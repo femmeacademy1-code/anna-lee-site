@@ -5,7 +5,8 @@ Pages serves a repo from /<repo-name>/, so root-absolute links ("/about", "/stat
 are rewritten to include that prefix. Forms cannot reach server.py on Pages, so the
 copy of static/app.js falls back to opening WhatsApp with the details.
 
-Usage:  python3 build.py && python3 tools/pages_build.py [/anna-lee-site]
+Usage:  python3 build.py && python3 tools/pages_build.py ""            (custom domain at the root)
+        python3 build.py && python3 tools/pages_build.py /anna-lee-site   (github.io/<repo>/ preview)
 """
 import re, shutil, sys, tempfile
 from pathlib import Path
@@ -25,6 +26,10 @@ if out.exists():
 shutil.copytree(root / "site", out)
 shutil.copytree(root / "static", out / "static")
 (out / ".nojekyll").write_text("")
+if not base:   # custom domain at the root: GitHub Pages reads it from docs/CNAME
+    import json
+    host = json.loads((root / "config.json").read_text(encoding="utf-8"))["domain"].split("//")[-1].strip("/")
+    (out / "CNAME").write_text(host + "\n")
 if keep:
     shutil.copytree(keep, out / "cms")
 

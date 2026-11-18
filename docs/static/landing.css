@@ -3,13 +3,13 @@
    everything centred, and sections that melt into each other with no hard edges.
    Loaded after site.css, only on pages that ask for it. */
 
-@font-face { font-family: "Ploni"; font-weight: 300; font-display: swap; src: url("/anna-lee-site/static/fonts/PloniLight.ttf") format("truetype"); }
-@font-face { font-family: "Ploni"; font-weight: 400; font-display: swap; src: url("/anna-lee-site/static/fonts/PloniRegular.ttf") format("truetype"); }
-@font-face { font-family: "Ploni"; font-weight: 500; font-display: swap; src: url("/anna-lee-site/static/fonts/PloniMedium.ttf") format("truetype"); }
-@font-face { font-family: "Ploni"; font-weight: 600; font-display: swap; src: url("/anna-lee-site/static/fonts/PloniDBold.ttf") format("truetype"); }
-@font-face { font-family: "Ploni"; font-weight: 700; font-display: swap; src: url("/anna-lee-site/static/fonts/PloniBold.ttf") format("truetype"); }
-@font-face { font-family: "Ploni Yad"; font-weight: 400; font-display: swap; src: url("/anna-lee-site/static/fonts/PloniYadRegular.ttf") format("truetype"); }
-@font-face { font-family: "Ploni Yad"; font-weight: 700; font-display: swap; src: url("/anna-lee-site/static/fonts/PloniYadBold.ttf") format("truetype"); }
+@font-face { font-family: "Ploni"; font-weight: 300; font-display: swap; src: url("/static/fonts/PloniLight.ttf") format("truetype"); }
+@font-face { font-family: "Ploni"; font-weight: 400; font-display: swap; src: url("/static/fonts/PloniRegular.ttf") format("truetype"); }
+@font-face { font-family: "Ploni"; font-weight: 500; font-display: swap; src: url("/static/fonts/PloniMedium.ttf") format("truetype"); }
+@font-face { font-family: "Ploni"; font-weight: 600; font-display: swap; src: url("/static/fonts/PloniDBold.ttf") format("truetype"); }
+@font-face { font-family: "Ploni"; font-weight: 700; font-display: swap; src: url("/static/fonts/PloniBold.ttf") format("truetype"); }
+@font-face { font-family: "Ploni Yad"; font-weight: 400; font-display: swap; src: url("/static/fonts/PloniYadRegular.ttf") format("truetype"); }
+@font-face { font-family: "Ploni Yad"; font-weight: 700; font-display: swap; src: url("/static/fonts/PloniYadBold.ttf") format("truetype"); }
 
 .lp {
   /* the page's soft palette, all from the brand */
@@ -204,7 +204,7 @@
     var(--lp-gift-photo, none) center 40% / cover no-repeat;
   -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 24%, #000 76%, transparent 100%);
           mask-image: linear-gradient(180deg, transparent 0%, #000 24%, #000 76%, transparent 100%); }
-.lp-gift { --lp-gift-photo: url("/anna-lee-site/static/img/gift-hug.jpg"); }
+.lp-gift { --lp-gift-photo: url("/static/img/gift-hug.jpg"); }
 .lp-gift h2 { text-shadow: 0 0 18px rgba(255, 248, 242, .9); }
 
 /* ---------- about ---------- */

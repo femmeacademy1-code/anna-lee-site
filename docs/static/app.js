@@ -220,7 +220,7 @@
         a.related.forEach(function (r) {
           var li = document.createElement("li");
           var link = document.createElement("a");
-          link.href = "/anna-lee-site/articles/" + encodeURIComponent(r.slug);
+          link.href = "/articles/" + encodeURIComponent(r.slug);
           link.textContent = r.title;
           li.appendChild(link);
           ul.appendChild(li);
@@ -291,7 +291,7 @@
         return '<button type="button" data-opt="' + o[0] + '" aria-pressed="false">' + o[1] + '</button>';
       }).join("") + '</div>' +
       '<div class="a11y-foot"><button type="button" class="a11y-reset">איפוס הגדרות</button>' +
-      '<a href="/anna-lee-site/accessibility">הצהרת נגישות</a></div>' +
+      '<a href="/accessibility">הצהרת נגישות</a></div>' +
     '</div>';
   document.body.appendChild(wrap);
 
