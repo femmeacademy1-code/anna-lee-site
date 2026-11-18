@@ -7,17 +7,26 @@ copy of static/app.js falls back to opening WhatsApp with the details.
 
 Usage:  python3 build.py && python3 tools/pages_build.py [/anna-lee-site]
 """
-import re, shutil, sys
+import re, shutil, sys, tempfile
 from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from cms_tags import connect
 
 root = Path(__file__).resolve().parent.parent
 base = (sys.argv[1] if len(sys.argv) > 1 else "/anna-lee-site").rstrip("/")
 out = root / "docs"
+# cms/ holds the client's saved edits and uploads (Femme CMS): keep it across rebuilds.
+keep = None
+if (out / "cms").exists():
+    keep = Path(tempfile.mkdtemp()) / "cms"
+    shutil.copytree(out / "cms", keep)
 if out.exists():
     shutil.rmtree(out)
 shutil.copytree(root / "site", out)
 shutil.copytree(root / "static", out / "static")
 (out / ".nojekyll").write_text("")
+if keep:
+    shutil.copytree(keep, out / "cms")
 
 ATTR = re.compile(r'(\b(?:href|src|action|data-next|data-download)=")/(?!/)')
 for f in out.rglob("*.html"):
@@ -44,4 +53,5 @@ old = 'msg.className = "form-msg err";\n        msg.textContent = "אין חיב
 assert old in s, "lead-form catch block not found"
 s = s.replace(old, fallback)
 js.write_text(s, encoding="utf-8")
-print("built", out, "with base", base)
+tagged = connect(out, base)
+print("built", out, "with base", base, "| CMS tag on", tagged, "pages")
