@@ -1,0 +1,43 @@
+{
+  "site_name": "אנה לי מילשטיין",
+  "tagline": "פסיכותרפיה הוליסטית, טיפול רגשי וויסות מערכת העצבים",
+  "domain": "https://example.com",
+  "draft": true,
+  "phone": "0506651451",
+  "whatsapp": "972506651451",
+  "email": "annaleemilstein@gmail.com",
+  "clinic_location": "הרצליה",
+  "clinic_address": "",
+  "response_time": "48 שעות",
+  "therapy_price_ils": 400,
+  "therapy_session_minutes": 60,
+  "intro_call_minutes": 20,
+  "breathwork_session_minutes": 90,
+  "breathwork_series_price_ils": 1200,
+  "breathwork_series_sessions": 3,
+  "lecture_free_minutes": 30,
+  "privacy_retention": "",
+  "breathwork_single_price_ils": 450,
+  "breathwork_series_original_ils": 1350,
+  "instagram": "https://www.instagram.com/annalee_psychotherapist/",
+  "meditation_url": "https://open.spotify.com/show/6FnCiyIcyLUeTc8XHhy6ab",
+  "lecture": {
+    "date": "2026-11-29",
+    "time": "20:30",
+    "zoom_link": "",
+    "after_email_ready": false,
+    "workshop_offer": ""
+  },
+  "legal": {
+    "business_name": "אנה לי מילשטיין",
+    "business_id": "ע.מ. 301840781",
+    "business_address": "רחוב הגפן 3",
+    "accessibility_coordinator": "אנה לי מילשטיין",
+    "updated": "17.11.2026",
+    "session_cancel_hours": 24,
+    "payment_terms": "בהעברה בנקאית",
+    "clinic_access": "הקליניקה אינה נגישה כרגע לאנשים עם מוגבלות בניידות. מי שזקוקה להתאמה מוזמנת לפנות אלי, ונמצא יחד פתרון מתאים.",
+    "refund_extra": "ביטול השתתפות בסדנה בפחות מ-2 ימי עסקים לפני מועדה, או אי-הגעה, אינם מזכים בהחזר. אפשר להעביר את המקום למשתתפת אחרת או לסדנה הבאה, בתיאום מראש.",
+    "retention": "הפרטים נשמרים כל עוד יש בהם צורך למטרה שלשמה נמסרו, ולא יותר משלוש שנים מהפנייה האחרונה, אלא אם החוק מחייב לשמור אותם זמן רב יותר. פרטים של מי שהסכימה לדיוור נשמרים עד שתבקש להסיר אותם."
+  }
+}

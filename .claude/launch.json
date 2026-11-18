@@ -1,0 +1,8 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    { "name": "anna-site", "runtimeExecutable": "sh",
+      "runtimeArgs": ["-c", "python3 build.py && ADMIN_PASSWORD=$(openssl rand -hex 16) python3 server.py"],
+      "port": 8000 }
+  ]
+}

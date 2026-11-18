@@ -1,0 +1,300 @@
+/* Landing pages (body.lp): the free lecture "על קוצים".
+   Soft and airy: Ploni for text, Ploni Yad (handwriting) for the strong sentences,
+   everything centred, and sections that melt into each other with no hard edges.
+   Loaded after site.css, only on pages that ask for it. */
+
+@font-face { font-family: "Ploni"; font-weight: 300; font-display: swap; src: url("/static/fonts/PloniLight.ttf") format("truetype"); }
+@font-face { font-family: "Ploni"; font-weight: 400; font-display: swap; src: url("/static/fonts/PloniRegular.ttf") format("truetype"); }
+@font-face { font-family: "Ploni"; font-weight: 500; font-display: swap; src: url("/static/fonts/PloniMedium.ttf") format("truetype"); }
+@font-face { font-family: "Ploni"; font-weight: 600; font-display: swap; src: url("/static/fonts/PloniDBold.ttf") format("truetype"); }
+@font-face { font-family: "Ploni"; font-weight: 700; font-display: swap; src: url("/static/fonts/PloniBold.ttf") format("truetype"); }
+@font-face { font-family: "Ploni Yad"; font-weight: 400; font-display: swap; src: url("/static/fonts/PloniYadRegular.ttf") format("truetype"); }
+@font-face { font-family: "Ploni Yad"; font-weight: 700; font-display: swap; src: url("/static/fonts/PloniYadBold.ttf") format("truetype"); }
+
+.lp {
+  /* the page's soft palette, all from the brand */
+  --lp-cream: #FBF6EF;
+  --lp-peach: #F6E4D9;
+  --lp-blush: #F3DAD3;
+  --lp-rose-mist: #EFD3CE;
+  --lp-sage: #E6EADF;
+  --lp-ink: #3A2620;
+  --lp-text: #4C392F;
+  --lp-soft: #6E5648;
+  --lp-rose: #94455A;
+  --lp-rose-hover: #7C3649;
+  --lp-hand-ink: #8A4F36;
+  --lp-clay: #E8C6B6;      /* the deeper warm tone the page ends in */
+  --lp-clay-deep: #DFB3A3;
+
+  /* one rhythm for the whole page */
+  --lp-pad: clamp(4.5rem, 9vw, 7.5rem);
+  --lp-gap: clamp(1.1rem, 2vw, 1.5rem);
+  --lp-narrow: 40rem;
+
+  font-family: "Ploni", "Heebo", system-ui, sans-serif;
+  background: var(--lp-cream);
+  color: var(--lp-text);
+}
+.lp::after { display: none; }
+.lp button, .lp input, .lp select, .lp textarea { font-family: inherit; }
+.lp .site-header { background: rgba(251, 246, 239, .9); border-bottom: 0; }
+.lp-header .wrap { justify-content: center; }
+.lp-header .brand { cursor: default; }
+.lp-header .lp-mark { width: 2.3rem; height: 2.3rem; }
+
+/* ---------- sections ---------- */
+
+.lp-sec { position: relative; padding: var(--lp-pad) 0; text-align: center; }
+.lp-wrap { width: 100%; max-width: 72rem; margin: 0 auto; padding: 0 clamp(1rem, 5vw, 2.5rem); position: relative; z-index: 1; }
+.lp-narrow { max-width: calc(var(--lp-narrow) + 5rem); }
+
+/* each section starts in the colour the one before it ended in, so there is never a line */
+/* every section has its own tone, so the eye feels each step down the page;
+   the change happens in a short soft fade at the top of each section, never a line */
+.lp { --lp-fade: clamp(5rem, 10vw, 8rem); }
+.lp-hero     { background: var(--lp-cream); overflow: hidden; padding-top: clamp(3rem, 6vw, 5rem); }
+.lp-problem  { background: linear-gradient(180deg, var(--lp-cream) 0, var(--lp-peach) var(--lp-fade), var(--lp-peach) 100%); }
+.lp-mood     { background: linear-gradient(180deg, var(--lp-peach) 0, #F9EFE7 var(--lp-fade), #F9EFE7 100%); }
+.lp-plan     { background: linear-gradient(180deg, #F9EFE7 0, #F4E3DA var(--lp-fade), #F4E3DA 100%); }
+.lp-gift     { background: linear-gradient(180deg, #F4E3DA 0, var(--lp-blush) var(--lp-fade), var(--lp-blush) 100%); }
+.lp-about    { background: linear-gradient(180deg, var(--lp-blush) 0, #F8ECE2 var(--lp-fade), #F8ECE2 100%); overflow: hidden; }
+.lp-register { background: linear-gradient(180deg, #F8ECE2 0, var(--lp-clay) var(--lp-fade), var(--lp-clay-deep) 100%); }
+
+/* ---------- type ---------- */
+
+.lp h1, .lp h2, .lp h3 { color: var(--lp-ink); font-family: inherit; letter-spacing: 0; }
+.lp h2 { font-size: clamp(1.6rem, 3.4vw, 2.3rem); font-weight: 400; line-height: 1.35; margin: 0 0 var(--lp-gap); text-wrap: balance; }
+.lp h2 strong { font-weight: 600; }
+.lp h3 { font-size: 1.4rem; font-weight: 600; margin: 0 0 .6rem; }
+.lp-sec p { font-size: clamp(1.15rem, 1.8vw, 1.32rem); line-height: 1.8; margin: 0 auto var(--lp-gap); max-width: var(--lp-narrow); }
+.lp-sec p:last-child { margin-bottom: 0; }
+.lp strong { font-weight: 600; color: var(--lp-ink); }
+
+.lp-kicker { font-size: 1rem !important; font-weight: 500; letter-spacing: .04em; color: var(--lp-hand-ink); margin-bottom: .6rem !important; }
+.lp-hand { font-family: "Ploni Yad", "Ploni", cursive; font-weight: 400; color: var(--lp-hand-ink); font-size: clamp(1.6rem, 3.4vw, 2.2rem) !important; line-height: 1.4 !important; text-wrap: balance; }
+.lp-hand-lg { font-size: clamp(1.7rem, 3.6vw, 2.4rem) !important; margin-bottom: .4rem !important; }
+.lp-hand-xl { font-size: clamp(2rem, 5vw, 3.3rem) !important; line-height: 1.35 !important; color: var(--lp-ink); }
+.lp-soft { color: var(--lp-soft); }
+
+/* ---------- button ---------- */
+
+.lp-btn, .lp .lead-form .btn {
+  display: inline-block; font-family: inherit; font-size: 1.1rem; font-weight: 500;
+  background: var(--lp-rose); color: #FFF8F3; border: 0; border-radius: 999px;
+  padding: 1rem 2.4rem; text-decoration: none; cursor: pointer;
+  box-shadow: 0 10px 28px -12px rgba(148, 69, 90, .55);
+  transition: transform .35s ease, box-shadow .35s ease, background-color .35s ease;
+}
+.lp-btn:hover, .lp .lead-form .btn:hover { background: var(--lp-rose-hover); color: #FFF8F3; transform: translateY(-2px); box-shadow: 0 16px 32px -14px rgba(148, 69, 90, .6); }
+.lp-btn:focus-visible, .lp .lead-form .btn:focus-visible { outline: 3px solid rgba(148, 69, 90, .35); outline-offset: 3px; }
+
+/* ---------- hero ---------- */
+
+.lp-hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; align-items: end; gap: clamp(1rem, 4vw, 3rem); }
+.lp-hero-text { padding-bottom: clamp(2rem, 6vw, 5rem); }
+.lp-title { position: relative; isolation: isolate; font-family: "Ploni Yad", "Ploni", cursive; font-weight: 700; font-size: clamp(3.4rem, 9vw, 6.2rem); line-height: 1; margin: 0 0 1rem; color: var(--lp-ink);
+  text-shadow: 0 0 28px rgba(255, 246, 236, .9), 0 0 2px rgba(255, 250, 244, .6); }
+/* a warm halo of light behind the title, breathing very slowly */
+.lp-title-glow { position: absolute; z-index: -1; inset: -55% -18%; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(closest-side, rgba(255, 244, 232, 1), rgba(242, 196, 180, .7) 45%, rgba(232, 170, 160, .25) 72%, rgba(232, 176, 166, 0));
+  filter: blur(8px); }
+@media (prefers-reduced-motion: no-preference) {
+  .lp-title-glow { animation: lp-breathe 7s ease-in-out infinite; }
+}
+@keyframes lp-breathe { 0%, 100% { opacity: .75; transform: scale(.96); } 50% { opacity: 1; transform: scale(1.04); } }
+.lp-sub strong { font-weight: 700; }
+.lp-sub { font-size: clamp(1.25rem, 2.4vw, 1.6rem) !important; line-height: 1.5 !important; color: var(--lp-ink); }
+.lp-when { display: flex; flex-wrap: wrap; justify-content: center; gap: .3rem .7rem; font-size: 1.1rem !important; margin-bottom: 1.8rem !important; }
+.lp-when span { color: var(--lp-hand-ink); }
+.lp-when strong { font-variant-numeric: tabular-nums; letter-spacing: .06em; font-kerning: none; }
+
+.lp-hero-media { position: relative; display: flex; justify-content: center; align-items: flex-end; margin-bottom: calc(-1 * var(--lp-pad)); }
+/* a glow of light behind each photo, so she stands in warmth and has depth behind her */
+.lp-glow { position: absolute; inset: 2% -10% 10%; border-radius: 50%; pointer-events: none;
+  background:
+    radial-gradient(closest-side at 50% 42%, rgba(255, 250, 242, .95), rgba(255, 250, 242, 0) 70%),
+    radial-gradient(closest-side, rgba(242, 190, 172, .85), rgba(236, 180, 168, .45) 60%, rgba(236, 186, 176, 0));
+  filter: blur(14px); }
+
+/* the cut-out photos: no frame, no edge, only her and a soft shadow */
+.lp-sticker {
+  position: relative; display: block; width: 100%; max-width: 25rem; height: auto;
+  filter: drop-shadow(0 22px 30px rgba(110, 60, 45, .16));
+}
+/* in the hero she is cut at the arms and the waist: the bottom of the photo melts away,
+   so there is no line of a cut body, only a soft passage into the next section */
+.lp-hero .lp-sticker {
+  max-width: 30rem;
+  -webkit-mask-image: linear-gradient(180deg, #000 52%, rgba(0, 0, 0, .45) 74%, transparent 95%),
+                      radial-gradient(ellipse 42% 60% at 50% 35%, #000 52%, transparent 100%);
+  -webkit-mask-composite: source-in;
+          mask-image: linear-gradient(180deg, #000 52%, rgba(0, 0, 0, .45) 74%, transparent 95%),
+                      radial-gradient(ellipse 42% 60% at 50% 35%, #000 52%, transparent 100%);
+          mask-composite: intersect;
+}
+.lp-hero-media::after { content: ""; position: absolute; inset: auto -20% -2% -20%; height: 38%; pointer-events: none;
+  background: radial-gradient(60% 70% at 50% 100%, var(--lp-cream), rgba(251, 246, 239, 0)); }
+
+/* ---------- the thorns, and the problem ---------- */
+
+.lp-problem .kotzim-fig { max-width: 22rem; margin: 0 auto clamp(2rem, 4vw, 3rem); }
+.lp-problem .kotzim-line { color: var(--lp-ink); }
+/* the turning sentence of the section sits in its own soft note: an uneven rounded frame,
+   warm glass inside, a hand-drawn line around it and the lotus resting on its top edge */
+.lp-note {
+  position: relative; max-width: 36rem; margin: clamp(2.75rem, 5vw, 3.75rem) auto 0;
+  padding: clamp(2.2rem, 4.5vw, 3rem) clamp(1.5rem, 5vw, 3.25rem) clamp(1.8rem, 4vw, 2.5rem);
+  border-radius: 46px 22px 46px 22px;
+  background: linear-gradient(140deg, rgba(255, 250, 245, .92), rgba(248, 226, 216, .85));
+  box-shadow: 0 28px 50px -34px rgba(138, 79, 54, .45), inset 0 0 0 1px rgba(255, 255, 255, .7);
+}
+.lp-note::before { /* the hand-drawn inner line */
+  content: ""; position: absolute; inset: 9px; pointer-events: none;
+  border-radius: 38px 16px 38px 16px; border: 1.5px dashed rgba(176, 111, 79, .35);
+}
+.lp-note-flower { position: absolute; top: 0; left: 50%; transform: translate(-50%, -55%);
+  display: grid; place-items: center; width: 3.4rem; height: 3.4rem; border-radius: 50%;
+  background: radial-gradient(circle, #FFF8F2 55%, rgba(255, 248, 242, 0) 72%); }
+.lp-note-flower .lp-mark { width: 2.3rem; height: 2.3rem; }
+.lp-note .lp-hand { margin: 0 auto; }
+
+/* ---------- mood: a quiet band of light ----------
+   Ready for a photo: set --lp-mood-photo on .lp-mood (e.g. a sunset or hands) and it shows,
+   faded into the sections above and below. Until then: a soft sunset of colour. */
+.lp-mood { padding: clamp(6rem, 14vw, 10rem) 0; overflow: hidden; }
+.lp-mood::before {
+  content: ""; position: absolute; inset: 0;
+  background:
+    var(--lp-mood-photo, radial-gradient(60% 55% at 50% 62%, rgba(255, 236, 206, .95), rgba(255, 236, 206, 0) 70%)),
+    radial-gradient(45% 60% at 20% 40%, rgba(232, 176, 166, .55), rgba(232, 176, 166, 0) 70%),
+    radial-gradient(45% 60% at 82% 45%, rgba(214, 190, 160, .55), rgba(214, 190, 160, 0) 70%),
+    linear-gradient(180deg, #F6E1D2, #EFCFC2 50%, #EAD9C6);
+  background-size: cover; background-position: center;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 78%, transparent 100%);
+          mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 78%, transparent 100%);
+}
+.lp-mood .lp-hand-xl { margin: 0 auto; }
+
+/* ---------- plan: three steps, no boxes ---------- */
+
+.lp-steps { list-style: none; margin: clamp(2.5rem, 5vw, 3.5rem) 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(2.5rem, 5vw, 4rem); }
+.lp-steps li { margin: 0; }
+/* each step: a drawing in a soft blob of colour, its number written by hand beside it */
+.lp-icon { position: relative; display: grid; place-items: center; width: 9.5rem; height: 9.5rem; margin: 0 auto 1.4rem; color: var(--lp-hand-ink); }
+.lp-icon::before { content: ""; position: absolute; inset: 0; z-index: 0;
+  border-radius: 58% 42% 52% 48% / 48% 56% 44% 52%;
+  background: radial-gradient(circle at 35% 30%, #FFF6EE, var(--lp-blush) 70%, #EECBC0);
+  box-shadow: 0 24px 40px -26px rgba(138, 79, 54, .45); }
+.lp-steps li:nth-child(2) .lp-icon::before { border-radius: 46% 54% 42% 58% / 56% 44% 56% 44%; background: radial-gradient(circle at 35% 30%, #FFF6EE, var(--lp-peach) 65%, #EBCDB9); }
+.lp-steps li:nth-child(3) .lp-icon::before { border-radius: 52% 48% 60% 40% / 42% 58% 42% 58%; background: radial-gradient(circle at 35% 30%, #FFF6EE, var(--lp-rose-mist) 70%, #E6C2BA); }
+.lp-icon svg { position: relative; z-index: 1; width: 64%; height: 64%; }
+.lp-num { position: absolute; z-index: 2; top: -.4rem; inset-inline-start: -.2rem; font-family: "Ploni Yad", cursive; font-weight: 700; font-size: 3rem; line-height: 1; color: #BF6A79; text-shadow: 0 2px 0 #FFF8F2; }
+.lp-steps p { font-size: 1.15rem !important; }
+
+/* photo: Unsplash, free licence (unsplash.com/photos/dvXGnwnYweM) */
+/* ---------- gift: a woman holding herself, faded into the colours around it ----------
+   The photo sits under a warm veil and melts away at the top and bottom, so the section
+   above and the one below run straight into it. */
+.lp-gift { padding: clamp(7rem, 15vw, 11rem) 0; overflow: hidden; }
+.lp-gift-photo { position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(48% 55% at 50% 50%, rgba(251, 240, 232, .88), rgba(251, 240, 232, .6) 60%, rgba(251, 240, 232, .25)),
+    linear-gradient(180deg, rgba(246, 228, 217, .35), rgba(243, 218, 211, .35)),
+    var(--lp-gift-photo, none) center 40% / cover no-repeat;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 24%, #000 76%, transparent 100%);
+          mask-image: linear-gradient(180deg, transparent 0%, #000 24%, #000 76%, transparent 100%); }
+.lp-gift { --lp-gift-photo: url("/static/img/gift-hug.jpg"); }
+.lp-gift h2 { text-shadow: 0 0 18px rgba(255, 248, 242, .9); }
+
+/* ---------- about ---------- */
+
+.lp-about-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
+.lp-about-media { position: relative; display: flex; justify-content: center; }
+.lp-glow-about { inset: -6% -14% 4%; }
+.lp-about-media::before { /* a second, wider halo: the section gains depth around her */
+  content: ""; position: absolute; inset: -24% -34%; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(closest-side, rgba(255, 246, 236, .95), rgba(236, 190, 178, .55) 50%, rgba(232, 180, 170, .2) 75%, rgba(239, 211, 206, 0)); }
+.lp-sticker-sm { max-width: 23rem; margin: 0 auto;
+  -webkit-mask-image: linear-gradient(180deg, #000 78%, transparent 100%), radial-gradient(ellipse 62% 70% at 50% 42%, #000 75%, transparent 100%);
+  -webkit-mask-composite: source-in;
+          mask-image: linear-gradient(180deg, #000 78%, transparent 100%), radial-gradient(ellipse 62% 70% at 50% 42%, #000 75%, transparent 100%);
+          mask-composite: intersect; }
+
+/* ---------- register ---------- */
+
+.lp-form {
+  max-width: 34rem; margin: clamp(2rem, 4vw, 2.75rem) auto var(--lp-gap); text-align: start;
+  background: rgba(255, 251, 247, .62); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  border-radius: 32px; padding: clamp(1.5rem, 4vw, 2.5rem);
+  box-shadow: 0 30px 60px -40px rgba(120, 60, 50, .35);
+}
+.lp .field label { font-weight: 500; color: var(--lp-ink); }
+.lp .field input { border-radius: 16px; border: 1px solid rgba(138, 79, 54, .22); background: #FFFCF9; padding: .85rem 1rem; }
+.lp .lead-form .btn { justify-self: center; min-width: 14rem; }
+.lp .lead-form .fine { text-align: center; }
+.lp-register > .lp-wrap > .fine { font-size: .92rem !important; color: var(--lp-soft); }
+
+/* ---------- the quiet WhatsApp group, for whoever can't come this time ---------- */
+
+.lp-wa { max-width: 32rem; margin: clamp(3rem, 6vw, 4.5rem) auto 0; padding-top: clamp(2.25rem, 4vw, 3rem); position: relative; }
+.lp-wa::before { /* a short soft rule instead of a box */
+  content: ""; position: absolute; top: 0; left: 50%; width: 7rem; height: 1px; transform: translateX(-50%);
+  background: linear-gradient(90deg, rgba(138, 79, 54, 0), rgba(138, 79, 54, .45), rgba(138, 79, 54, 0)); }
+.lp-wa .lp-hand { margin-bottom: .3rem !important; }
+.lp-wa-btn {
+  display: inline-flex; align-items: center; gap: .6rem; margin-top: .4rem;
+  font-family: inherit; font-size: 1.05rem; font-weight: 500; text-decoration: none;
+  color: var(--lp-ink); background: rgba(255, 250, 245, .75); border: 1.5px solid rgba(138, 79, 54, .3);
+  border-radius: 999px; padding: .85rem 1.8rem;
+  transition: background-color .3s ease, border-color .3s ease, transform .3s ease;
+}
+.lp-wa-btn:hover { background: #FFFAF5; border-color: rgba(138, 79, 54, .55); transform: translateY(-2px); color: var(--lp-ink); }
+.lp-wa-btn:focus-visible { outline: 3px solid rgba(148, 69, 90, .35); outline-offset: 3px; }
+.lp-wa-icon { width: 1.3rem; height: 1.3rem; color: #3E8E5E; flex: none; }
+
+/* ---------- footer: continues the page's last colour instead of a dark block ---------- */
+
+.lp .site-footer { background: linear-gradient(180deg, var(--lp-clay-deep) 0%, #E7CFC4 100%); color: var(--lp-text); }
+.lp .site-footer::before { display: none; }
+.lp .site-footer a { color: var(--lp-ink); }
+.lp .site-footer .footer-bottom { border-color: rgba(58, 38, 32, .12); color: var(--lp-soft); }
+
+/* ---------- the floating button ---------- */
+
+.lp-float {
+  position: fixed; z-index: 60; inset-inline-start: auto; right: clamp(.9rem, 2.5vw, 1.75rem); bottom: clamp(.9rem, 2.5vw, 1.75rem);
+  font-family: inherit; font-size: 1.05rem; font-weight: 500; text-decoration: none;
+  background: var(--lp-rose); color: #FFF8F3; border-radius: 999px; padding: .95rem 1.8rem;
+  box-shadow: 0 14px 34px -12px rgba(148, 69, 90, .6), 0 0 0 6px rgba(255, 246, 238, .55);
+  opacity: 0; transform: translateY(14px); pointer-events: none;
+  transition: opacity .45s ease, transform .45s ease, background-color .3s ease;
+}
+.lp-float.on { opacity: 1; transform: none; pointer-events: auto; }
+.lp-float:hover { background: var(--lp-rose-hover); color: #FFF8F3; }
+.lp-float:focus-visible { outline: 3px solid rgba(148, 69, 90, .4); outline-offset: 3px; }
+
+/* ---------- motion: sections drift in softly ---------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  .lp-sec > .lp-wrap { animation: lp-rise 1s ease both; }
+  @supports (animation-timeline: view()) {
+    .lp-sec > .lp-wrap { animation: lp-rise linear both; animation-timeline: view(); animation-range: entry 0% entry 35%; }
+  }
+}
+@keyframes lp-rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+
+/* ---------- phone ---------- */
+
+@media (max-width: 760px) {
+  .lp-hero-grid, .lp-about-grid { grid-template-columns: 1fr; }
+  .lp-hero-text { padding-bottom: 1rem; }
+  .lp-hero-media { max-width: 19rem; margin-inline: auto; }
+  .lp-steps { grid-template-columns: 1fr; }
+  .lp-sticker-sm { max-width: 16rem; }
+  .lp-icon { width: 8rem; height: 8rem; }
+  .lp-sec p br { display: none; }
+  .lp-sec p.lp-hand br, .lp-sec p.lp-sub br { display: inline; }
+  .lp-note { border-radius: 34px 16px 34px 16px; }
+  .lp-note::before { border-radius: 27px 10px 27px 10px; }
+}

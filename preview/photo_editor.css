@@ -1,0 +1,21 @@
+/* photo editing mode (preview only) */
+.pe-toggle { position: fixed; bottom: 16px; left: 16px; z-index: 1001; display: inline-flex; align-items: center; gap: .5rem; font: inherit; font-size: .95rem; font-weight: 500; color: #FFF7F1; background: #4B3027; border: 0; border-radius: 999px; padding: .65rem 1.2rem; cursor: pointer; box-shadow: 0 12px 26px -14px rgba(75, 48, 39, .7); }
+.pe-toggle::before { content: ""; width: .7rem; height: .7rem; border-radius: 50%; border: 1.5px solid #F3C9CF; }
+.pe-toggle[aria-pressed="true"] { background: #94455A; }
+.pe-toast { position: fixed; bottom: 70px; left: 16px; right: auto; max-width: min(24rem, calc(100vw - 32px)); z-index: 1001; background: #4B3027; color: #FFF7F1; border-radius: 14px; padding: .7rem 1rem; font-size: .95rem; line-height: 1.5; opacity: 0; transform: translateY(6px); transition: opacity .2s ease, transform .2s ease; pointer-events: none; }
+.pe-toast.show { opacity: 1; transform: none; }
+.pe-host { position: relative; }
+.pe-bar { display: none; }
+.photo-edit .pe-host { outline: 2px dashed #94455A; outline-offset: 5px; }
+.photo-edit .breath.pe-host { outline-offset: -2px; border-radius: 50%; }
+.photo-edit .way-photo.pe-host { border-radius: 50%; outline-offset: 12px; }
+.photo-edit .pe-host.pe-over { outline: 3px solid #94455A; }
+.photo-edit .pe-host.pe-over img { opacity: .6; }
+.photo-edit .pe-host img { cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none; }
+.photo-edit .pe-host.pe-moving img { cursor: grabbing; }
+.photo-edit .pe-bar { display: flex; position: absolute; left: 50%; bottom: 10px; transform: translateX(-50%); z-index: 6; gap: .35rem; align-items: center; justify-content: center; width: max-content; max-width: calc(100% - 16px); flex-wrap: wrap; background: rgba(255, 252, 249, .95); border-radius: 999px; padding: .35rem .45rem; font-size: .86rem; color: #4B3027; box-shadow: 0 10px 24px -16px rgba(75, 48, 39, .7); }
+.pe-bar button { font: inherit; border: 1px solid #94455A; background: #fff; color: #94455A; border-radius: 999px; padding: .2rem .85rem; cursor: pointer; line-height: 1.5; }
+.pe-bar .pe-zoom { width: 1.9rem; height: 1.9rem; padding: 0; font-size: 1.1rem; display: grid; place-items: center; }
+.pe-bar .pe-reset { display: none; }
+.pe-changed .pe-bar .pe-reset { display: inline-block; }
+.photo-edit .pe-host .stamp { pointer-events: none; }
