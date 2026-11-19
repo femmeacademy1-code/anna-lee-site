@@ -869,6 +869,8 @@ def page_workshops():
 def page_workshop(p):
     if p["slug"] == "rebirthing-after-birth":
         return page_birth_workshop(p)
+    if p["slug"] == "calm-in-the-storm":
+        return page_calm_landing(p)
     price = f"{p['price_ils']:,} ₪" if p.get("price_ils") else "המחיר יפורסם בקרוב"
     fl = ["סדנה" if p["kind"] == "workshop" else "קורס", price]
     if p.get("duration"):
@@ -892,6 +894,137 @@ def page_workshop(p):
         parts.append(sec(s["heading"], b))
     parts.append(form_sec("להשאיר פרטים", "<p>אחזור אלייך עם פרטים על המועד והמחיר כשיתפרסמו.</p>", lead_form("workshop", item=p["title"])))
     return layout(f"/workshops/{p['slug']}", p["title"], p["summary"], head + assemble(*parts), active="/workshops")
+
+
+def page_calm_landing(p):
+    """The landing page of the workshop "רגועה בעין הסערה", in the same soft design as the lecture
+    (static/landing.css). The copy comes from Anna Lee's own brief (the docx of 19.11.2026);
+    date, price and payment link are not in it yet, so the page collects details instead."""
+    title = p["title"]
+    hero = f"""<section class="lp-sec lp-hero">
+  <div class="lp-wrap lp-hero-grid">
+    <div class="lp-hero-text">
+      <p class="lp-kicker">סדנת זום חווייתית</p>
+      <h1 class="lp-title"><span class="lp-title-glow" aria-hidden="true"></span>{E(title)}</h1>
+      <p class="lp-sub"><strong>החרדה לא חייבת לנהל אותך.</strong> <br>בואי להבין מה קורה לך בגוף וללמוד איך לעזור לעצמך גם כשהכול מרגיש יותר מדי.</p>
+      <p class="lp-when"><strong>סדנת זום חווייתית</strong><span aria-hidden="true">·</span><strong>90 דקות</strong><span aria-hidden="true">·</span>ידע, תרגול וכלים לחיים</p>
+      <p><a class="lp-btn" href="#register">אני רוצה להצטרף לסדנה</a></p>
+    </div>
+    <div class="lp-hero-media">
+      <span class="lp-glow" aria-hidden="true"></span>
+      <img class="lp-sticker" src="/static/img/anna-cutout.png" alt="אנה לי מילשטיין עם הידיים על הלב" width="648" height="946">
+    </div>
+  </div>
+</section>"""
+    problem = f"""<section class="lp-sec lp-problem">
+  <div class="lp-wrap lp-narrow">
+    <h2>כמה אנרגיה את משקיעה <br><strong>בלנסות להחזיק את עצמך?</strong></h2>
+    <p>את יכולה להיראות בשליטה מבחוץ ובו בזמן להרגיש שהגוף שלך כל הזמן בכוננות.</p>
+    <p>לפעמים מה שהכי מפחיד בחרדה הוא לא רק מה שמרגישים — <br><strong>אלא הפחד שהיא תחזור.</strong></p>
+    <p>את ממשיכה לתפקד, לעבוד ולדאוג לכולם, אבל מבפנים את לא פעם על הקצה.</p>
+    <p>לפעמים החרדה ברורה: דופק מהיר, מחשבות שלא עוצרות או פחד שמשהו רע עומד לקרות. ולפעמים היא מופיעה כעצבנות, התפרצויות, קושי לנוח, צורך בשליטה או חשיבת יתר.</p>
+    <p>את מותשת מהדריכות, ואולי גם מהפחד שהחרדה תגיע שוב.</p>
+    <div class="lp-note">
+      <span class="lp-note-flower" aria-hidden="true">{LP_MARK}</span>
+      <p class="lp-hand">את לא צריכה להיפטר מהחרדה <br>כדי להפסיק לפחד ממנה.</p>
+    </div>
+  </div>
+</section>"""
+    mood = """<section class="lp-sec lp-mood" aria-label="משפט מתוך הסדנה">
+  <div class="lp-wrap lp-narrow">
+    <p class="lp-hand lp-hand-xl">מה אם במקום להילחם בגוף שלך, <br>תלמדי לעבוד איתו?</p>
+  </div>
+</section>"""
+    plan_items = [
+        ("להבין מה קורה בגוף", "נבין מה קורה במערכת העצבים בזמן חרדה, ולמה הגוף יכול להרגיש בסכנה <strong>גם כשהראש יודע שהכול בסדר.</strong>"),
+        ("להפסיק להיבהל מתגובות הגוף", "נלמד לזהות סימנים של עוררות והצפה, <strong>ולגלות שאפשר לפתח איתן מערכת יחסים אחרת.</strong>"),
+        ("להתנסות בכלים מעשיים", "נתנסה בכלים מהנשימה, הקרקוע והקשב לגוף, <strong>ונחשוב איך לשלב אותם בחיים העמוסים שלנו.</strong>"),
+    ]
+    plan = f"""<section class="lp-sec lp-plan">
+  <div class="lp-wrap">
+    <h2>מה נעשה יחד?</h2>
+    <ol class="lp-steps">{"".join(f'<li><span class="lp-icon" aria-hidden="true">{LP_ICONS[i-1]}<span class="lp-num">{i}</span></span><h3>{E(t)}</h3><p>{pp}</p></li>' for i, (t, pp) in enumerate(plan_items, 1))}</ol>
+    <p class="lp-soft lp-after-steps">יהיה מקום גם לשאלות. אין צורך בידע קודם.</p>
+  </div>
+</section>"""
+    fit_items = [
+        "למי שמתפקדת מבחוץ אבל מרגישה מוצפת או דרוכה מבפנים.",
+        "למי שחווה חרדה, התקפי חרדה או פחד מההתקף הבא.",
+        "למי שהחרדה שלה נראית כמו עצבנות, התפרצויות, חשיבת יתר או קושי לנוח.",
+        "למי שמתקשה עם חוסר ודאות ומרגישה שהיא חייבת להיות בשליטה.",
+        "למי שרוצה כלים מעשיים שמערבים גם את הגוף, ולא רק הסברים או חשיבה חיובית.",
+    ]
+    fit = f"""<section class="lp-sec lp-for">
+  <div class="lp-wrap lp-narrow">
+    <h2>למי הסדנה מתאימה?</h2>
+    <ul class="lp-for-list">{"".join(f"<li>{E(x)}</li>" for x in fit_items)}</ul>
+  </div>
+</section>"""
+    take = """<section class="lp-sec lp-take">
+  <div class="lp-wrap lp-narrow">
+    <p class="lp-hand lp-hand-lg">עם מה תצאי?</p>
+    <p>עם הבנה בהירה יותר של החרדה שלך, פחות בהלה מתגובות הגוף, כמה דרכי ויסות שתוכלי להמשיך לתרגל, <strong>ותחושה שיש לך אפשרות להשפיע על הדרך שבה את פוגשת רגעים קשים.</strong></p>
+  </div>
+</section>"""
+    dream = """<section class="lp-sec lp-dream" aria-label="משפט מתוך הסדנה">
+  <div class="lp-wrap lp-narrow">
+    <p class="lp-hand lp-hand-xl">לא חיים בלי פחד, <br>אלא חיים שבהם הפחד כבר לא מנהל אותך.</p>
+    <p class="lp-soft">אפשר להרגיש יציבה גם כשהכול מסביב סוער.</p>
+  </div>
+</section>"""
+    story = """<section class="lp-sec lp-about lp-story">
+  <div class="lp-wrap lp-narrow">
+    <p class="lp-hand lp-hand-lg">עליי, והסיבה שהסדנה הזו כל כך קרובה לליבי</p>
+  </div>
+  <div class="lp-wrap lp-about-grid">
+    <div class="lp-about-media">
+      <span class="lp-glow lp-glow-about" aria-hidden="true"></span>
+      <img class="lp-sticker lp-sticker-sm" src="/static/img/anna-seated-cutout.png" alt="אנה לי מילשטיין יושבת בקליניקה" width="1035" height="1275" loading="lazy">
+    </div>
+    <div class="lp-about-text">
+      <p>אני אנה לי מילשטיין, מטפלת רגשית בפסיכותרפיה הוליסטית ומרצה במכללת רידמן.</p>
+      <p>בקליניקה שלי אני מלווה נשים שמתמודדות עם חרדה, הצפה רגשית, התקפי זעם, סטרס וקושי בוויסות רגשי. אני משלבת טיפול בשיחה עם כלים מעולמות הנשימה, המדיטציה והעבודה עם הגוף ומערכת העצבים.</p>
+      <p><strong>אבל חרדה היא לא משהו שאני מכירה רק מהלימודים או מהקליניקה.</strong></p>
+    </div>
+  </div>
+  <div class="lp-wrap lp-narrow lp-story-text">
+    <p>לפני שנתיים חוויתי התקף חרדה כל כך מפחיד, שהייתי בטוחה שזהו, איבדתי את זה. שעוד רגע מגיעים החלוקים הלבנים לקחת אותי לאשפוז. אני זוכרת את הפחד העצום ממה שקורה לי ואת התחושה שאני מאבדת שליטה.</p>
+    <p>היום אני לא יכולה להגיד שאני לא חווה חרדה. אבל משהו עמוק השתנה ביחסים שלי איתה. בזכות הכלים שאספתי לאורך השנים, ושאני ממשיכה לאסוף ולתרגל, אני יודעת שיש לי אותי. שגם אם החרדה תגיע, יש לי דרכים לפגוש אותה ולעזור לעצמי לחזור בהדרגה לאיזון.</p>
+    <p>ולא פחות חשוב, למדתי איך להתנהל בתוך החיים הסופר עמוסים שלי, לזהות מתי הגוף מתקרב לקצה ולתמוך בו לפני שהוא מגיע לשם. זה לא אומר שאני תמיד מצליחה או תמיד רגועה. זה אומר שאני כבר לא חיה באותו פחד מהחרדה.</p>
+    <p class="lp-hand lp-hand-lg">אני יודעת שיש לי אותי.</p>
+    <p>וזו בדיוק הסיבה שיצרתי את ״רגועה בעין הסערה״. אני יודעת כמה מפחיד זה יכול להיות להרגיש שהחרדה מנהלת אותך, וכמה משמעותי לגלות שיש לך כלים ושאת לא חסרת אונים מול הגוף שלך. את הדבר הזה אני רוצה להעביר הלאה.</p>
+  </div>
+</section>"""
+    form = lead_form("workshop", item=title, register=True, button="אני רוצה להצטרף לסדנה",
+                     success="קיבלתי את הפרטים שלך. אחזור אלייך עם פרטים על המועד והמחיר כשיתפרסמו.")
+    register = f"""<section class="lp-sec lp-register" id="register">
+  <div class="lp-wrap lp-narrow">
+    <p class="lp-hand lp-hand-lg">ניפגש ב״רגועה בעין הסערה״</p>
+    <h2>את לא צריכה לחכות שהחיים יירגעו <br><strong>כדי להתחיל להרגיש בהם יותר יציבה.</strong></h2>
+    <p>אני מזמינה אותך להגיע כמו שאת, עם השאלות, החששות וכל מה שאת סוחבת. נלמד יחד להבין את הגוף, לפגוש את החרדה קצת אחרת ולתרגל דרכים לעזור לעצמנו.</p>
+    <p class="lp-when"><strong>סדנת זום</strong><span aria-hidden="true">·</span><strong>90 דקות</strong></p>
+    <div class="lp-form">{form}</div>
+    <p class="fine">אחזור אלייך עם פרטים על המועד והמחיר כשיתפרסמו. <br>ההרשמה אינה מותנית באישור דיוור, ואפשר להסיר את עצמך מהרשימה בכל עת.</p>
+    <div class="lp-wa">
+      <p class="lp-hand">מתווסתים פה עם אנה לי מילשטיין</p>
+      <p>קבוצת וואטסאפ שקטה למי שרוצה להכיר את מערכת העצבים שלה קצת יותר טוב. אני משתפת שם ידע בגובה העיניים, תרגולים קצרים, כלים להתמודדות עם חרדה והצפה ועדכונים על הרצאות וסדנאות. בלי רעש מיותר.</p>
+      <a class="lp-wa-btn" href="{WHATSAPP_GROUP}" target="_blank" rel="noopener">{WA_ICON}להצטרפות לקבוצה השקטה</a>
+    </div>
+    <p class="fine lp-disclaimer">זו סדנה לימודית וחווייתית, לא תחליף לטיפול נפשי אישי או רפואי. תרגולים מותאמים לבחירה ולנוחות של המשתתפות.</p>
+  </div>
+</section>"""
+    fonts = "".join(f'<link rel="preload" href="/static/fonts/{f}.ttf" as="font" type="font/ttf" crossorigin>'
+                    for f in ("PloniRegular", "PloniYadRegular"))
+    return layout(
+        f"/workshops/{p['slug']}",
+        f"{title}: סדנת זום להבנת החרדה",
+        "סדנת זום חווייתית בת 90 דקות להבנת החרדה, ויסות מערכת העצבים וכלים מעשיים להתמודדות עם רגעי הצפה.",
+        hero + problem + mood + plan + fit + take + dream + story + register + LP_FLOAT.replace("שמרי לי מקום בהרצאה", "אני רוצה להצטרף לסדנה"),
+        active="/workshops",
+        extra_head=fonts + '<link rel="stylesheet" href="/static/landing.css">',
+        body_class="lp lp-calm",
+        landing=True,
+    )
 
 
 def page_birth_workshop(p):

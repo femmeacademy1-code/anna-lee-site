@@ -298,3 +298,31 @@
   .lp-note { border-radius: 34px 16px 34px 16px; }
   .lp-note::before { border-radius: 27px 10px 27px 10px; }
 }
+
+
+/* ---------- "רגועה בעין הסערה": the workshop landing (body.lp.lp-calm) ----------
+   Same language as the lecture; its own run of tones so that no two neighbours share a colour. */
+.lp-calm .lp-for   { background: linear-gradient(180deg, #F4E3DA 0, #ECEEE0 var(--lp-fade), #ECEEE0 100%); }
+.lp-calm .lp-take  { background: linear-gradient(180deg, #ECEEE0 0, #F8E8DC var(--lp-fade), #F8E8DC 100%); }
+.lp-calm .lp-dream { background: linear-gradient(180deg, #F8E8DC 0, var(--lp-rose-mist) var(--lp-fade), var(--lp-rose-mist) 100%); padding: clamp(6rem, 14vw, 10rem) 0; overflow: hidden; }
+.lp-calm .lp-dream::before { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(60% 55% at 50% 60%, rgba(255, 236, 206, .8), rgba(255, 236, 206, 0) 70%),
+              radial-gradient(40% 55% at 15% 45%, rgba(223, 160, 150, .45), rgba(223, 160, 150, 0) 70%),
+              radial-gradient(40% 55% at 85% 50%, rgba(186, 192, 150, .4), rgba(186, 192, 150, 0) 70%); }
+.lp-calm .lp-dream .lp-hand-xl { margin: 0 auto; }
+.lp-calm .lp-story { background: linear-gradient(180deg, var(--lp-rose-mist) 0, #FAF1E8 var(--lp-fade), #FAF1E8 100%); padding-bottom: clamp(3rem, 6vw, 4.5rem); }
+.lp-calm .lp-register { background: linear-gradient(180deg, #FAF1E8 0, var(--lp-clay) var(--lp-fade), var(--lp-clay-deep) 100%); }
+
+.lp-after-steps { margin-top: clamp(2rem, 4vw, 3rem) !important; }
+
+/* who it is for: centred lines separated by a short soft rule, no boxes */
+.lp-for-list { list-style: none; margin: clamp(1.75rem, 4vw, 2.5rem) auto 0; padding: 0; max-width: 36rem; }
+.lp-for-list li { position: relative; margin: 0; padding: 1.35rem 0; font-size: clamp(1.15rem, 1.8vw, 1.32rem); line-height: 1.7; }
+.lp-for-list li + li::before { content: ""; position: absolute; top: 0; left: 50%; width: 5rem; height: 1px; transform: translateX(-50%);
+  background: linear-gradient(90deg, rgba(138, 79, 54, 0), rgba(138, 79, 54, .4), rgba(138, 79, 54, 0)); }
+
+/* her story: the long text stays narrow and calm */
+.lp-story .lp-about-grid { margin-top: clamp(1.5rem, 3vw, 2.5rem); }
+.lp-story-text { margin-top: clamp(2.25rem, 5vw, 3.5rem); }
+.lp-story-text .lp-hand { margin: clamp(1.75rem, 4vw, 2.5rem) auto !important; }
+.lp-disclaimer { margin-top: clamp(2.25rem, 4vw, 3rem) !important; font-size: .9rem !important; color: var(--lp-soft); }
