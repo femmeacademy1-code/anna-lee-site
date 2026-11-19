@@ -301,28 +301,106 @@
 
 
 /* ---------- "רגועה בעין הסערה": the workshop landing (body.lp.lp-calm) ----------
-   Same language as the lecture; its own run of tones so that no two neighbours share a colour. */
-.lp-calm .lp-for   { background: linear-gradient(180deg, #F4E3DA 0, #ECEEE0 var(--lp-fade), #ECEEE0 100%); }
-.lp-calm .lp-take  { background: linear-gradient(180deg, #ECEEE0 0, #F8E8DC var(--lp-fade), #F8E8DC 100%); }
-.lp-calm .lp-dream { background: linear-gradient(180deg, #F8E8DC 0, var(--lp-rose-mist) var(--lp-fade), var(--lp-rose-mist) 100%); padding: clamp(6rem, 14vw, 10rem) 0; overflow: hidden; }
-.lp-calm .lp-dream::before { content: ""; position: absolute; inset: 0; pointer-events: none;
-  background: radial-gradient(60% 55% at 50% 60%, rgba(255, 236, 206, .8), rgba(255, 236, 206, 0) 70%),
-              radial-gradient(40% 55% at 15% 45%, rgba(223, 160, 150, .45), rgba(223, 160, 150, 0) 70%),
-              radial-gradient(40% 55% at 85% 50%, rgba(186, 192, 150, .4), rgba(186, 192, 150, 0) 70%); }
-.lp-calm .lp-dream .lp-hand-xl { margin: 0 auto; }
-.lp-calm .lp-story { background: linear-gradient(180deg, var(--lp-rose-mist) 0, #FAF1E8 var(--lp-fade), #FAF1E8 100%); padding-bottom: clamp(3rem, 6vw, 4.5rem); }
-.lp-calm .lp-register { background: linear-gradient(180deg, #FAF1E8 0, var(--lp-clay) var(--lp-fade), var(--lp-clay-deep) 100%); }
+   The brand stays (Ploni, Ploni Yad, the lotus, the rose button). The character is the sea:
+   a horizon, waves instead of fades between the sections, and a sage green beside the rose. */
+.lp-calm {
+  --c-sky: #FBF2E7; --c-sand: #F6E4D6; --c-cream: #FCF6EC; --c-shell: #F7EADB;
+  --c-sage-mist: #E4E9D4; --c-sage-soft: #D6DDC1; --c-sage: #A4AC86; --c-sage-deep: #66714F; --c-dusk: #5C6849;
+  --calm-wave: clamp(2.6rem, 6.5vw, 5.5rem);
+}
+.lp-calm .calm-sec { padding-top: calc(var(--lp-pad) + 1rem); margin-top: -1px; overflow: visible; z-index: 1; }
+.calm-wave { position: absolute; left: 0; width: 100%; height: var(--calm-wave); top: 1px; transform: translateY(-100%); color: var(--c); display: block; pointer-events: none; }
+.calm-sand   { --c: var(--c-sand);       background: var(--c-sand); }
+.calm-cream  { --c: var(--c-cream);      background: var(--c-cream); }
+.calm-shell  { --c: var(--c-shell);      background: var(--c-shell); }
+.calm-sage   { --c: var(--c-sage-soft);  background: var(--c-sage-soft); }
+.calm-story  { --c: #FBF1E6;             background: #FBF1E6; overflow-x: clip; }
+.calm-register { --c: #EBCDBE;           background: linear-gradient(180deg, #EBCDBE, #DFB3A3); }
+.calm-sunset { --c: #F4D3C0; background: linear-gradient(180deg, #F4D3C0 0%, #F0BFB0 55%, #E9B5A6 100%); padding-block: clamp(6rem, 13vw, 9.5rem) clamp(7rem, 14vw, 10rem); clip-path: inset(-12rem 0 0 0); }
+.calm-dusk   { --c: var(--c-dusk); background: linear-gradient(180deg, #5C6849 0%, #6F7A5B 60%, #7C8764 100%); color: #FBF3E8; padding-block: clamp(6rem, 13vw, 9.5rem) clamp(7rem, 14vw, 10rem); clip-path: inset(-12rem 0 0 0); }
+.calm-sunset > .lp-wrap, .calm-dusk > .lp-wrap { z-index: 2; }
 
-.lp-after-steps { margin-top: clamp(2rem, 4vw, 3rem) !important; }
+/* hero: a sky, a horizon, and her standing in the sea */
+.calm-hero { --w: clamp(13rem, 34vw, 19rem); position: relative; z-index: 0; isolation: isolate; overflow-x: clip; padding: clamp(3rem, 6vw, 5rem) 0 0;
+  background: linear-gradient(180deg, var(--c-sky) 0%, #FBE9DC 55%, #F8DCCB 100%); }
+.calm-hero-text { position: relative; z-index: 4; }
+.calm-hero .lp-btn { margin-top: .4rem; }
+.calm-stage { position: relative; width: 100%; height: calc(var(--w) * 1.44); margin-top: clamp(1.5rem, 4vw, 2.5rem); }
+.calm-sun { position: absolute; z-index: 0; left: 50%; top: 6%; width: calc(var(--w) * 1.9); aspect-ratio: 1; transform: translateX(-50%); border-radius: 50%;
+  background: radial-gradient(closest-side, #FFF6E2 0, #FCE0BE 40%, rgba(250, 205, 175, .55) 62%, rgba(250, 205, 175, 0) 78%); }
+.calm-horizon { position: absolute; z-index: 1; left: 0; right: 0; bottom: 0; height: calc(var(--w) * .8);
+  background: linear-gradient(180deg, #E8DCC4 0, #D9DDC3 14%, #C6D0B2 100%); }
+.calm-horizon::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: rgba(255, 255, 255, .85); }
+.calm-anna { position: absolute; z-index: 2; left: 50%; bottom: 0; transform: translateX(-50%); width: var(--w); height: auto;
+  filter: drop-shadow(0 18px 24px rgba(90, 70, 50, .16));
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%); mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%); }
+.calm-sea-front { position: absolute; z-index: 3; left: 0; bottom: 0; width: 100%; height: calc(var(--w) * .54); display: block; }
 
-/* who it is for: centred lines separated by a short soft rule, no boxes */
-.lp-for-list { list-style: none; margin: clamp(1.75rem, 4vw, 2.5rem) auto 0; padding: 0; max-width: 36rem; }
-.lp-for-list li { position: relative; margin: 0; padding: 1.35rem 0; font-size: clamp(1.15rem, 1.8vw, 1.32rem); line-height: 1.7; }
-.lp-for-list li + li::before { content: ""; position: absolute; top: 0; left: 50%; width: 5rem; height: 1px; transform: translateX(-50%);
-  background: linear-gradient(90deg, rgba(138, 79, 54, 0), rgba(138, 79, 54, .4), rgba(138, 79, 54, 0)); }
+/* problem: heading and quote beside the text, not above it */
+.calm-two { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(2rem, 6vw, 5rem); align-items: start; text-align: start; }
+.calm-two-head { position: sticky; top: 5.5rem; text-align: center; }
+.calm-two-head h2 { margin-bottom: clamp(1.75rem, 4vw, 2.5rem); }
+.calm-two-body p { margin-inline: 0; max-width: none; }
+.calm-stone { position: relative; padding: clamp(1.8rem, 4vw, 2.4rem) clamp(1.4rem, 4vw, 2.2rem); border-radius: 62% 38% 52% 48% / 44% 52% 48% 56%;
+  background: radial-gradient(circle at 30% 25%, #F1F4E4, var(--c-sage-soft) 80%); box-shadow: 0 26px 44px -30px rgba(80, 94, 60, .5); }
+.calm-stone .lp-hand { margin: .4rem auto 0; color: #5A6540; }
+.calm-glyph { width: 2.1rem; height: 1.05rem; color: var(--c-sage-deep); display: block; margin: 0 auto; }
 
-/* her story: the long text stays narrow and calm */
-.lp-story .lp-about-grid { margin-top: clamp(1.5rem, 3vw, 2.5rem); }
-.lp-story-text { margin-top: clamp(2.25rem, 5vw, 3.5rem); }
-.lp-story-text .lp-hand { margin: clamp(1.75rem, 4vw, 2.5rem) auto !important; }
+/* the quote bands: sunset and dusk over the water */
+.calm-sunset .lp-hand-xl { margin: 0 auto; color: var(--lp-ink); text-shadow: 0 0 22px rgba(255, 240, 228, .8); }
+.calm-sunset-sun { position: absolute; z-index: 1; left: 50%; bottom: -14%; width: min(46rem, 90vw); aspect-ratio: 1; transform: translateX(-50%); border-radius: 50%;
+  background: radial-gradient(closest-side, #FFF2DA 0, #FBD9B4 36%, rgba(247, 190, 160, .6) 60%, rgba(247, 190, 160, 0) 76%); }
+.calm-dusk-sun { position: absolute; z-index: 1; left: 50%; bottom: -26%; width: min(40rem, 86vw); aspect-ratio: 1; transform: translateX(-50%); border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(255, 224, 186, .75) 0, rgba(238, 178, 140, .4) 45%, rgba(238, 178, 140, 0) 72%); }
+.calm-lines { position: absolute; z-index: 1; left: 0; bottom: 0; width: 100%; height: 6rem; pointer-events: none; }
+.calm-dusk h2, .calm-dusk .lp-hand { color: #FBF3E8; }
+.calm-dusk .lp-hand-xl { margin: 0 auto; text-shadow: 0 2px 22px rgba(40, 50, 30, .35); }
+.calm-dusk-soft { color: #E6E8D6 !important; }
+
+/* the three steps rise and fall like swells */
+.calm-tides { list-style: none; margin: clamp(2.5rem, 5vw, 3.5rem) 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.5rem, 4vw, 3rem); align-items: start; }
+.calm-tides li { margin: 0; padding: clamp(1.4rem, 3vw, 2rem) clamp(1.2rem, 3vw, 1.8rem) clamp(1.6rem, 3vw, 2.2rem); border-radius: 52px 28px 52px 28px;
+  background: linear-gradient(160deg, #F7F9EE, var(--c-sage-mist)); box-shadow: 0 28px 46px -34px rgba(80, 94, 60, .5); }
+.calm-tides li:nth-child(2) { margin-top: clamp(1.5rem, 4vw, 3rem); border-radius: 28px 52px 28px 52px; }
+.calm-tides li:nth-child(3) { margin-top: clamp(3rem, 8vw, 6rem); }
+.calm-tides .lp-icon::before { background: radial-gradient(circle at 35% 30%, #FFFDF6, #E2E8CF 70%, #CBD6B3) !important; box-shadow: 0 18px 30px -22px rgba(80, 94, 60, .5); }
+.calm-tides .lp-icon { color: #5A6540; width: 8rem; height: 8rem; }
+.calm-tides .lp-num { color: #DA627D; }
+.calm-tides p { font-size: 1.15rem !important; }
+.calm-after { margin-top: clamp(2.5rem, 5vw, 3.5rem) !important; }
+
+/* who it is for: small pools, each a line of its own */
+.calm-pools { list-style: none; margin: clamp(1.75rem, 4vw, 2.5rem) auto 0; padding: 0; display: grid; gap: .9rem; max-width: 36rem; }
+.calm-pools li { display: flex; align-items: center; gap: .9rem; text-align: start; padding: 1rem 1.5rem; border-radius: 30px 14px 30px 14px;
+  background: linear-gradient(120deg, #F3F6E7, var(--c-sage-mist)); font-size: clamp(1.1rem, 1.7vw, 1.25rem); line-height: 1.6; box-shadow: 0 16px 28px -24px rgba(80, 94, 60, .55); }
+.calm-pools li:nth-child(even) { border-radius: 14px 30px 14px 30px; margin-inline-start: clamp(0rem, 4vw, 2.5rem); }
+.calm-pools .calm-glyph { flex: none; margin: 0; width: 2rem; }
+
+.calm-sage .lp-hand { color: #4F5B3A; }
+
+/* her story: text beside her, aligned to the start, easy on the eye */
+.calm-story-title { margin-bottom: clamp(2rem, 5vw, 3.5rem) !important; }
+.calm-story-grid { display: grid; grid-template-columns: .75fr 1.25fr; gap: clamp(2rem, 5vw, 4.5rem); align-items: start; text-align: start; }
+.calm-story-media { position: sticky; top: 5.5rem; display: flex; justify-content: center; }
+.calm-story-media .lp-sticker-sm { max-width: 21rem; }
+.calm-story-text p { margin-inline: 0; max-width: none; }
+.calm-story-text .lp-hand { margin: clamp(1.5rem, 3vw, 2.25rem) 0 !important; }
+
+.calm-register .lp-form { background: rgba(255, 251, 247, .66); }
 .lp-disclaimer { margin-top: clamp(2.25rem, 4vw, 3rem) !important; font-size: .9rem !important; color: var(--lp-soft); }
+.lp-calm .site-footer { background: linear-gradient(180deg, #DFB3A3 0%, #E7CFC4 100%); }
+
+@media (max-width: 760px) {
+  .calm-two, .calm-story-grid { grid-template-columns: 1fr; }
+  .calm-two-head, .calm-story-media { position: static; }
+  .calm-two { text-align: center; }
+  .calm-two-body p { margin-inline: auto; }
+  .calm-tides { grid-template-columns: 1fr; }
+  .calm-tides li:nth-child(n) { margin-top: 0; }
+  .calm-story-media .lp-sticker-sm { max-width: 15rem; }
+  .calm-story-text p { text-align: center; margin-inline: auto; }
+  .calm-story-text .lp-hand { text-align: center; }
+  .calm-pools li:nth-child(even) { margin-inline-start: 0; }
+  .calm-hero { --w: min(15rem, 62vw); }
+}
+.lp-calm .calm-story { overflow-x: clip; overflow-y: visible; }
