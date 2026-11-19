@@ -1,0 +1,13 @@
+name = "annalee-leads"
+main = "leads.js"
+compatibility_date = "2025-01-01"
+workers_dev = false
+routes = [{ pattern = "forms.annalee-milstein.com", custom_domain = true }]
+
+[vars]
+ALLOWED_ORIGINS = "https://annalee-milstein.com,https://www.annalee-milstein.com"
+LECTURE_DATE = "2026-11-29"
+LECTURE_TIME = "20:30"
+ZOOM_LINK = ""
+BREVO_SENDER_NAME = "אנה לי מילשטיין"
+# Set as secrets (never here):  BREVO_API_KEY, BREVO_SENDER_EMAIL, NOTIFY_EMAIL, BREVO_LIST_REGISTRANTS, BREVO_LIST_ID

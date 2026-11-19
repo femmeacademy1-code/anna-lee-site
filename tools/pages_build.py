@@ -8,7 +8,7 @@ copy of static/app.js falls back to opening WhatsApp with the details.
 Usage:  python3 build.py && python3 tools/pages_build.py ""            (custom domain at the root)
         python3 build.py && python3 tools/pages_build.py /anna-lee-site   (github.io/<repo>/ preview)
 """
-import re, shutil, sys, tempfile
+import json, re, shutil, sys, tempfile
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from cms_tags import connect
@@ -27,7 +27,6 @@ shutil.copytree(root / "site", out)
 shutil.copytree(root / "static", out / "static")
 (out / ".nojekyll").write_text("")
 if not base:   # custom domain at the root: GitHub Pages reads it from docs/CNAME
-    import json
     host = json.loads((root / "config.json").read_text(encoding="utf-8"))["domain"].split("//")[-1].strip("/")
     (out / "CNAME").write_text(host + "\n")
 if keep:
@@ -54,6 +53,10 @@ fallback = (
     'msg.innerHTML = \'לשליחת הפרטים לאנה, <a target="_blank" rel="noopener" href="\' + wa + \'">לחצי כאן לוואטסאפ</a>.\'; '
     'window.open(wa, "_blank");'
 )
+endpoint = json.loads((root / "config.json").read_text(encoding="utf-8")).get("forms_endpoint", "")
+if endpoint:   # forms post to the Brevo Worker (worker/leads.js); without it they fall back to WhatsApp
+    assert 'fetch("/api/leads"' in s
+    s = s.replace('fetch("/api/leads"', 'fetch(' + json.dumps(endpoint))
 old = 'msg.className = "form-msg err";\n        msg.textContent = "אין חיבור לשרת כרגע. נסי שוב מאוחר יותר.";'
 assert old in s, "lead-form catch block not found"
 s = s.replace(old, fallback)

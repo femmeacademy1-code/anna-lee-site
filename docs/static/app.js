@@ -66,7 +66,7 @@
       btn.disabled = true;
       msg.className = "form-msg";
       msg.textContent = "שולחים...";
-      fetch("/api/leads", {
+      fetch("https://forms.annalee-milstein.com/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)
