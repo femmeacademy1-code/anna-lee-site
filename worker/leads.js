@@ -83,19 +83,8 @@ async function followUp(env, lead) {
     if (isLecture && env.BREVO_LIST_REGISTRANTS) lists.push(+env.BREVO_LIST_REGISTRANTS);
     if (lead.marketing && env.BREVO_LIST_ID) lists.push(+env.BREVO_LIST_ID);
     if (lists.length) jobs.push(brevo(env, '/contacts', { email: lead.email, attributes: { FIRSTNAME: lead.name }, listIds: lists, updateEnabled: true }));
-    if (isLecture) {
-      const { when, time } = lectureWhen(env);
-      const first = esc(lead.name.split(/\s+/)[0]);
-      const zoom = (env.ZOOM_LINK || '').trim();
-      const zoomBlock = zoom ? `<p><a class="btn" href="${esc(zoom)}">לכניסה לזום</a></p>` : '<p>את הקישור לזום אשלח אלייך במייל התזכורת.</p>';
-      jobs.push(sendMail(env, lead.email, lead.name, `נרשמת להרצאה "על קוצים" | ${when} ב-${time}`,
-        `<p>היי ${first},</p>
-<p>איזה כיף שנרשמת להרצאה <strong>"${esc(LECTURE_TITLE)}"</strong>.</p>
-<p><strong>מתי:</strong> ${esc(when)}, בשעה ${esc(time)}<br><strong>איפה:</strong> בזום, בלייב<br><strong>משך:</strong> 30 דקות</p>
-${zoomBlock}
-<p>ההרצאה לא תוקלט, אז כדאי לשריין את הזמן ביומן.</p>
-<p>מחכה לראות אותך,<br>אנה לי</p>`, true));
-    }
+    // The lecture confirmation email is now sent by the Brevo automation (trigger: contact added to list #4),
+    // so it is not sent from here any more. Notification to Anna and the list sign-ups above are unchanged.
   }
   // Every job is attempted; a failure is logged (Workers logs) and never blocks the visitor.
   for (const r of await Promise.allSettled(jobs)) if (r.status === 'rejected') console.error('[lead]', r.reason && r.reason.message);
