@@ -69,6 +69,15 @@ function itemList(env, topic) {
   return 0;
 }
 
+// The list of a form that has no topic of its own: by the kind of service (the clinic, breathwork), and the contact page's general list.
+function serviceList(env, lead) {
+  let by = {};
+  try { by = JSON.parse(env.SERVICE_LISTS || '{}'); } catch (e) { console.error('[lead] SERVICE_LISTS is not valid JSON'); }
+  if (Number.isInteger(+by[lead.service]) && +by[lead.service] > 0) return +by[lead.service];
+  if (/contact/.test(lead.source || '') && Number.isInteger(+env.CONTACT_LIST) && +env.CONTACT_LIST > 0) return +env.CONTACT_LIST;
+  return 0;
+}
+
 function lectureWhen(env) {
   const [y, m, d] = String(env.LECTURE_DATE || '').split('-').map(Number);
   if (!y) return { when: '', time: env.LECTURE_TIME || '' };
@@ -90,7 +99,7 @@ async function followUp(env, lead) {
   if (lead.email) {
     const lists = [];
     if (isLecture && env.BREVO_LIST_REGISTRANTS) lists.push(+env.BREVO_LIST_REGISTRANTS);
-    const itemId = itemList(env, topic);
+    const itemId = itemList(env, topic) || serviceList(env, lead);
     if (itemId && !lists.includes(itemId)) lists.push(itemId);
     if (lead.marketing && env.BREVO_LIST_ID) lists.push(+env.BREVO_LIST_ID);
     if (lists.length) jobs.push(brevo(env, '/contacts', { email: lead.email, attributes: { FIRSTNAME: lead.name }, listIds: lists, updateEnabled: true }));
@@ -121,7 +130,7 @@ export default {
     const lead = {
       name: clean(data.name, 100), phone: clean(data.phone, 30), email: clean(data.email, 120),
       service: clean(data.service, 30) || 'general', item: clean(data.item, 200), message: clean(data.message, 2000),
-      marketing: data.marketing_consent === true,
+      marketing: data.marketing_consent === true, source: clean(data.source, 200),
     };
     if (lead.name.length < 2) return reply(env, req, 400, { error: 'נא להזין שם.' });
     if (!lead.phone && !lead.email) return reply(env, req, 400, { error: 'נא להזין טלפון או מייל.' });

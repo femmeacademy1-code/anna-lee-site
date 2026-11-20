@@ -1273,7 +1273,7 @@ def page_lecture(l):
         what = sec("על מה זה", """<p>ההרצאה והסדנה מיועדות לצוותי חינוך, ועוסקות בשחיקה, בוויסות רגשי ובכלים קצרים שאפשר ליישם בתוך יום העבודה.</p>
 <p>הפרטים, כולל המועד, המשך והמחיר, יעודכנו בקרוב. אפשר להשאיר פרטים עכשיו, ואחזור אלייך.</p>""")
         form = form_sec("בקשת פרטים", "<p>ספרי לי על הצוות ועל המוסד, ואחזור אלייך.</p>",
-                        lead_form("lecture", note_label="ספרי קצת על הצוות והמוסד (אופציונלי)"), hid="request")
+                        lead_form("lecture", item=l["title"], note_label="ספרי קצת על הצוות והמוסד (אופציונלי)"), hid="request")
         return layout(f"/lectures/{l['slug']}", "הרצאה וסדנה לצוותי חינוך",
                       "הרצאה וסדנה לצוותי חינוך על שחיקה, ויסות רגשי וכלים להתמודדות עם עומס.",
                       head + assemble(what, form), active="/lectures")
@@ -1298,7 +1298,7 @@ def page_lecture(l):
 <p><a class="more" href="/lectures/education-teams">להרצאה לצוותי חינוך</a></p>"""),
         stretch=True), wide=True)
     form = form_sec("בקשת פרטים והצעת מחיר", "<p>ספרי לי על הארגון ועל הקהל, ואחזור אלייך עם הצעה מתאימה.</p>",
-                    lead_form("lecture", note_label="ספרי קצת על הארגון והקהל (אופציונלי)"), hid="request")
+                    lead_form("lecture", item=l["title"], note_label="ספרי קצת על הארגון והקהל (אופציונלי)"), hid="request")
     return layout(f"/lectures/{l['slug']}", l["title"],
                   "הרצאה לארגונים על סטרס, שחיקה וויסות מערכת העצבים. בקשת פרטים והצעת מחיר.",
                   head + assemble(what, take, form), active="/lectures")
