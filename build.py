@@ -931,7 +931,6 @@ def page_calm_landing(p):
   </div>
 </section>"""
     mood = f"""<section class="lp-sec lp-mood calm-soft" aria-label="משפט מתוך הסדנה">
-  {photo("calm-shore.jpg", "calm-photo-soft", "50% 50%")}
   <div class="lp-wrap lp-narrow">
     <p class="lp-hand lp-hand-xl">מה אם במקום להילחם בגוף שלך, <br>תלמדי לעבוד איתו?</p>
   </div>

@@ -326,16 +326,21 @@
 .lp-key { font-weight: 600; color: var(--lp-ink); font-size: 1.06em; }
 .lp-calm .calm-problem .lp-note { margin-top: clamp(2.75rem, 5vw, 3.75rem); }
 
-/* 3. the quote over a soft, light photograph, like the opening */
-.calm-photo-soft  { --veil: radial-gradient(58% 62% at 50% 50%, rgba(251, 244, 236, .86), rgba(251, 244, 236, .62) 70%, rgba(251, 244, 236, .5)); }
-.lp-calm .calm-soft { background: linear-gradient(180deg, #F3E4DA 0, var(--calm-cream) var(--lp-fade), var(--calm-cream) 100%); padding: clamp(7.5rem, 16vw, 12rem) 0; overflow: hidden; }
-.lp-calm .calm-soft .lp-hand-xl { color: var(--lp-ink); text-shadow: 0 0 22px rgba(255, 250, 244, .95), 0 0 4px rgba(255, 250, 244, .7); }
+/* 3. the quote on plain cream: peach above, peach below */
+.lp-calm .calm-soft { background: linear-gradient(180deg, var(--lp-peach) 0, var(--calm-cream) var(--lp-fade), var(--calm-cream) 100%); padding: clamp(7rem, 15vw, 11rem) 0; overflow: hidden; }
+.lp-calm .calm-soft::before { display: none; }
+.lp-calm .calm-soft .lp-hand-xl { color: var(--lp-ink); }
 
 /* 4. what we do: one soft vintage peach, all three blobs alike */
 .lp-calm .calm-plan { background: linear-gradient(180deg, var(--calm-cream) 0, #F3E4DA var(--lp-fade), #F3E4DA 100%); }
 .lp-calm .calm-plan .lp-steps li:nth-child(n) .lp-icon::before { border-radius: 58% 42% 52% 48% / 48% 56% 44% 52%;
   background: radial-gradient(circle at 35% 30%, #FFFDFA, #F3E4DA 78%); box-shadow: 0 22px 36px -24px rgba(122, 79, 58, .45), inset 0 0 0 1px rgba(122, 79, 58, .08); }
 .lp-after-steps { margin-top: clamp(2rem, 4vw, 3rem) !important; }
+
+/* the three steps: the brown of the opening text, softer than before */
+.lp-calm .calm-plan h2, .lp-calm .calm-plan h3, .lp-calm .calm-plan strong { color: var(--lp-soft); }
+.lp-calm .calm-plan .lp-steps p { color: var(--lp-ink); text-shadow: 0 0 14px rgba(255, 255, 255, .95), 0 0 3px rgba(255, 255, 255, .7); }
+.lp-calm .calm-plan .lp-after-steps { color: var(--lp-soft); }
 
 /* 5. who it is for: a photograph behind, every line in its own soft box */
 .lp-calm .calm-for { background: linear-gradient(180deg, var(--lp-blush) 0, #CDBFB4 var(--lp-fade), #CDBFB4 100%); padding: clamp(6.5rem, 13vw, 10rem) 0; overflow: hidden; }
@@ -383,14 +388,7 @@
 }
 
 
-/* "I know I have me": in a box of its own, like the sentence of the opening */
-.lp-calm .calm-quote-box { max-width: 30rem; margin: clamp(1.75rem, 4vw, 2.5rem) auto clamp(1.75rem, 3vw, 2.25rem); padding: clamp(1.5rem, 3vw, 2rem) clamp(1.5rem, 4vw, 2.5rem); }
-.lp-calm .calm-quote-box .lp-hand { margin: 0 auto !important; }
-/* ---------- on both landing pages the text has only two colours: dark brown and light brown
-   (cream-white stays only where the background is dark) ---------- */
-.lp .nav a, .lp .consent, .lp .field label, .lp .site-footer a { color: var(--lp-ink); }
-.lp .nav a:hover, .lp .nav a[aria-current="page"] { color: var(--lp-soft); border-bottom-color: var(--lp-soft); }
-.lp .fine, .lp .lead-form .fine { color: var(--lp-soft); }
-.lp .fine a, .lp .a11y-reset { color: var(--lp-soft); }
-.lp .skip { color: var(--lp-ink); }
-.lp [class*="a11y"] a { color: var(--lp-soft); }
+/* "I know I have me": a small box, only around the sentence itself */
+.lp-calm .calm-quote-box { display: block; width: fit-content; max-width: 100%; margin: clamp(1.5rem, 3vw, 2rem) auto clamp(2rem, 4vw, 2.75rem); padding: .7rem clamp(1.6rem, 4vw, 2.4rem) .8rem; border-radius: 30px 14px 30px 14px; }
+.lp-calm .calm-quote-box::before { inset: 5px; border-radius: 25px 10px 25px 10px; }
+.lp-calm .calm-quote-box .lp-hand { margin: 0 !important; font-size: clamp(1.5rem, 3vw, 2rem) !important; line-height: 1.3 !important; }
