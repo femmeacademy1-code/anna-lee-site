@@ -328,7 +328,7 @@
 .lp-calm .calm-problem .lp-note { margin-top: clamp(2.75rem, 5vw, 3.75rem); }
 
 /* 3. the quote on plain cream: peach above, peach below */
-.lp-calm .calm-soft { background: linear-gradient(180deg, var(--lp-peach) 0, var(--calm-cream) var(--lp-fade), var(--calm-cream) 100%); padding: clamp(7rem, 15vw, 11rem) 0; overflow: hidden; }
+.lp-calm .calm-soft { background: linear-gradient(180deg, var(--lp-peach) 0, var(--calm-cream) var(--lp-fade), var(--calm-cream) 100%); padding: calc(var(--lp-fade) + clamp(2.5rem, 5vw, 4rem)) 0 clamp(5rem, 9vw, 7rem); overflow: hidden; }
 .lp-calm .calm-soft::before { display: none; }
 .lp-calm .calm-soft .lp-hand-xl { color: var(--lp-soft); }
 
@@ -364,7 +364,7 @@
 /* 7. the dream: as it was, ending in plain cream */
 .lp-calm .lp-dream { background: linear-gradient(180deg, var(--calm-cream) 0, var(--calm-cream) 100%); padding: clamp(7rem, 15vw, 11rem) 0; overflow: hidden; }
 .lp-calm .lp-dream .lp-hand-xl { text-shadow: 0 0 20px rgba(255, 248, 242, .9); }
-.lp-calm .lp-dream .lp-soft { color: var(--calm-light-text); font-weight: 500; text-shadow: 0 1px 2px rgba(70, 42, 30, .75), 0 0 14px rgba(70, 42, 30, .55), 0 0 28px rgba(70, 42, 30, .35); }
+.lp-calm .lp-dream .lp-soft { color: var(--calm-light-text); font-weight: 500; text-shadow: 0 0 2px rgba(110, 66, 48, .85), 0 1px 3px rgba(110, 66, 48, .6), 0 0 18px rgba(255, 255, 255, .95), 0 0 32px rgba(255, 255, 255, .9), 0 0 56px rgba(255, 255, 255, .75); }
 
 /* 8. her story: plain cream (the passage into it is cream only), the text beside her, a tall photograph on the left */
 .lp-calm .calm-story { background: #FBF6EF; padding-bottom: clamp(3rem, 6vw, 4.5rem); overflow: hidden; }
