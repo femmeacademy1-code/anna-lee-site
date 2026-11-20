@@ -4,7 +4,8 @@
  *
  * What it does for every lead (same rules as mailer.py on the Python server):
  *   1. emails Anna Lee a note with the details (NOTIFY_EMAIL)
- *   2. with an email address: adds the contact to the lecture list (for the lecture) and to the newsletter list (only with marketing consent)
+ *   2. with an email address: adds the contact to the list of what they asked for (the lecture, a workshop, a free tool: see ITEM_LISTS in wrangler.toml)
+ *      and to the newsletter list (only with marketing consent)
  *   3. for the lecture "על קוצים": sends the confirmation email
  * The Brevo key lives only here, as a secret. Nothing is stored in the Worker.
  */
@@ -60,6 +61,14 @@ async function sendMail(env, to, toName, subject, body, footer) {
   });
 }
 
+// The list of what the form was about: the first entry of ITEM_LISTS ([["text in the form's topic", list number], ...]) that fits.
+function itemList(env, topic) {
+  let pairs = [];
+  try { pairs = JSON.parse(env.ITEM_LISTS || '[]'); } catch (e) { console.error('[lead] ITEM_LISTS is not valid JSON'); }
+  for (const [needle, id] of pairs) if (topic.includes(needle) && Number.isInteger(+id)) return +id;
+  return 0;
+}
+
 function lectureWhen(env) {
   const [y, m, d] = String(env.LECTURE_DATE || '').split('-').map(Number);
   if (!y) return { when: '', time: env.LECTURE_TIME || '' };
@@ -81,6 +90,8 @@ async function followUp(env, lead) {
   if (lead.email) {
     const lists = [];
     if (isLecture && env.BREVO_LIST_REGISTRANTS) lists.push(+env.BREVO_LIST_REGISTRANTS);
+    const itemId = itemList(env, topic);
+    if (itemId && !lists.includes(itemId)) lists.push(itemId);
     if (lead.marketing && env.BREVO_LIST_ID) lists.push(+env.BREVO_LIST_ID);
     if (lists.length) jobs.push(brevo(env, '/contacts', { email: lead.email, attributes: { FIRSTNAME: lead.name }, listIds: lists, updateEnabled: true }));
     // The lecture confirmation email is now sent by the Brevo automation (trigger: contact added to list #4),
