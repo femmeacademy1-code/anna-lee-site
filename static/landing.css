@@ -328,7 +328,8 @@
 .lp-calm .calm-problem .lp-note { margin-top: clamp(2.75rem, 5vw, 3.75rem); }
 
 /* 3. the quote on plain cream: peach above, peach below */
-.lp-calm .calm-soft { background: linear-gradient(180deg, var(--lp-peach) 0, var(--calm-cream) var(--lp-fade), var(--calm-cream) 100%); padding: calc(var(--lp-fade) + clamp(2.5rem, 5vw, 4rem)) 0 clamp(5rem, 9vw, 7rem); overflow: hidden; }
+.lp-calm .calm-soft { background: linear-gradient(180deg, var(--lp-peach) 0, var(--calm-cream) var(--lp-fade), var(--calm-cream) 100%); display: flex; align-items: center; min-height: clamp(24rem, 40vw, 32rem); padding: calc(var(--lp-fade) * .5 + 3.25rem) 0 2.5rem; overflow: hidden; }
+.lp-calm .calm-soft > .lp-wrap { width: 100%; }
 .lp-calm .calm-soft::before { display: none; }
 .lp-calm .calm-soft .lp-hand-xl { color: var(--lp-soft); }
 
