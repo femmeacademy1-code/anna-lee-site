@@ -301,44 +301,85 @@
 
 
 /* ---------- "רגועה בעין הסערה": the workshop landing (body.lp.lp-calm) ----------
-   Same language as the lecture; a sage green beside the rose, and photographs of the sea and the hands
-   that melt into the sections (no hard edge anywhere: every photo fades at top and bottom, under a warm veil). */
-.lp-calm {
-  --lp-sage-mist: #E1E7D0; --lp-sage-soft: #D3DBBC; --lp-sage-ink: #4F5B3A;
-}
-.lp-calm .lp-for   { background: linear-gradient(180deg, #F4E3DA 0, var(--lp-sage-mist) var(--lp-fade), var(--lp-sage-mist) 100%); overflow: hidden; }
-.lp-calm .lp-take  { background: linear-gradient(180deg, var(--lp-sage-mist) 0, #F8E8DC var(--lp-fade), #F8E8DC 100%); overflow: hidden; padding: clamp(6.5rem, 13vw, 10rem) 0; }
-.lp-calm .lp-dream { background: linear-gradient(180deg, #F8E8DC 0, var(--lp-rose-mist) var(--lp-fade), var(--lp-rose-mist) 100%); padding: clamp(7rem, 15vw, 11rem) 0; overflow: hidden; }
-.lp-calm .lp-story { background: linear-gradient(180deg, var(--lp-rose-mist) 0, #EEF1E0 var(--lp-fade), #EEF1E0 100%); padding-bottom: clamp(3rem, 6vw, 4.5rem); overflow: hidden; }
-.lp-calm .lp-register { background: linear-gradient(180deg, #EEF1E0 0, var(--lp-clay) var(--lp-fade), var(--lp-clay-deep) 100%); }
-.lp-calm .lp-mood::before { display: none; }
-.lp-calm .lp-mood { padding: clamp(7rem, 15vw, 11rem) 0; overflow: hidden; }
+   Same language as the lecture, with the site menu. Photographs of the sea and the hands melt into the
+   sections (no hard edge anywhere: every photo fades at the top and the bottom). */
+.lp-calm { --calm-blue: #A9C8D2; --calm-blue-deep: #8FB4C1; --calm-pink: #F6DAD3; --calm-cream: #FBF6EF; --calm-end: #F4E6DB; }
 
-/* a photograph inside a section: under a veil, and melting away at the top and the bottom */
+/* a photograph inside a section: under a veil, melting away at the top and the bottom */
 .calm-photo { position: absolute; inset: 0; z-index: 0; pointer-events: none;
   background: var(--veil), var(--calm-photo) var(--pos, center) / var(--size, cover) no-repeat;
   -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 26%, #000 74%, transparent 100%);
           mask-image: linear-gradient(180deg, transparent 0%, #000 26%, #000 74%, transparent 100%); }
-.calm-photo-mood  { --size: 150% auto; --pos: 0% 64%; --veil: radial-gradient(55% 62% at 50% 50%, rgba(251, 240, 230, .82), rgba(251, 240, 230, .42) 70%, rgba(251, 240, 230, .3)); }
-.calm-photo-for   { --veil: linear-gradient(rgba(225, 231, 208, .76), rgba(225, 231, 208, .7)); }
-.calm-photo-take  { --veil: linear-gradient(rgba(248, 232, 220, .68), rgba(248, 232, 220, .62)); }
+.calm-photo-hero  { --veil: radial-gradient(60% 65% at 50% 50%, rgba(251, 240, 230, .9), rgba(251, 240, 230, .55) 70%, rgba(251, 240, 230, .4)); }
+.calm-photo-for   { --veil: linear-gradient(rgba(44, 34, 28, .34), rgba(44, 34, 28, .3)); }
 .calm-photo-dream { --veil: radial-gradient(52% 60% at 50% 50%, rgba(251, 240, 232, .86), rgba(251, 240, 232, .55) 70%, rgba(247, 226, 214, .4)); }
-.lp-calm .lp-dream h2, .lp-calm .lp-dream .lp-hand-xl { text-shadow: 0 0 20px rgba(255, 248, 242, .9); }
 
-.lp-after-steps { margin-top: clamp(2rem, 4vw, 3rem) !important; }
-/* a touch of sage: the middle step's blob and the little stone around the sentence of the opening */
-.lp-calm .lp-steps li:nth-child(2) .lp-icon::before { background: radial-gradient(circle at 35% 30%, #FBFCF3, var(--lp-sage-mist) 65%, #C9D3B0); }
+/* 1. the opening: centred text over the sea-shore photo */
+.lp-calm .calm-hero { background: var(--calm-cream); text-align: center; overflow: hidden; padding: clamp(5rem, 11vw, 8rem) 0 clamp(6rem, 13vw, 10rem); }
+.lp-calm .calm-hero .lp-title-glow { inset: -40% -22%; }
+.lp-when-sub { margin-top: -.8rem !important; color: var(--lp-soft); }
+
+/* 2. equal spacing, key sentences marked, a soft white glow on the gentle ones */
+.lp-calm .calm-problem .lp-wrap > p { margin: 0 auto clamp(1.5rem, 3vw, 2rem); text-shadow: 0 0 14px rgba(255, 255, 255, .95), 0 0 3px rgba(255, 255, 255, .7); }
+.lp-calm .calm-problem h2 { margin-bottom: clamp(1.5rem, 3vw, 2rem); }
+.lp-key { font-weight: 600; color: var(--lp-ink); font-size: 1.06em; }
+.lp-calm .calm-problem .lp-note { margin-top: clamp(2.75rem, 5vw, 3.75rem); }
+
+/* 3. a soft vintage blue, the sentence in white with a dark edge so it can be read */
+.lp-calm .calm-blue { background: linear-gradient(180deg, #F6E4D9 0, #E4E8E4 calc(var(--lp-fade) * .45), var(--calm-blue) var(--lp-fade), var(--calm-blue-deep) 100%); padding: clamp(7rem, 15vw, 11rem) 0; }
+.lp-calm .calm-blue::before { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(60% 55% at 50% 50%, rgba(255, 255, 255, .28), rgba(255, 255, 255, 0) 70%); }
+.lp-calm .calm-blue .lp-hand-xl { color: #fff; -webkit-text-stroke: 1px rgba(46, 82, 98, .55); paint-order: stroke fill;
+  text-shadow: 0 2px 4px rgba(38, 72, 88, .55), 0 4px 22px rgba(38, 72, 88, .45); }
+
+/* 4. what we do: one soft rose for the whole section, all three blobs alike */
+.lp-calm .calm-plan { background: linear-gradient(180deg, var(--calm-blue-deep) 0, #E9DCDD calc(var(--lp-fade) * .5), var(--calm-pink) var(--lp-fade), var(--calm-pink) 100%); }
+.lp-calm .calm-plan .lp-icon::before,
+.lp-calm .calm-plan .lp-steps li:nth-child(n) .lp-icon::before { border-radius: 58% 42% 52% 48% / 48% 56% 44% 52%;
+  background: radial-gradient(circle at 35% 30%, #FFF6EE, #F3D3CB 70%, #EBC1B8); }
 .lp-calm .lp-num { color: #BF6A79; }
+.lp-after-steps { margin-top: clamp(2rem, 4vw, 3rem) !important; }
 
-/* who it is for: centred lines separated by a short soft rule, no boxes */
-.lp-for-list { list-style: none; margin: clamp(1.75rem, 4vw, 2.5rem) auto 0; padding: 0; max-width: 36rem; }
-.lp-for-list li { position: relative; margin: 0; padding: 1.35rem 0; font-size: clamp(1.15rem, 1.8vw, 1.32rem); line-height: 1.7; }
-.lp-for-list li + li::before { content: ""; position: absolute; top: 0; left: 50%; width: 5rem; height: 1px; transform: translateX(-50%);
-  background: linear-gradient(90deg, rgba(79, 91, 58, 0), rgba(79, 91, 58, .4), rgba(79, 91, 58, 0)); }
-.lp-calm .lp-take .lp-hand { color: var(--lp-sage-ink); }
+/* 5. who it is for: a photograph behind, every line in its own soft box */
+.lp-calm .calm-for { background: linear-gradient(180deg, var(--calm-pink) 0, #CDBFB4 var(--lp-fade), #CDBFB4 100%); padding: clamp(6.5rem, 13vw, 10rem) 0; overflow: hidden; }
+.lp-calm .calm-for h2 { color: #fff; text-shadow: 0 2px 16px rgba(30, 22, 18, .6); }
+.calm-boxes { list-style: none; margin: clamp(1.75rem, 4vw, 2.5rem) auto 0; padding: 0; display: grid; gap: 1rem; max-width: 36rem; }
+.calm-boxes li { margin: 0; padding: 1.15rem 1.6rem; border-radius: 26px 12px 26px 12px; background: rgba(255, 251, 246, .9);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); box-shadow: 0 18px 34px -24px rgba(40, 28, 22, .55);
+  font-size: clamp(1.12rem, 1.8vw, 1.28rem); line-height: 1.65; color: var(--lp-ink); }
+.calm-boxes li:nth-child(even) { border-radius: 12px 26px 12px 26px; }
 
-/* her story: the long text stays narrow and calm */
-.lp-story .lp-about-grid { margin-top: clamp(1.5rem, 3vw, 2.5rem); }
-.lp-story-text { margin-top: clamp(2.25rem, 5vw, 3.5rem); }
-.lp-story-text .lp-hand { margin: clamp(1.75rem, 4vw, 2.5rem) auto !important; }
+/* 6. what you leave with: cream, no photograph */
+.lp-calm .calm-take { background: linear-gradient(180deg, #CDBFB4 0, var(--calm-cream) var(--lp-fade), var(--calm-cream) 100%); padding: clamp(5.5rem, 11vw, 8.5rem) 0; }
+
+/* 7. the dream: as it was */
+.lp-calm .lp-dream { background: linear-gradient(180deg, var(--calm-cream) 0, var(--lp-rose-mist) var(--lp-fade), var(--lp-rose-mist) 100%); padding: clamp(7rem, 15vw, 11rem) 0; overflow: hidden; }
+.lp-calm .lp-dream .lp-hand-xl { text-shadow: 0 0 20px rgba(255, 248, 242, .9); }
+
+/* 8. her story: cream; the text beside her, a tall photograph on the left, the closing lines centred below */
+.lp-calm .calm-story { background: linear-gradient(180deg, var(--lp-rose-mist) 0, #FBF3EA var(--lp-fade), #FBF3EA 100%); padding-bottom: clamp(3rem, 6vw, 4.5rem); overflow: hidden; }
+.calm-story-title { margin-bottom: clamp(2rem, 5vw, 3.5rem) !important; }
+.calm-story-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(1.5rem, 4vw, 3.5rem); align-items: stretch; text-align: start; }
+.calm-story-text p { margin-inline: 0; max-width: none; }
+.calm-story-media { position: relative; display: flex; align-items: center; justify-content: center; min-height: 100%; }
+.calm-story-img { position: relative; width: 120%; max-width: none; margin-inline: -10%; height: auto; filter: drop-shadow(0 22px 30px rgba(110, 60, 45, .16));
+  -webkit-mask-image: linear-gradient(180deg, #000 80%, transparent 100%); mask-image: linear-gradient(180deg, #000 80%, transparent 100%); }
+.calm-story-end { margin: clamp(2.25rem, 5vw, 3.5rem) auto 0; }
+.calm-story-end .lp-hand { margin: 0 auto clamp(1.25rem, 3vw, 2rem) !important; }
+
+/* 9. registration, and then a clear, light end of the page */
+.lp-calm .calm-register { background: linear-gradient(180deg, #FBF3EA 0, var(--lp-clay) var(--lp-fade), var(--lp-clay-deep) 70%, var(--lp-clay-deep) 100%); padding-bottom: clamp(10rem, 18vw, 14rem); }
+.lp-calm .calm-register::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: clamp(9rem, 17vw, 13rem); pointer-events: none;
+  background: linear-gradient(180deg, rgba(244, 230, 219, 0) 0, var(--calm-end) 100%); }
+.lp-calm .lead-form .fine { font-size: .74rem !important; line-height: 1.5; color: var(--lp-soft); opacity: .85; margin-top: .6rem; }
 .lp-disclaimer { margin-top: clamp(2.25rem, 4vw, 3rem) !important; font-size: .9rem !important; color: var(--lp-soft); }
+.lp-calm .site-footer { background: linear-gradient(180deg, var(--calm-end) 0, #F9EFE5 45%, #FCF7F0 100%); color: var(--lp-text); }
+.lp-calm .site-footer a { color: var(--lp-ink); }
+
+@media (max-width: 760px) {
+  .calm-story-grid { grid-template-columns: 1fr; }
+  .calm-story-media { order: -1; }
+  .calm-story-img { max-width: 17rem; }
+  .calm-story-text p { text-align: center; margin-inline: auto; }
+  .lp-calm .calm-hero { padding-block: clamp(3.5rem, 12vw, 5rem) clamp(5rem, 14vw, 7rem); }
+}
