@@ -15,17 +15,17 @@
   /* the page's soft palette, all from the brand */
   --lp-cream: #FBF6EF;
   --lp-peach: #F6E4D9;
-  --lp-blush: #F3DAD3;
-  --lp-rose-mist: #EFD3CE;
+  --lp-blush: #F2DAC8;
+  --lp-rose-mist: #EED6C5;
   --lp-sage: #E6EADF;
   --lp-ink: #3A2620;
-  --lp-text: #4C392F;
-  --lp-soft: #6E5648;
+  --lp-text: #3A2620;       /* dark brown */
+  --lp-soft: #7A4F3A;       /* light brown */
   --lp-rose: #94455A;
   --lp-rose-hover: #7C3649;
-  --lp-hand-ink: #8A4F36;
-  --lp-clay: #E8C6B6;      /* the deeper warm tone the page ends in */
-  --lp-clay-deep: #DFB3A3;
+  --lp-hand-ink: #7A4F3A; /* light brown */
+  --lp-clay: #E8CDB7;      /* the deeper warm tone the page ends in */
+  --lp-clay-deep: #DFBBA2;
 
   /* one rhythm for the whole page */
   --lp-pad: clamp(4.5rem, 9vw, 7.5rem);
@@ -97,7 +97,7 @@
   text-shadow: 0 0 28px rgba(255, 246, 236, .9), 0 0 2px rgba(255, 250, 244, .6); }
 /* a warm halo of light behind the title, breathing very slowly */
 .lp-title-glow { position: absolute; z-index: -1; inset: -55% -18%; border-radius: 50%; pointer-events: none;
-  background: radial-gradient(closest-side, rgba(255, 244, 232, 1), rgba(242, 196, 180, .7) 45%, rgba(232, 170, 160, .25) 72%, rgba(232, 176, 166, 0));
+  background: radial-gradient(closest-side, rgba(255, 244, 232, 1), rgba(242, 206, 176, .7) 45%, rgba(236, 190, 156, .25) 72%, rgba(236, 192, 160, 0));
   filter: blur(8px); }
 @media (prefers-reduced-motion: no-preference) {
   .lp-title-glow { animation: lp-breathe 7s ease-in-out infinite; }
@@ -114,7 +114,7 @@
 .lp-glow { position: absolute; inset: 2% -10% 10%; border-radius: 50%; pointer-events: none;
   background:
     radial-gradient(closest-side at 50% 42%, rgba(255, 250, 242, .95), rgba(255, 250, 242, 0) 70%),
-    radial-gradient(closest-side, rgba(242, 190, 172, .85), rgba(236, 180, 168, .45) 60%, rgba(236, 186, 176, 0));
+    radial-gradient(closest-side, rgba(242, 200, 168, .85), rgba(238, 190, 158, .45) 60%, rgba(238, 196, 168, 0));
   filter: blur(14px); }
 
 /* the cut-out photos: no frame, no edge, only her and a soft shadow */
@@ -146,7 +146,7 @@
   position: relative; max-width: 36rem; margin: clamp(2.75rem, 5vw, 3.75rem) auto 0;
   padding: clamp(2.2rem, 4.5vw, 3rem) clamp(1.5rem, 5vw, 3.25rem) clamp(1.8rem, 4vw, 2.5rem);
   border-radius: 46px 22px 46px 22px;
-  background: linear-gradient(140deg, rgba(255, 250, 245, .92), rgba(248, 226, 216, .85));
+  background: linear-gradient(140deg, rgba(255, 250, 245, .92), rgba(248, 230, 214, .85));
   box-shadow: 0 28px 50px -34px rgba(138, 79, 54, .45), inset 0 0 0 1px rgba(255, 255, 255, .7);
 }
 .lp-note::before { /* the hand-drawn inner line */
@@ -167,9 +167,9 @@
   content: ""; position: absolute; inset: 0;
   background:
     var(--lp-mood-photo, radial-gradient(60% 55% at 50% 62%, rgba(255, 236, 206, .95), rgba(255, 236, 206, 0) 70%)),
-    radial-gradient(45% 60% at 20% 40%, rgba(232, 176, 166, .55), rgba(232, 176, 166, 0) 70%),
+    radial-gradient(45% 60% at 20% 40%, rgba(234, 190, 158, .55), rgba(234, 190, 158, 0) 70%),
     radial-gradient(45% 60% at 82% 45%, rgba(214, 190, 160, .55), rgba(214, 190, 160, 0) 70%),
-    linear-gradient(180deg, #F6E1D2, #EFCFC2 50%, #EAD9C6);
+    linear-gradient(180deg, #F6E1D2, #EFD3BE 50%, #EAD9C6);
   background-size: cover; background-position: center;
   -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 78%, transparent 100%);
           mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 78%, transparent 100%);
@@ -184,12 +184,12 @@
 .lp-icon { position: relative; display: grid; place-items: center; width: 9.5rem; height: 9.5rem; margin: 0 auto 1.4rem; color: var(--lp-hand-ink); }
 .lp-icon::before { content: ""; position: absolute; inset: 0; z-index: 0;
   border-radius: 58% 42% 52% 48% / 48% 56% 44% 52%;
-  background: radial-gradient(circle at 35% 30%, #FFF6EE, var(--lp-blush) 70%, #EECBC0);
+  background: radial-gradient(circle at 35% 30%, #FFF6EE, var(--lp-blush) 70%, #EBCBB2);
   box-shadow: 0 24px 40px -26px rgba(138, 79, 54, .45); }
 .lp-steps li:nth-child(2) .lp-icon::before { border-radius: 46% 54% 42% 58% / 56% 44% 56% 44%; background: radial-gradient(circle at 35% 30%, #FFF6EE, var(--lp-peach) 65%, #EBCDB9); }
-.lp-steps li:nth-child(3) .lp-icon::before { border-radius: 52% 48% 60% 40% / 42% 58% 42% 58%; background: radial-gradient(circle at 35% 30%, #FFF6EE, var(--lp-rose-mist) 70%, #E6C2BA); }
+.lp-steps li:nth-child(3) .lp-icon::before { border-radius: 52% 48% 60% 40% / 42% 58% 42% 58%; background: radial-gradient(circle at 35% 30%, #FFF6EE, var(--lp-rose-mist) 70%, #E8C8B2); }
 .lp-icon svg { position: relative; z-index: 1; width: 64%; height: 64%; }
-.lp-num { position: absolute; z-index: 2; top: -.4rem; inset-inline-start: -.2rem; font-family: "Ploni Yad", cursive; font-weight: 700; font-size: 3rem; line-height: 1; color: #BF6A79; text-shadow: 0 2px 0 #FFF8F2; }
+.lp-num { position: absolute; z-index: 2; top: -.4rem; inset-inline-start: -.2rem; font-family: "Ploni Yad", cursive; font-weight: 700; font-size: 3rem; line-height: 1; color: #7A4F3A; text-shadow: 0 2px 0 #FFF8F2; }
 .lp-steps p { font-size: 1.15rem !important; }
 
 /* photo: Unsplash, free licence (unsplash.com/photos/dvXGnwnYweM) */
@@ -200,7 +200,7 @@
 .lp-gift-photo { position: absolute; inset: 0; z-index: 0; pointer-events: none;
   background:
     radial-gradient(48% 55% at 50% 50%, rgba(251, 240, 232, .88), rgba(251, 240, 232, .6) 60%, rgba(251, 240, 232, .25)),
-    linear-gradient(180deg, rgba(246, 228, 217, .35), rgba(243, 218, 211, .35)),
+    linear-gradient(180deg, rgba(246, 228, 217, .35), rgba(242, 218, 200, .35)),
     var(--lp-gift-photo, none) center 40% / cover no-repeat;
   -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 24%, #000 76%, transparent 100%);
           mask-image: linear-gradient(180deg, transparent 0%, #000 24%, #000 76%, transparent 100%); }
@@ -214,7 +214,7 @@
 .lp-glow-about { inset: -6% -14% 4%; }
 .lp-about-media::before { /* a second, wider halo: the section gains depth around her */
   content: ""; position: absolute; inset: -24% -34%; border-radius: 50%; pointer-events: none;
-  background: radial-gradient(closest-side, rgba(255, 246, 236, .95), rgba(236, 190, 178, .55) 50%, rgba(232, 180, 170, .2) 75%, rgba(239, 211, 206, 0)); }
+  background: radial-gradient(closest-side, rgba(255, 246, 236, .95), rgba(238, 198, 168, .55) 50%, rgba(236, 192, 164, .2) 75%, rgba(238, 214, 197, 0)); }
 .lp-sticker-sm { max-width: 23rem; margin: 0 auto;
   -webkit-mask-image: linear-gradient(180deg, #000 78%, transparent 100%), radial-gradient(ellipse 62% 70% at 50% 42%, #000 75%, transparent 100%);
   -webkit-mask-composite: source-in;
@@ -301,63 +301,61 @@
 
 
 /* ---------- "רגועה בעין הסערה": the workshop landing (body.lp.lp-calm) ----------
-   Same language as the lecture, with the site menu. Photographs of the sea and the hands melt into the
-   sections (no hard edge anywhere: every photo fades at the top and the bottom). */
-.lp-calm { --calm-blue: #A9C8D2; --calm-blue-deep: #8FB4C1; --calm-pink: #F6DAD3; --calm-cream: #FBF6EF; --calm-end: #F4E6DB; }
+   Same language as the lecture, with the site menu. Photographs melt into the sections (no hard edge
+   anywhere: every photo fades at the top and the bottom). Photographs are always set horizontally. */
+.lp-calm { --calm-cream: #FBF6EF; --calm-dark: #4A3B33; --calm-end: #F6E8DB; --calm-light-text: #FBF3E8; }
 
-/* a photograph inside a section: under a veil, melting away at the top and the bottom */
 .calm-photo { position: absolute; inset: 0; z-index: 0; pointer-events: none;
   background: var(--veil), var(--calm-photo) var(--pos, center) / var(--size, cover) no-repeat;
   -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 26%, #000 74%, transparent 100%);
           mask-image: linear-gradient(180deg, transparent 0%, #000 26%, #000 74%, transparent 100%); }
-.calm-photo-hero  { --veil: radial-gradient(60% 65% at 50% 50%, rgba(251, 240, 230, .9), rgba(251, 240, 230, .55) 70%, rgba(251, 240, 230, .4)); }
+.calm-photo-hero  { --veil: radial-gradient(58% 62% at 50% 50%, rgba(251, 242, 232, .7), rgba(251, 242, 232, .3) 75%, rgba(251, 242, 232, .12)); }
+.calm-photo-dark  { --veil: linear-gradient(rgba(34, 24, 19, .58), rgba(34, 24, 19, .52)); }
 .calm-photo-for   { --veil: linear-gradient(rgba(44, 34, 28, .34), rgba(44, 34, 28, .3)); }
-.calm-photo-dream { --veil: radial-gradient(52% 60% at 50% 50%, rgba(251, 240, 232, .86), rgba(251, 240, 232, .55) 70%, rgba(247, 226, 214, .4)); }
+.calm-photo-dream { --veil: radial-gradient(52% 60% at 50% 50%, rgba(251, 240, 232, .86), rgba(251, 240, 232, .55) 70%, rgba(251, 236, 222, .4)); }
 
-/* 1. the opening: centred text over the sea-shore photo */
+/* 1. the opening: centred text over a horizontal photograph */
 .lp-calm .calm-hero { background: var(--calm-cream); text-align: center; overflow: hidden; padding: clamp(5rem, 11vw, 8rem) 0 clamp(6rem, 13vw, 10rem); }
 .lp-calm .calm-hero .lp-title-glow { inset: -40% -22%; }
+.lp-calm .calm-hero-text { text-shadow: 0 0 18px rgba(255, 250, 244, .9), 0 0 3px rgba(255, 250, 244, .7); }
 .lp-when-sub { margin-top: -.8rem !important; color: var(--lp-soft); }
 
-/* 2. equal spacing, key sentences marked, a soft white glow on the gentle ones */
-.lp-calm .calm-problem .lp-wrap > p { margin: 0 auto clamp(1.5rem, 3vw, 2rem); text-shadow: 0 0 14px rgba(255, 255, 255, .95), 0 0 3px rgba(255, 255, 255, .7); }
-.lp-calm .calm-problem h2 { margin-bottom: clamp(1.5rem, 3vw, 2rem); }
+/* 2. the opening text: equal spacing, key sentences marked, a soft white glow */
+.lp-calm .calm-problem > .lp-wrap { max-width: 62rem; }
+.lp-calm .calm-problem .lp-wrap > p { max-width: none; margin: 0 auto clamp(1.75rem, 3.4vw, 2.4rem); text-shadow: 0 0 14px rgba(255, 255, 255, .95), 0 0 3px rgba(255, 255, 255, .7); }
+.lp-calm .calm-problem h2 { margin-bottom: clamp(1.75rem, 3.4vw, 2.4rem); }
 .lp-key { font-weight: 600; color: var(--lp-ink); font-size: 1.06em; }
 .lp-calm .calm-problem .lp-note { margin-top: clamp(2.75rem, 5vw, 3.75rem); }
 
-/* 3. a soft vintage blue, the sentence in white with a dark edge so it can be read */
-.lp-calm .calm-blue { background: linear-gradient(180deg, #F6E4D9 0, #E4E8E4 calc(var(--lp-fade) * .45), var(--calm-blue) var(--lp-fade), var(--calm-blue-deep) 100%); padding: clamp(7rem, 15vw, 11rem) 0; }
-.lp-calm .calm-blue::before { content: ""; position: absolute; inset: 0; pointer-events: none;
-  background: radial-gradient(60% 55% at 50% 50%, rgba(255, 255, 255, .28), rgba(255, 255, 255, 0) 70%); }
-.lp-calm .calm-blue .lp-hand-xl { color: #fff; -webkit-text-stroke: 1px rgba(46, 82, 98, .55); paint-order: stroke fill;
-  text-shadow: 0 2px 4px rgba(38, 72, 88, .55), 0 4px 22px rgba(38, 72, 88, .45); }
+/* 3. the quote over a darkened photograph, in cream-white */
+.lp-calm .calm-dark { background: linear-gradient(180deg, var(--lp-peach) 0, var(--calm-dark) var(--lp-fade), var(--calm-dark) 100%); padding: clamp(7.5rem, 16vw, 12rem) 0; overflow: hidden; }
+.lp-calm .calm-dark .lp-hand-xl { color: var(--calm-light-text); text-shadow: 0 2px 18px rgba(20, 12, 8, .55); }
 
-/* 4. what we do: one soft rose for the whole section, all three blobs alike */
-.lp-calm .calm-plan { background: linear-gradient(180deg, var(--calm-blue-deep) 0, #E9DCDD calc(var(--lp-fade) * .5), var(--calm-pink) var(--lp-fade), var(--calm-pink) 100%); }
-.lp-calm .calm-plan .lp-icon::before,
+/* 4. what we do: one soft vintage peach, all three blobs alike */
+.lp-calm .calm-plan { background: linear-gradient(180deg, var(--calm-dark) 0, var(--lp-blush) var(--lp-fade), var(--lp-blush) 100%); }
 .lp-calm .calm-plan .lp-steps li:nth-child(n) .lp-icon::before { border-radius: 58% 42% 52% 48% / 48% 56% 44% 52%;
-  background: radial-gradient(circle at 35% 30%, #FFF6EE, #F3D3CB 70%, #EBC1B8); }
-.lp-calm .lp-num { color: #BF6A79; }
+  background: radial-gradient(circle at 35% 30%, #FFF6EE, #F0D4BE 70%, #E8C4A9); }
 .lp-after-steps { margin-top: clamp(2rem, 4vw, 3rem) !important; }
 
 /* 5. who it is for: a photograph behind, every line in its own soft box */
-.lp-calm .calm-for { background: linear-gradient(180deg, var(--calm-pink) 0, #CDBFB4 var(--lp-fade), #CDBFB4 100%); padding: clamp(6.5rem, 13vw, 10rem) 0; overflow: hidden; }
-.lp-calm .calm-for h2 { color: #fff; text-shadow: 0 2px 16px rgba(30, 22, 18, .6); }
+.lp-calm .calm-for { background: linear-gradient(180deg, var(--lp-blush) 0, #CDBFB4 var(--lp-fade), #CDBFB4 100%); padding: clamp(6.5rem, 13vw, 10rem) 0; overflow: hidden; }
+.lp-calm .calm-for h2 { color: var(--calm-light-text); text-shadow: 0 2px 16px rgba(30, 22, 18, .6); }
 .calm-boxes { list-style: none; margin: clamp(1.75rem, 4vw, 2.5rem) auto 0; padding: 0; display: grid; gap: 1rem; max-width: 36rem; }
 .calm-boxes li { margin: 0; padding: 1.15rem 1.6rem; border-radius: 26px 12px 26px 12px; background: rgba(255, 251, 246, .9);
   -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); box-shadow: 0 18px 34px -24px rgba(40, 28, 22, .55);
   font-size: clamp(1.12rem, 1.8vw, 1.28rem); line-height: 1.65; color: var(--lp-ink); }
 .calm-boxes li:nth-child(even) { border-radius: 12px 26px 12px 26px; }
 
-/* 6. what you leave with: cream, no photograph */
-.lp-calm .calm-take { background: linear-gradient(180deg, #CDBFB4 0, var(--calm-cream) var(--lp-fade), var(--calm-cream) 100%); padding: clamp(5.5rem, 11vw, 8.5rem) 0; }
+/* 6. what you leave with: cream, the text in the middle of the section */
+.lp-calm .calm-take { background: linear-gradient(180deg, #CDBFB4 0, var(--calm-cream) var(--lp-fade), var(--calm-cream) 100%);
+  padding: calc(var(--lp-fade) + clamp(2.5rem, 5vw, 4rem)) 0 clamp(6rem, 12vw, 9rem); }
 
-/* 7. the dream: as it was */
-.lp-calm .lp-dream { background: linear-gradient(180deg, var(--calm-cream) 0, var(--lp-rose-mist) var(--lp-fade), var(--lp-rose-mist) 100%); padding: clamp(7rem, 15vw, 11rem) 0; overflow: hidden; }
+/* 7. the dream: as it was, ending in plain cream */
+.lp-calm .lp-dream { background: linear-gradient(180deg, var(--calm-cream) 0, var(--calm-cream) 100%); padding: clamp(7rem, 15vw, 11rem) 0; overflow: hidden; }
 .lp-calm .lp-dream .lp-hand-xl { text-shadow: 0 0 20px rgba(255, 248, 242, .9); }
 
-/* 8. her story: cream; the text beside her, a tall photograph on the left, the closing lines centred below */
-.lp-calm .calm-story { background: linear-gradient(180deg, var(--lp-rose-mist) 0, #FBF3EA var(--lp-fade), #FBF3EA 100%); padding-bottom: clamp(3rem, 6vw, 4.5rem); overflow: hidden; }
+/* 8. her story: plain cream (the passage into it is cream only), the text beside her, a tall photograph on the left */
+.lp-calm .calm-story { background: #FBF6EF; padding-bottom: clamp(3rem, 6vw, 4.5rem); overflow: hidden; }
 .calm-story-title { margin-bottom: clamp(2rem, 5vw, 3.5rem) !important; }
 .calm-story-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(1.5rem, 4vw, 3.5rem); align-items: stretch; text-align: start; }
 .calm-story-text p { margin-inline: 0; max-width: none; }
@@ -368,10 +366,10 @@
 .calm-story-end .lp-hand { margin: 0 auto clamp(1.25rem, 3vw, 2rem) !important; }
 
 /* 9. registration, and then a clear, light end of the page */
-.lp-calm .calm-register { background: linear-gradient(180deg, #FBF3EA 0, var(--lp-clay) var(--lp-fade), var(--lp-clay-deep) 70%, var(--lp-clay-deep) 100%); padding-bottom: clamp(10rem, 18vw, 14rem); }
+.lp-calm .calm-register { background: linear-gradient(180deg, #FBF6EF 0, var(--lp-clay) var(--lp-fade), var(--lp-clay-deep) 70%, var(--lp-clay-deep) 100%); padding-bottom: clamp(10rem, 18vw, 14rem); }
 .lp-calm .calm-register::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: clamp(9rem, 17vw, 13rem); pointer-events: none;
-  background: linear-gradient(180deg, rgba(244, 230, 219, 0) 0, var(--calm-end) 100%); }
-.lp-calm .lead-form .fine { font-size: .74rem !important; line-height: 1.5; color: var(--lp-soft); opacity: .85; margin-top: .6rem; }
+  background: linear-gradient(180deg, rgba(246, 232, 219, 0) 0, var(--calm-end) 100%); }
+.lp-calm .lead-form .fine { font-size: .74rem !important; line-height: 1.5; color: var(--lp-soft); margin-top: .6rem; }
 .lp-disclaimer { margin-top: clamp(2.25rem, 4vw, 3rem) !important; font-size: .9rem !important; color: var(--lp-soft); }
 .lp-calm .site-footer { background: linear-gradient(180deg, var(--calm-end) 0, #F9EFE5 45%, #FCF7F0 100%); color: var(--lp-text); }
 .lp-calm .site-footer a { color: var(--lp-ink); }
@@ -379,7 +377,16 @@
 @media (max-width: 760px) {
   .calm-story-grid { grid-template-columns: 1fr; }
   .calm-story-media { order: -1; }
-  .calm-story-img { max-width: 17rem; }
+  .calm-story-img { max-width: 17rem; width: 100%; margin-inline: 0; }
   .calm-story-text p { text-align: center; margin-inline: auto; }
   .lp-calm .calm-hero { padding-block: clamp(3.5rem, 12vw, 5rem) clamp(5rem, 14vw, 7rem); }
 }
+
+/* ---------- on both landing pages the text has only two colours: dark brown and light brown
+   (cream-white stays only where the background is dark) ---------- */
+.lp .nav a, .lp .consent, .lp .field label, .lp .site-footer a { color: var(--lp-ink); }
+.lp .nav a:hover, .lp .nav a[aria-current="page"] { color: var(--lp-soft); border-bottom-color: var(--lp-soft); }
+.lp .fine, .lp .lead-form .fine { color: var(--lp-soft); }
+.lp .fine a, .lp .a11y-reset { color: var(--lp-soft); }
+.lp .skip { color: var(--lp-ink); }
+.lp [class*="a11y"] a { color: var(--lp-soft); }

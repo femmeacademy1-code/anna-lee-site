@@ -908,7 +908,7 @@ def page_calm_landing(p):
         return f'<div class="calm-photo {cls}" style="{st}" aria-hidden="true"></div>'
 
     hero = f"""<section class="lp-sec lp-hero calm-hero">
-  {photo("calm-shells.jpg", "calm-photo-hero", "0% 64%", "150% auto")}
+  {photo("calm-sunset-walk.jpg", "calm-photo-hero", "50% 55%")}
   <div class="lp-wrap lp-narrow calm-hero-text">
     <p class="lp-kicker">סדנת זום חווייתית</p>
     <h1 class="lp-title"><span class="lp-title-glow" aria-hidden="true"></span>{E(title)}</h1>
@@ -919,20 +919,19 @@ def page_calm_landing(p):
   </div>
 </section>"""
     problem = f"""<section class="lp-sec lp-problem calm-problem">
-  <div class="lp-wrap lp-narrow">
+  <div class="lp-wrap">
     <h2>כמה אנרגיה את משקיעה <br><strong>בלנסות להחזיק את עצמך?</strong></h2>
-    <p>את יכולה להיראות בשליטה מבחוץ ובו בזמן להרגיש ש<span class="lp-key">הגוף שלך כל הזמן בכוננות.</span></p>
-    <p>לפעמים מה שהכי מפחיד בחרדה הוא לא רק מה שמרגישים — <br><span class="lp-key">אלא הפחד שהיא תחזור.</span></p>
-    <p>את ממשיכה לתפקד, לעבוד ולדאוג לכולם, אבל מבפנים את <span class="lp-key">לא פעם על הקצה.</span></p>
-    <p>לפעמים החרדה ברורה: דופק מהיר, מחשבות שלא עוצרות או פחד שמשהו רע עומד לקרות. ולפעמים היא מופיעה כעצבנות, התפרצויות, קושי לנוח, צורך בשליטה או חשיבת יתר.</p>
-    <p><span class="lp-key">את מותשת מהדריכות,</span> ואולי גם מהפחד שהחרדה תגיע שוב.</p>
+    <p>את יכולה להיראות בשליטה מבחוץ ובו בזמן להרגיש ש<span class="lp-key">הגוף שלך כל הזמן בכוננות.</span> <br>לפעמים מה שהכי מפחיד בחרדה הוא לא רק מה שמרגישים — <br><span class="lp-key">אלא הפחד שהיא תחזור.</span></p>
+    <p>את ממשיכה לתפקד, לעבוד ולדאוג לכולם, <br>אבל מבפנים את <span class="lp-key">לא פעם על הקצה.</span></p>
+    <p>לפעמים החרדה ברורה: דופק מהיר, מחשבות שלא עוצרות <br>או פחד שמשהו רע עומד לקרות. <br>ולפעמים היא מופיעה כעצבנות, התפרצויות, קושי לנוח, צורך בשליטה או חשיבת יתר. <br><span class="lp-key">את מותשת מהדריכות,</span> ואולי גם מהפחד שהחרדה תגיע שוב.</p>
     <div class="lp-note">
       <span class="lp-note-flower" aria-hidden="true">{LP_MARK}</span>
       <p class="lp-hand">את לא צריכה להיפטר מהחרדה <br>כדי להפסיק לפחד ממנה.</p>
     </div>
   </div>
 </section>"""
-    mood = """<section class="lp-sec lp-mood calm-blue" aria-label="משפט מתוך הסדנה">
+    mood = f"""<section class="lp-sec lp-mood calm-dark" aria-label="משפט מתוך הסדנה">
+  {photo("calm-shore.jpg", "calm-photo-dark", "50% 50%")}
   <div class="lp-wrap lp-narrow">
     <p class="lp-hand lp-hand-xl">מה אם במקום להילחם בגוף שלך, <br>תלמדי לעבוד איתו?</p>
   </div>
