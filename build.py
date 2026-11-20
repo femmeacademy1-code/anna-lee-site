@@ -930,8 +930,8 @@ def page_calm_landing(p):
     </div>
   </div>
 </section>"""
-    mood = f"""<section class="lp-sec lp-mood calm-dark" aria-label="משפט מתוך הסדנה">
-  {photo("calm-shore.jpg", "calm-photo-dark", "50% 50%")}
+    mood = f"""<section class="lp-sec lp-mood calm-soft" aria-label="משפט מתוך הסדנה">
+  {photo("calm-shore.jpg", "calm-photo-soft", "50% 50%")}
   <div class="lp-wrap lp-narrow">
     <p class="lp-hand lp-hand-xl">מה אם במקום להילחם בגוף שלך, <br>תלמדי לעבוד איתו?</p>
   </div>
@@ -993,7 +993,7 @@ def page_calm_landing(p):
       </div>
     </div>
     <div class="lp-narrow calm-story-end">
-      <p class="lp-hand lp-hand-lg">אני יודעת שיש לי אותי.</p>
+      <div class="lp-note calm-quote-box"><p class="lp-hand lp-hand-lg">אני יודעת שיש לי אותי.</p></div>
       <p>וזו בדיוק הסיבה שיצרתי את ״רגועה בעין הסערה״. אני יודעת כמה מפחיד זה יכול להיות להרגיש שהחרדה מנהלת אותך, וכמה משמעותי לגלות שיש לך כלים ושאת לא חסרת אונים מול הגוף שלך. את הדבר הזה אני רוצה להעביר הלאה.</p>
     </div>
   </div>

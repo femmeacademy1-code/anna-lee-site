@@ -14,9 +14,9 @@
 .lp {
   /* the page's soft palette, all from the brand */
   --lp-cream: #FBF6EF;
-  --lp-peach: #F6E4D9;
-  --lp-blush: #F2DAC8;
-  --lp-rose-mist: #EED6C5;
+  --lp-peach: #F3E4DA;   /* the one pink-peach of all backgrounds */
+  --lp-blush: #F3E4DA;
+  --lp-rose-mist: #F3E4DA;
   --lp-sage: #E6EADF;
   --lp-ink: #3A2620;
   --lp-text: #3A2620;       /* dark brown */
@@ -24,8 +24,8 @@
   --lp-rose: #94455A;
   --lp-rose-hover: #7C3649;
   --lp-hand-ink: #7A4F3A; /* light brown */
-  --lp-clay: #E8CDB7;      /* the deeper warm tone the page ends in */
-  --lp-clay-deep: #DFBBA2;
+  --lp-clay: #F3E4DA;      /* the deeper warm tone the page ends in */
+  --lp-clay-deep: #F3E4DA;
 
   /* one rhythm for the whole page */
   --lp-pad: clamp(4.5rem, 9vw, 7.5rem);
@@ -55,11 +55,11 @@
 .lp { --lp-fade: clamp(5rem, 10vw, 8rem); }
 .lp-hero     { background: var(--lp-cream); overflow: hidden; padding-top: clamp(3rem, 6vw, 5rem); }
 .lp-problem  { background: linear-gradient(180deg, var(--lp-cream) 0, var(--lp-peach) var(--lp-fade), var(--lp-peach) 100%); }
-.lp-mood     { background: linear-gradient(180deg, var(--lp-peach) 0, #F9EFE7 var(--lp-fade), #F9EFE7 100%); }
-.lp-plan     { background: linear-gradient(180deg, #F9EFE7 0, #F4E3DA var(--lp-fade), #F4E3DA 100%); }
-.lp-gift     { background: linear-gradient(180deg, #F4E3DA 0, var(--lp-blush) var(--lp-fade), var(--lp-blush) 100%); }
-.lp-about    { background: linear-gradient(180deg, var(--lp-blush) 0, #F8ECE2 var(--lp-fade), #F8ECE2 100%); overflow: hidden; }
-.lp-register { background: linear-gradient(180deg, #F8ECE2 0, var(--lp-clay) var(--lp-fade), var(--lp-clay-deep) 100%); }
+.lp-mood     { background: linear-gradient(180deg, var(--lp-peach) 0, #FBF6EF var(--lp-fade), #FBF6EF 100%); }
+.lp-plan     { background: linear-gradient(180deg, #FBF6EF 0, #F3E4DA var(--lp-fade), #F3E4DA 100%); }
+.lp-gift     { background: linear-gradient(180deg, #F3E4DA 0, var(--lp-blush) var(--lp-fade), var(--lp-blush) 100%); }
+.lp-about    { background: linear-gradient(180deg, var(--lp-blush) 0, #FBF6EF var(--lp-fade), #FBF6EF 100%); overflow: hidden; }
+.lp-register { background: linear-gradient(180deg, #FBF6EF 0, var(--lp-clay) var(--lp-fade), var(--lp-clay-deep) 100%); }
 
 /* ---------- type ---------- */
 
@@ -169,7 +169,7 @@
     var(--lp-mood-photo, radial-gradient(60% 55% at 50% 62%, rgba(255, 236, 206, .95), rgba(255, 236, 206, 0) 70%)),
     radial-gradient(45% 60% at 20% 40%, rgba(234, 190, 158, .55), rgba(234, 190, 158, 0) 70%),
     radial-gradient(45% 60% at 82% 45%, rgba(214, 190, 160, .55), rgba(214, 190, 160, 0) 70%),
-    linear-gradient(180deg, #F6E1D2, #EFD3BE 50%, #EAD9C6);
+    linear-gradient(180deg, #F3E4DA, #F3E4DA);
   background-size: cover; background-position: center;
   -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 78%, transparent 100%);
           mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 78%, transparent 100%);
@@ -303,14 +303,13 @@
 /* ---------- "רגועה בעין הסערה": the workshop landing (body.lp.lp-calm) ----------
    Same language as the lecture, with the site menu. Photographs melt into the sections (no hard edge
    anywhere: every photo fades at the top and the bottom). Photographs are always set horizontally. */
-.lp-calm { --calm-cream: #FBF6EF; --calm-dark: #4A3B33; --calm-end: #F6E8DB; --calm-light-text: #FBF3E8; }
+.lp-calm { --calm-cream: #FBF6EF; --calm-end: #F3E4DA; --calm-light-text: #FBF3E8; }
 
 .calm-photo { position: absolute; inset: 0; z-index: 0; pointer-events: none;
   background: var(--veil), var(--calm-photo) var(--pos, center) / var(--size, cover) no-repeat;
   -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 26%, #000 74%, transparent 100%);
           mask-image: linear-gradient(180deg, transparent 0%, #000 26%, #000 74%, transparent 100%); }
 .calm-photo-hero  { --veil: radial-gradient(58% 62% at 50% 50%, rgba(251, 242, 232, .7), rgba(251, 242, 232, .3) 75%, rgba(251, 242, 232, .12)); }
-.calm-photo-dark  { --veil: linear-gradient(rgba(34, 24, 19, .58), rgba(34, 24, 19, .52)); }
 .calm-photo-for   { --veil: linear-gradient(rgba(44, 34, 28, .34), rgba(44, 34, 28, .3)); }
 .calm-photo-dream { --veil: radial-gradient(52% 60% at 50% 50%, rgba(251, 240, 232, .86), rgba(251, 240, 232, .55) 70%, rgba(251, 236, 222, .4)); }
 
@@ -327,14 +326,15 @@
 .lp-key { font-weight: 600; color: var(--lp-ink); font-size: 1.06em; }
 .lp-calm .calm-problem .lp-note { margin-top: clamp(2.75rem, 5vw, 3.75rem); }
 
-/* 3. the quote over a darkened photograph, in cream-white */
-.lp-calm .calm-dark { background: linear-gradient(180deg, var(--lp-peach) 0, var(--calm-dark) var(--lp-fade), var(--calm-dark) 100%); padding: clamp(7.5rem, 16vw, 12rem) 0; overflow: hidden; }
-.lp-calm .calm-dark .lp-hand-xl { color: var(--calm-light-text); text-shadow: 0 2px 18px rgba(20, 12, 8, .55); }
+/* 3. the quote over a soft, light photograph, like the opening */
+.calm-photo-soft  { --veil: radial-gradient(58% 62% at 50% 50%, rgba(251, 244, 236, .86), rgba(251, 244, 236, .62) 70%, rgba(251, 244, 236, .5)); }
+.lp-calm .calm-soft { background: linear-gradient(180deg, #F3E4DA 0, var(--calm-cream) var(--lp-fade), var(--calm-cream) 100%); padding: clamp(7.5rem, 16vw, 12rem) 0; overflow: hidden; }
+.lp-calm .calm-soft .lp-hand-xl { color: var(--lp-ink); text-shadow: 0 0 22px rgba(255, 250, 244, .95), 0 0 4px rgba(255, 250, 244, .7); }
 
 /* 4. what we do: one soft vintage peach, all three blobs alike */
-.lp-calm .calm-plan { background: linear-gradient(180deg, var(--calm-dark) 0, var(--lp-blush) var(--lp-fade), var(--lp-blush) 100%); }
+.lp-calm .calm-plan { background: linear-gradient(180deg, var(--calm-cream) 0, #F3E4DA var(--lp-fade), #F3E4DA 100%); }
 .lp-calm .calm-plan .lp-steps li:nth-child(n) .lp-icon::before { border-radius: 58% 42% 52% 48% / 48% 56% 44% 52%;
-  background: radial-gradient(circle at 35% 30%, #FFF6EE, #F0D4BE 70%, #E8C4A9); }
+  background: radial-gradient(circle at 35% 30%, #FFFDFA, #F3E4DA 78%); box-shadow: 0 22px 36px -24px rgba(122, 79, 58, .45), inset 0 0 0 1px rgba(122, 79, 58, .08); }
 .lp-after-steps { margin-top: clamp(2rem, 4vw, 3rem) !important; }
 
 /* 5. who it is for: a photograph behind, every line in its own soft box */
@@ -366,12 +366,12 @@
 .calm-story-end .lp-hand { margin: 0 auto clamp(1.25rem, 3vw, 2rem) !important; }
 
 /* 9. registration, and then a clear, light end of the page */
-.lp-calm .calm-register { background: linear-gradient(180deg, #FBF6EF 0, var(--lp-clay) var(--lp-fade), var(--lp-clay-deep) 70%, var(--lp-clay-deep) 100%); padding-bottom: clamp(10rem, 18vw, 14rem); }
+.lp-calm .calm-register { background: linear-gradient(180deg, var(--calm-cream) 0, #F3E4DA var(--lp-fade), #F3E4DA 100%); padding-bottom: clamp(10rem, 18vw, 14rem); }
 .lp-calm .calm-register::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: clamp(9rem, 17vw, 13rem); pointer-events: none;
-  background: linear-gradient(180deg, rgba(246, 232, 219, 0) 0, var(--calm-end) 100%); }
+  background: linear-gradient(180deg, rgba(243, 228, 218, 0) 0, var(--calm-end) 100%); }
 .lp-calm .lead-form .fine { font-size: .74rem !important; line-height: 1.5; color: var(--lp-soft); margin-top: .6rem; }
 .lp-disclaimer { margin-top: clamp(2.25rem, 4vw, 3rem) !important; font-size: .9rem !important; color: var(--lp-soft); }
-.lp-calm .site-footer { background: linear-gradient(180deg, var(--calm-end) 0, #F9EFE5 45%, #FCF7F0 100%); color: var(--lp-text); }
+.lp-calm .site-footer { background: linear-gradient(180deg, var(--calm-end) 0, #F9F0E8 45%, #FCF8F2 100%); color: var(--lp-text); }
 .lp-calm .site-footer a { color: var(--lp-ink); }
 
 @media (max-width: 760px) {
@@ -382,6 +382,10 @@
   .lp-calm .calm-hero { padding-block: clamp(3.5rem, 12vw, 5rem) clamp(5rem, 14vw, 7rem); }
 }
 
+
+/* "I know I have me": in a box of its own, like the sentence of the opening */
+.lp-calm .calm-quote-box { max-width: 30rem; margin: clamp(1.75rem, 4vw, 2.5rem) auto clamp(1.75rem, 3vw, 2.25rem); padding: clamp(1.5rem, 3vw, 2rem) clamp(1.5rem, 4vw, 2.5rem); }
+.lp-calm .calm-quote-box .lp-hand { margin: 0 auto !important; }
 /* ---------- on both landing pages the text has only two colours: dark brown and light brown
    (cream-white stays only where the background is dark) ---------- */
 .lp .nav a, .lp .consent, .lp .field label, .lp .site-footer a { color: var(--lp-ink); }
