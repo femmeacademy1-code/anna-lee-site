@@ -162,6 +162,16 @@ def lead_form(service, item="", note_label="מה הביא אותך לפנות ע
 </form>"""
 
 
+def asset(path):
+    """/static/x.css -> /static/x.css?v=<hash of the file>: when the file changes, browsers fetch it again."""
+    import hashlib
+    f = pathlib.Path(__file__).parent / path.lstrip("/")
+    try:
+        return f"{path}?v={hashlib.md5(f.read_bytes()).hexdigest()[:8]}"
+    except OSError:
+        return path
+
+
 def layout(path, title, description, main, active=None, noindex=None, extra_head="", body_class="", og_image="", landing=False):
     # a landing page stands alone: the name without a link and no menu, so the way out is not
     # one tap away; the footer keeps only the legal links
@@ -210,7 +220,7 @@ def layout(path, title, description, main, active=None, noindex=None, extra_head
 {('<meta property="og:image" content="' + E(CFG["domain"].rstrip("/") + og_image) + '">') if og_image else ""}
 <link rel="preload" href="/static/fonts/heebo-hebrew-300-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/static/fonts/heebo-hebrew-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/static/site.css">
+<link rel="stylesheet" href="{asset("/static/site.css")}">
 {extra_head}
 </head>
 <body{(' class="' + body_class + '"') if body_class else ""}>
@@ -238,7 +248,7 @@ def layout(path, title, description, main, active=None, noindex=None, extra_head
   </div>
   <div class="wrap"><p class="footer-bottom">© {date.today().year} {E(CFG['site_name'])}. כל הזכויות שמורות.</p></div>
 </footer>
-<script src="/static/app.js" defer></script>
+<script src="{asset("/static/app.js")}" defer></script>
 </body>
 </html>
 """
@@ -899,21 +909,21 @@ def page_workshop(p):
 # The workshop's own five icons (same line style as the lecture's, other drawings): it is a path of five steps
 CALM_ICONS = [
     # 1. getting to know my anxiety: an open eye, and a quiet pulse line under it
-    '''<svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    '''<svg viewBox="0 0 120 120" width="64" height="64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
   <path d="M12 54c12-20 28-30 48-30s36 10 48 30c-12 20-28 30-48 30S24 74 12 54z"/>
   <circle cx="60" cy="54" r="15" fill="currentColor" fill-opacity=".14"/>
   <circle cx="60" cy="54" r="5" fill="currentColor" stroke="none"/>
   <path d="M26 100h22l6-10 8 18 7-12 5 4h20" opacity=".65"/>
 </svg>''',
     # 2. no longer fighting: open hands, holding what is there
-    '''<svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    '''<svg viewBox="0 0 120 120" width="64" height="64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
   <path d="M18 66c0 20 18 34 42 34s42-14 42-34"/>
   <path d="M30 70c4 10 14 16 30 16s26-6 30-16" opacity=".55"/>
   <circle cx="60" cy="48" r="14" fill="currentColor" fill-opacity=".18"/>
   <path d="M60 22v-6M42 30l-4-4M78 30l4-4M30 48h-6M96 48h-6" opacity=".7"/>
 </svg>''',
     # 3. getting to know what helps me: a flower of five petals
-    '''<svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    '''<svg viewBox="0 0 120 120" width="64" height="64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
   <g transform="translate(60 56)" fill="currentColor" fill-opacity=".14">
     <ellipse cx="0" cy="-24" rx="11" ry="21"/>
     <ellipse cx="0" cy="-24" rx="11" ry="21" transform="rotate(72)"/>
@@ -925,14 +935,14 @@ CALM_ICONS = [
   <path d="M60 94v14" opacity=".7"/>
 </svg>''',
     # 4. supporting myself in everyday life: a sun rising over still water
-    '''<svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    '''<svg viewBox="0 0 120 120" width="64" height="64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
   <path d="M14 78h92"/>
   <path d="M36 78a24 24 0 0 1 48 0" fill="currentColor" fill-opacity=".16"/>
   <path d="M60 36v-8M34 46l-6-5M86 46l6-5M20 62h-6M106 62h-6" opacity=".7"/>
   <path d="M26 92c8-5 14 5 22 0s14 5 22 0 14 5 22 0" opacity=".65"/>
 </svg>''',
     # 5. my personal protocol: a compass
-    '''<svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    '''<svg viewBox="0 0 120 120" width="64" height="64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
   <circle cx="60" cy="60" r="40"/>
   <path d="M60 28l9 32-9 32-9-32z" fill="currentColor" fill-opacity=".2"/>
   <path d="M60 28v8M60 92v-8M28 60h8M92 60h-8" opacity=".7"/>
@@ -1119,7 +1129,7 @@ def page_calm_landing(p):
         "סדנת זום חווייתית בת 90 דקות: מבינים ביחד את החרדה, מתנסים בכלים לוויסות ובונים פרוטוקול ויסות אישי.",
         hero + problem + mood + plan + protocol + fit + take + dream + story + register + float_btn,
         active="/workshops",
-        extra_head=fonts + '<link rel="stylesheet" href="/static/landing.css">',
+        extra_head=fonts + f'<link rel="stylesheet" href="{asset("/static/landing.css")}">',
         body_class="lp lp-calm",
     )
 
@@ -1354,7 +1364,7 @@ def page_free_lecture(l):
         "הרצאה חינמית בלייב, 30 דקות, אונליין: מה קורה בגוף כשהחרדה עולה, ואילו כלים עוזרים, ובסוף ערכת ויסות לשמירה בטלפון.",
         hero + problem + mood + plan + gift + about + register + LP_FLOAT,
         active="/lectures",
-        extra_head=fonts + '<link rel="stylesheet" href="/static/landing.css">',
+        extra_head=fonts + f'<link rel="stylesheet" href="{asset("/static/landing.css")}">',
         body_class="lp",
         og_image="/static/img/og-kotzim.jpg",
         landing=True,
