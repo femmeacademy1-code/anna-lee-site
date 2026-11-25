@@ -896,12 +896,66 @@ def page_workshop(p):
     return layout(f"/workshops/{p['slug']}", p["title"], p["summary"], head + assemble(*parts), active="/workshops")
 
 
+# The workshop's own five icons (same line style as the lecture's, other drawings): it is a path of five steps
+CALM_ICONS = [
+    # 1. getting to know my anxiety: an open eye, and a quiet pulse line under it
+    '''<svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M12 54c12-20 28-30 48-30s36 10 48 30c-12 20-28 30-48 30S24 74 12 54z"/>
+  <circle cx="60" cy="54" r="15" fill="currentColor" fill-opacity=".14"/>
+  <circle cx="60" cy="54" r="5" fill="currentColor" stroke="none"/>
+  <path d="M26 100h22l6-10 8 18 7-12 5 4h20" opacity=".65"/>
+</svg>''',
+    # 2. no longer fighting: open hands, holding what is there
+    '''<svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M18 66c0 20 18 34 42 34s42-14 42-34"/>
+  <path d="M30 70c4 10 14 16 30 16s26-6 30-16" opacity=".55"/>
+  <circle cx="60" cy="48" r="14" fill="currentColor" fill-opacity=".18"/>
+  <path d="M60 22v-6M42 30l-4-4M78 30l4-4M30 48h-6M96 48h-6" opacity=".7"/>
+</svg>''',
+    # 3. getting to know what helps me: a flower of five petals
+    '''<svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+  <g transform="translate(60 56)" fill="currentColor" fill-opacity=".14">
+    <ellipse cx="0" cy="-24" rx="11" ry="21"/>
+    <ellipse cx="0" cy="-24" rx="11" ry="21" transform="rotate(72)"/>
+    <ellipse cx="0" cy="-24" rx="11" ry="21" transform="rotate(144)"/>
+    <ellipse cx="0" cy="-24" rx="11" ry="21" transform="rotate(216)"/>
+    <ellipse cx="0" cy="-24" rx="11" ry="21" transform="rotate(288)"/>
+  </g>
+  <circle cx="60" cy="56" r="6" fill="currentColor" stroke="none"/>
+  <path d="M60 94v14" opacity=".7"/>
+</svg>''',
+    # 4. supporting myself in everyday life: a sun rising over still water
+    '''<svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M14 78h92"/>
+  <path d="M36 78a24 24 0 0 1 48 0" fill="currentColor" fill-opacity=".16"/>
+  <path d="M60 36v-8M34 46l-6-5M86 46l6-5M20 62h-6M106 62h-6" opacity=".7"/>
+  <path d="M26 92c8-5 14 5 22 0s14 5 22 0 14 5 22 0" opacity=".65"/>
+</svg>''',
+    # 5. my personal protocol: a compass
+    '''<svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="60" cy="60" r="40"/>
+  <path d="M60 28l9 32-9 32-9-32z" fill="currentColor" fill-opacity=".2"/>
+  <path d="M60 28v8M60 92v-8M28 60h8M92 60h-8" opacity=".7"/>
+  <circle cx="60" cy="60" r="4" fill="currentColor" stroke="none"/>
+</svg>''',
+]
+
+_EMPH = re.compile(r"(ביחד|ביטחון|הכלים|כלים|נתנסה|התנסות|תמיכה)")
+
+
+def emph(text):
+    """Soft emphasis on the words of the workshop: together, confidence, tools, experiencing, support."""
+    return _EMPH.sub(r'<span class="lp-em">\1</span>', text)
+
+
 def page_calm_landing(p):
     """The landing page of the workshop "רגועה בעין הסערה", in the soft design of the lecture
-    (static/landing.css), with the site menu. The copy is Anna Lee's own brief (the docx of 19.11.2026);
-    the date and time (27.12, 20:30) were given on 20.11.2026; the price and the payment link are not
-    known yet, so the page collects details instead."""
+    (static/landing.css), with the site menu, but with its own character: five steps as a path,
+    its own icons and a place of its own for the personal protocol. The copy comes from Anna Lee's
+    brief (the docx of 19.11.2026) and her notes of 25.11.2026. Date: 27.12, 20:30. Price: 189 NIS,
+    150 NIS for early registration until Thursday 3.12.2026 (after that the page shows only 189)."""
     title = p["title"]
+    CTA = "אני רוצה ללמוד איך לתמוך בעצמי"
 
     def photo(name, cls, pos="", size=""):
         st = f"--calm-photo:url(/static/img/{name})" + (f";--pos:{pos}" if pos else "") + (f";--size:{size}" if size else "")
@@ -912,39 +966,68 @@ def page_calm_landing(p):
   <div class="lp-wrap lp-narrow calm-hero-text">
     <p class="lp-kicker">סדנת זום חווייתית</p>
     <h1 class="lp-title"><span class="lp-title-glow" aria-hidden="true"></span>{E(title)}</h1>
-    <p class="lp-sub"><strong>החרדה לא חייבת לנהל אותך.</strong> <br>בואי להבין מה קורה לך בגוף וללמוד איך לעזור לעצמך גם כשהכול מרגיש יותר מדי.</p>
+    <p class="lp-sub"><strong>החרדה לא חייבת לנהל אותך.</strong> <br>בואי נבין ביחד מה קורה לך בגוף ונלמד איך לתמוך בעצמנו גם כשהכול מרגיש יותר מדי.</p>
     <p class="lp-when"><strong>27.12</strong><span aria-hidden="true">·</span><strong>20:30</strong><span aria-hidden="true">·</span><strong>90 דקות</strong><span aria-hidden="true">·</span>בזום</p>
     <p class="lp-when-sub">ידע, תרגול וכלים לחיים</p>
-    <p><a class="lp-btn" href="#register">אני רוצה להצטרף לסדנה</a></p>
+    <p><a class="lp-btn" href="#register">{CTA}</a></p>
   </div>
 </section>"""
     problem = f"""<section class="lp-sec lp-problem calm-problem">
   <div class="lp-wrap">
-    <h2>כמה אנרגיה את משקיעה <br><strong>בלנסות להחזיק את עצמך?</strong></h2>
-    <p>את יכולה להיראות בשליטה מבחוץ ובו בזמן להרגיש ש<span class="lp-key">הגוף שלך כל הזמן בכוננות.</span> <br>לפעמים מה שהכי מפחיד בחרדה הוא לא רק מה שמרגישים — <br><span class="lp-key">אלא הפחד שהיא תחזור.</span></p>
-    <p>את ממשיכה לתפקד, לעבוד ולדאוג לכולם, <br>אבל מבפנים את <span class="lp-key">לא פעם על הקצה.</span></p>
-    <p>לפעמים החרדה ברורה: דופק מהיר, מחשבות שלא עוצרות <br>או פחד שמשהו רע עומד לקרות. <br>ולפעמים היא מופיעה כעצבנות, התפרצויות, קושי לנוח, צורך בשליטה או חשיבת יתר. <br><span class="lp-key">את מותשת מהדריכות,</span> ואולי גם מהפחד שהחרדה תגיע שוב.</p>
+    <p>יכול להיות שאת מכירה את התחושה הזאת, <br>שהחיים ממשיכים כרגיל, את מתפקדת, עובדת, דואגת לכולם, <br>אבל משהו בתוכך מתקשה להרפות.</p>
+    <p>גם ברגעים שבהם הכל בסדר, הגוף שלך עדיין דרוך. <br>לפעמים המחשבות לא מפסיקות לרוץ, <br>לפעמים את מוצפת מדברים שנראים קטנים <br>ולפעמים את פשוט מפחדת שהחרדה תגיע שוב.</p>
+    <p>ואולי את כבר כל כך עסוקה בניסיון להימנע מהחרדה, <br>שאת מרגישה שהמאבק בה הפך להיות חלק מהיום־יום שלך.</p>
+    <p><span class="lp-key">אם את מזהה את עצמך כאן, את ממש לא לבד.</span></p>
+    <p>אפשר ללמוד להכיר את התגובות של הגוף שלך, <br>להבין מה הוא מנסה לספר לך <br>ולגלות איך לתמוך בעצמך ברגעים שבהם הכל מרגיש קצת יותר מדי.</p>
     <div class="lp-note">
       <span class="lp-note-flower" aria-hidden="true">{LP_MARK}</span>
-      <p class="lp-hand">את לא צריכה להיפטר מהחרדה <br>כדי להפסיק לפחד ממנה.</p>
+      <p class="lp-hand">אפשר להפסיק להילחם בחרדה <br>וללמוד איך להיות שם בשביל עצמך כשהיא מגיעה.</p>
     </div>
   </div>
 </section>"""
-    mood = f"""<section class="lp-sec lp-mood calm-soft" aria-label="משפט מתוך הסדנה">
+    mood = """<section class="lp-sec lp-mood calm-soft" aria-label="משפט מתוך הסדנה">
   <div class="lp-wrap lp-narrow">
     <p class="lp-hand lp-hand-xl">מה אם במקום להילחם בגוף שלך, <br>תלמדי לעבוד איתו?</p>
   </div>
 </section>"""
-    plan_items = [
-        ("להבין מה קורה בגוף", "נבין מה קורה במערכת העצבים בזמן חרדה, ולמה הגוף יכול להרגיש בסכנה <strong>גם כשהראש יודע שהכול בסדר.</strong>"),
-        ("להפסיק להיבהל מתגובות הגוף", "נלמד לזהות סימנים של עוררות והצפה, <strong>ולגלות שאפשר לפתח איתן מערכת יחסים אחרת.</strong>"),
-        ("להתנסות בכלים מעשיים", "נתנסה בכלים מהנשימה, הקרקוע והקשב לגוף, <strong>ונחשוב איך לשלב אותם בחיים העמוסים שלנו.</strong>"),
+    steps = [
+        ("להכיר את החרדה שלי", "נעמיק בהבנה של מה שקורה בגוף ובמערכת העצבים בזמן חרדה ונלמד לזהות את הסימנים המוקדמים של הצפה."),
+        ("להפסיק להילחם בחרדה", "נבין איך הפחד מהחרדה והניסיון להימנע ממנה יכולים להזין אותה, ונכיר דרכים אחרות לפגוש את מה שקורה לנו."),
+        ("להכיר את מה שעוזר לי", "נלמד ונתנסה ביחד במגוון כלים מעשיים מעולמות הנשימה, הקרקוע והוויסות. נבדוק איך הגוף שלנו מגיב לכלים השונים ומה מרגיש לנו נכון."),
+        ("לתמוך בעצמי גם בשגרה", "נבין איך אפשר לתמוך במערכת העצבים שלנו בתוך החיים העמוסים שאנחנו מנהלות, גם כשאנחנו לא נמצאות ברגע של חרדה."),
+        ("לבנות את פרוטוקול הוויסות האישי שלי", "נאסוף את ההבנות והכלים מתוך הסדנה ונבנה תוכנית אישית, שתעזור לכל אחת לדעת איך לתמוך בעצמה כשהחרדה מגיעה וגם בשגרה."),
     ]
+    journey = "".join(
+        f'<li class="{"calm-final" if i == 5 else ""}"><span class="calm-ic" aria-hidden="true">{CALM_ICONS[i-1]}</span>'
+        f'<div class="calm-step"><p class="calm-step-no">שלב {i}</p><h3>{E(t)}</h3><p>{emph(E(x))}</p></div></li>'
+        for i, (t, x) in enumerate(steps, 1))
     plan = f"""<section class="lp-sec lp-plan calm-plan">
-  <div class="lp-wrap">
-    <h2>מה נעשה יחד?</h2>
-    <ol class="lp-steps">{"".join(f'<li><span class="lp-icon" aria-hidden="true">{LP_ICONS[i-1]}<span class="lp-num">{i}</span></span><h3>{E(t)}</h3><p>{pp}</p></li>' for i, (t, pp) in enumerate(plan_items, 1))}</ol>
+  <div class="lp-wrap lp-narrow">
+    <h2>מה נלמד ונגלה ביחד?</h2>
+    <p>אנחנו לא חייבות להעלים את החרדה כדי להרגיש יותר <span class="lp-em">ביטחון</span> בחיים שלנו. אנחנו יכולות ללמוד להבין אותה, לזהות מה קורה לנו כשהיא מגיעה, להכיר את <span class="lp-em">הכלים</span> שעוזרים לנו ולפתח בהדרגה את הביטחון ביכולת שלנו להתמודד איתה.</p>
+    <ol class="calm-journey">{journey}</ol>
+    <p class="calm-versus">״על קוצים״ היא טעימה והיכרות. בסדנה הזאת אנחנו מעמיקות: מתנסות ב<span class="lp-em">כלים</span> ובונות פרוטוקול אישי. גם מי שלא השתתפה ב״על קוצים״ יכולה להצטרף. <a class="more" href="/lectures/al-kotzim">להרצאה החינמית על קוצים</a></p>
     <p class="lp-soft lp-after-steps">יהיה מקום גם לשאלות. אין צורך בידע קודם.</p>
+  </div>
+</section>"""
+    protocol_items = [
+        "מהם הסימנים שהגוף שלך מתחיל לצאת מאיזון.",
+        "אילו כלים עוזרים לך להתקרקע.",
+        "מה יכול לתמוך בך ברגעים של הצפה.",
+        "איך וממי את יכולה לבקש תמיכה.",
+        "מה את יכולה לעשות בשגרה כדי לתמוך במערכת העצבים שלך.",
+    ]
+    protocol = f"""<section class="lp-sec calm-protocol">
+  <div class="lp-wrap lp-narrow">
+    <span class="calm-compass" aria-hidden="true">{CALM_ICONS[4]}</span>
+    <p class="lp-hand lp-hand-lg">פרוטוקול ויסות אישי</p>
+    <h2>כי ברגע של חרדה, <br>לא תמיד קל להיזכר במה שיכול לעזור לנו.</h2>
+    <p>במהלך הסדנה תבני לעצמך פרוטוקול ויסות אישי, מעין מפת דרכים שתוכלי לחזור אליה ברגעים של חרדה והצפה.</p>
+    <div class="calm-map">
+      <p class="calm-map-title">ביחד נזהה:</p>
+      <ul>{"".join(f"<li>{emph(E(x))}</li>" for x in protocol_items)}</ul>
+    </div>
+    <p>לכל אחת מאיתנו יש מערכת עצבים אחרת, היסטוריה אחרת וצרכים אחרים. לכן חשוב לי שלא תצאי רק עם רשימה של תרגילים, אלא עם <span class="lp-em">כלים</span> שלמדת להכיר ולהתאים לעצמך.</p>
   </div>
 </section>"""
     fit_items = [
@@ -964,7 +1047,7 @@ def page_calm_landing(p):
     take = """<section class="lp-sec lp-take calm-take">
   <div class="lp-wrap lp-narrow">
     <p class="lp-hand lp-hand-lg">עם מה תצאי?</p>
-    <p>עם הבנה בהירה יותר של החרדה שלך, <br>פחות בהלה מתגובות הגוף, <br>כמה דרכי ויסות שתוכלי להמשיך לתרגל, <br><strong>ותחושה שיש לך אפשרות להשפיע על הדרך שבה את פוגשת רגעים קשים.</strong></p>
+    <p>עם הבנה בהירה יותר של החרדה שלך, <br>פחות בהלה מתגובות הגוף, <br>כמה דרכי ויסות שתוכלי להמשיך לתרגל, <br>פרוטוקול ויסות אישי שבנית בעצמך, <br><strong>ותחושה שיש לך אפשרות להשפיע על הדרך שבה את פוגשת רגעים קשים.</strong></p>
   </div>
 </section>"""
     dream = f"""<section class="lp-sec lp-dream" aria-label="משפט מתוך הסדנה">
@@ -980,11 +1063,9 @@ def page_calm_landing(p):
     <div class="calm-story-grid">
       <div class="calm-story-text">
         <p>אני אנה לי מילשטיין, מטפלת רגשית בפסיכותרפיה הוליסטית ומרצה במכללת רידמן.</p>
-        <p>בקליניקה שלי אני מלווה נשים שמתמודדות עם חרדה, הצפה רגשית, התקפי זעם, סטרס וקושי בוויסות רגשי. אני משלבת טיפול בשיחה עם כלים מעולמות הנשימה, המדיטציה והעבודה עם הגוף ומערכת העצבים.</p>
         <p><strong>אבל חרדה היא לא משהו שאני מכירה רק מהלימודים או מהקליניקה.</strong></p>
-        <p>לפני שנתיים חוויתי התקף חרדה כל כך מפחיד, שהייתי בטוחה שזהו, איבדתי את זה. שעוד רגע מגיעים החלוקים הלבנים לקחת אותי לאשפוז. אני זוכרת את הפחד העצום ממה שקורה לי ואת התחושה שאני מאבדת שליטה.</p>
-        <p>היום אני לא יכולה להגיד שאני לא חווה חרדה. אבל משהו עמוק השתנה ביחסים שלי איתה. בזכות הכלים שאספתי לאורך השנים, ושאני ממשיכה לאסוף ולתרגל, אני יודעת שיש לי אותי. שגם אם החרדה תגיע, יש לי דרכים לפגוש אותה ולעזור לעצמי לחזור בהדרגה לאיזון.</p>
-        <p>ולא פחות חשוב, למדתי איך להתנהל בתוך החיים הסופר עמוסים שלי, לזהות מתי הגוף מתקרב לקצה ולתמוך בו לפני שהוא מגיע לשם. זה לא אומר שאני תמיד מצליחה או תמיד רגועה. זה אומר שאני כבר לא חיה באותו פחד מהחרדה.</p>
+        <p>לפני שנתיים חוויתי התקף חרדה כל כך מפחיד שהייתי בטוחה שזהו, השתגעתי, שעוד רגע מגיעים האנשים בחלוקים הלבנים לקחת אותי לאשפוז.</p>
+        <p>אבל בתוך כל הפחד הזה ידעתי מה לעשות, איך להיתמך ואיך לתמוך בעצמי. הבנתי שמשהו עמוק השתנה בי לאורך השנים. התפתחה בי תחושת ביטחון ביכולת שלי להתמודד גם ברגעים שבהם אני מרגישה שאני מאבדת שליטה.</p>
       </div>
       <div class="calm-story-media">
         <span class="lp-glow lp-glow-about" aria-hidden="true"></span>
@@ -992,25 +1073,35 @@ def page_calm_landing(p):
       </div>
     </div>
     <div class="lp-narrow calm-story-end">
-      <div class="lp-note calm-quote-box"><p class="lp-hand lp-hand-lg">אני יודעת שיש לי אותי.</p></div>
-      <p>וזו בדיוק הסיבה שיצרתי את ״רגועה בעין הסערה״. אני יודעת כמה מפחיד זה יכול להיות להרגיש שהחרדה מנהלת אותך, וכמה משמעותי לגלות שיש לך כלים ושאת לא חסרת אונים מול הגוף שלך. את הדבר הזה אני רוצה להעביר הלאה.</p>
+      <div class="lp-note calm-quote-box"><p class="lp-hand lp-hand-lg">היום אני יודעת שיש לי אותי.</p></div>
+      <p>בקליניקה אני מלווה אנשים שמתמודדים עם חרדה, דריכות והצפה, ועוזרת להם להכיר את הגוף שלהם, למצוא את הכלים שנכונים עבורם וללמוד לסמוך על עצמם גם ברגעים של קושי.</p>
+      <p>וזאת בדיוק החוויה שאני רוצה לאפשר לך דרך הסדנה הזאת.</p>
     </div>
   </div>
 </section>"""
-    form = lead_form("workshop", item=title, register=True, button="אני רוצה להצטרף לסדנה",
-                     success="קיבלתי את הפרטים שלך. אחזור אלייך עם פרטים על המחיר כשיתפרסמו.")
-    register = f"""<section class="lp-sec lp-register calm-register" id="register">
+    form = lead_form("workshop", item=title, register=True, button=CTA,
+                     success="קיבלתי את הפרטים שלך. אחזור אלייך עם פרטי ההרשמה והתשלום.")
+    price = """<div class="calm-price" data-early-until="2026-12-04T00:00:00+02:00">
+      <div class="calm-price-row">
+        <p class="calm-price-box"><span class="calm-price-label">מחיר מלא לסדנה</span><span class="calm-price-full">189 ₪</span></p>
+        <p class="calm-price-box calm-price-early"><span class="calm-price-label">מחיר בהטבת הרשמה מוקדמת</span><span class="calm-price-now">150 ₪</span></p>
+      </div>
+      <p class="calm-price-note">ההטבה בתוקף עד יום חמישי, 3.12.2026, כולל.</p>
+    </div>
+    <script>(function(){var e=document.querySelector(".calm-price");if(e&&Date.now()>=Date.parse(e.getAttribute("data-early-until")))e.classList.add("ended")})();</script>"""
+    register = f"""<section class="lp-sec calm-register lp-register" id="register">
   <div class="lp-wrap lp-narrow">
     <p class="lp-hand lp-hand-lg">ניפגש ב״רגועה בעין הסערה״</p>
     <h2>את לא צריכה לחכות שהחיים יירגעו <br><strong>כדי להתחיל להרגיש בהם יותר יציבה.</strong></h2>
     <p>אני מזמינה אותך להגיע כמו שאת, עם השאלות, החששות וכל מה שאת סוחבת. נלמד יחד להבין את הגוף, לפגוש את החרדה קצת אחרת ולתרגל דרכים לעזור לעצמנו.</p>
     <p class="lp-when"><strong>27.12</strong><span aria-hidden="true">·</span><strong>20:30</strong><span aria-hidden="true">·</span><strong>90 דקות</strong><span aria-hidden="true">·</span>בזום</p>
+    {price}
     <div class="lp-form">{form}</div>
     <div class="lp-wa-direct">
       <p class="lp-hand">מתלבטת? אני זמינה עבורך</p>
       <a class="lp-wa-btn" href="{whatsapp_link()}" target="_blank" rel="noopener">{WA_ICON}לשליחת הודעה בוואטסאפ</a>
     </div>
-    <p class="fine">אחזור אלייך עם פרטים על המחיר כשיתפרסמו. <br>ההרשמה אינה מותנית באישור דיוור, ואפשר להסיר את עצמך מהרשימה בכל עת.</p>
+    <p class="fine">אחזור אלייך עם פרטי ההרשמה והתשלום. <br>ההרשמה אינה מותנית באישור דיוור, ואפשר להסיר את עצמך מהרשימה בכל עת.</p>
     <div class="lp-wa">
       <p class="lp-hand">מתווסתים פה עם אנה לי מילשטיין</p>
       <p>קבוצת וואטסאפ שקטה למי שרוצה להכיר את מערכת העצבים שלה קצת יותר טוב. אני משתפת שם ידע בגובה העיניים, תרגולים קצרים, כלים להתמודדות עם חרדה והצפה ועדכונים על הרצאות וסדנאות. בלי רעש מיותר.</p>
@@ -1021,12 +1112,12 @@ def page_calm_landing(p):
 </section>"""
     fonts = "".join(f'<link rel="preload" href="/static/fonts/{f}.ttf" as="font" type="font/ttf" crossorigin>'
                     for f in ("PloniRegular", "PloniYadRegular"))
-    float_btn = LP_FLOAT.replace("שמרי לי מקום בהרצאה", "אני רוצה להצטרף לסדנה")
+    float_btn = LP_FLOAT.replace("שמרי לי מקום בהרצאה", CTA)
     return layout(
         f"/workshops/{p['slug']}",
         f"{title}: סדנת זום להבנת החרדה",
-        "סדנת זום חווייתית בת 90 דקות להבנת החרדה, ויסות מערכת העצבים וכלים מעשיים להתמודדות עם רגעי הצפה.",
-        hero + problem + mood + plan + fit + take + dream + story + register + float_btn,
+        "סדנת זום חווייתית בת 90 דקות: מבינים ביחד את החרדה, מתנסים בכלים לוויסות ובונים פרוטוקול ויסות אישי.",
+        hero + problem + mood + plan + protocol + fit + take + dream + story + register + float_btn,
         active="/workshops",
         extra_head=fonts + '<link rel="stylesheet" href="/static/landing.css">',
         body_class="lp lp-calm",
