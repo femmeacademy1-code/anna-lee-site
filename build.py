@@ -958,6 +958,19 @@ def emph(text):
     return _EMPH.sub(r'<span class="lp-em">\1</span>', text)
 
 
+# A very gentle wave between two sections, instead of a fade. "up": the wave of the section's own colour rises over the section above it;
+# "down": the colour of the section above descends over the top of a photograph (a photograph has no single colour of its own).
+CALM_WAVE_UP = ["M0 20C180 8 360 8 540 18S900 32 1080 22 1300 10 1440 18V40H0Z", "M0 18C240 30 480 30 720 20S1200 6 1440 18V40H0Z"]
+CALM_WAVE_DOWN = ["M0 0H1440V20C1260 32 1080 32 900 22S540 8 360 18 120 30 0 20Z", "M0 0H1440V18C1200 6 960 6 720 20S240 30 0 18Z"]
+CALM_PEACH, CALM_CREAM = "#F3E4DA", "#FBF6EF"
+
+
+def calm_wave(kind, color, i=0):
+    path = (CALM_WAVE_UP if kind == "up" else CALM_WAVE_DOWN)[i % 2]
+    return (f'<svg class="calm-wave calm-wave-{kind}" style="color:{color}" viewBox="0 0 1440 40" preserveAspectRatio="none" aria-hidden="true">'
+            f'<path d="{path}" fill="currentColor"/></svg>')
+
+
 def page_calm_landing(p):
     """The landing page of the workshop "רגועה בעין הסערה", in the soft design of the lecture
     (static/landing.css), with the site menu, but with its own character: five steps as a path,
@@ -1123,11 +1136,23 @@ def page_calm_landing(p):
     fonts = "".join(f'<link rel="preload" href="/static/fonts/{f}.ttf" as="font" type="font/ttf" crossorigin>'
                     for f in ("PloniRegular", "PloniYadRegular"))
     float_btn = LP_FLOAT.replace("שמרי לי מקום בהרצאה", CTA)
+    # the passages between sections: a gentle wave in place of the fades
+    passages = [
+        (hero, "down", CALM_CREAM), (problem, "up", CALM_PEACH), (mood, "up", CALM_CREAM), (plan, "up", CALM_PEACH),
+        (protocol, "up", CALM_CREAM), (fit, "down", CALM_CREAM), (take, "up", CALM_CREAM), (dream, "down", CALM_CREAM),
+        (story, "up", CALM_CREAM), (register, "up", CALM_PEACH),
+    ]
+    waved = []
+    for n, (html_, kind, color) in enumerate(passages):
+        end = html_.index(">") + 1                      # right after the opening <section ...> tag
+        waved.append(html_[:end] + calm_wave(kind, color, n) + html_[end:])
+    waved.append(float_btn)
     return layout(
         f"/workshops/{p['slug']}",
         f"{title}: סדנת זום להבנת החרדה",
         "סדנת זום חווייתית בת 90 דקות: מבינים ביחד את החרדה, מתנסים בכלים לוויסות ובונים פרוטוקול ויסות אישי.",
-        hero + problem + mood + plan + protocol + fit + take + dream + story + register + float_btn,
+        "".join(waved),
+
         active="/workshops",
         extra_head=fonts + f'<link rel="stylesheet" href="{asset("/static/landing.css")}">',
         body_class="lp lp-calm",

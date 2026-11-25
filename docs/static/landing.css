@@ -459,3 +459,23 @@
   .calm-map li { font-size: 1.05rem; }
   .calm-price-now { font-size: 2.3rem; }
 }
+
+
+/* ---------- the workshop page: a very gentle wave between the sections, in place of the fades ---------- */
+.lp-calm { --calm-wave: clamp(1.4rem, 3vw, 2.5rem); }
+.calm-wave { position: absolute; left: 0; width: 100%; height: var(--calm-wave); display: block; pointer-events: none; z-index: 3; }
+.calm-wave-up { top: 1px; transform: translateY(-100%); }
+.calm-wave-down { top: -1px; }
+/* every section is one flat colour (peach or cream); the photographs fill their sections edge to edge */
+.lp-calm .lp-sec { overflow: visible; overflow-x: clip; }
+.lp-calm .calm-photo { -webkit-mask-image: none; mask-image: none; }
+.lp-calm .calm-hero { background: var(--calm-cream); padding-top: calc(clamp(5rem, 11vw, 8rem) + var(--calm-wave)); padding-bottom: clamp(6rem, 12vw, 9rem); }
+.lp-calm .calm-problem { background: var(--lp-peach); padding-top: calc(var(--lp-pad) + var(--calm-wave)); }
+.lp-calm .calm-soft { background: var(--calm-cream); padding: calc(var(--calm-wave) + 3.25rem) 0 3rem; }
+.lp-calm .calm-plan { background: var(--lp-peach); padding-top: calc(var(--lp-pad) + var(--calm-wave)); }
+.lp-calm .calm-protocol { background: var(--calm-cream); padding: calc(var(--calm-wave) + clamp(3.5rem, 7vw, 5.5rem)) 0 clamp(5rem, 10vw, 8rem); }
+.lp-calm .calm-for { background: #CDBFB4; padding: calc(var(--calm-wave) + clamp(4.5rem, 9vw, 7rem)) 0 clamp(5rem, 10vw, 8rem); }
+.lp-calm .calm-take { background: var(--calm-cream); padding: calc(var(--calm-wave) + clamp(4rem, 8vw, 6rem)) 0 clamp(5rem, 10vw, 8rem); }
+.lp-calm .lp-dream { background: var(--calm-cream); padding: calc(var(--calm-wave) + clamp(5.5rem, 12vw, 9rem)) 0 clamp(6rem, 13vw, 10rem); }
+.lp-calm .calm-story { background: var(--calm-cream); padding-top: calc(var(--lp-pad) + var(--calm-wave)); }
+.lp-calm .calm-register { background: var(--lp-peach); padding-top: calc(var(--lp-pad) + var(--calm-wave)); }
