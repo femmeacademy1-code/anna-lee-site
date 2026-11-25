@@ -1006,6 +1006,10 @@ def page_calm_landing(p):
     <p>אני מזמינה אותך להגיע כמו שאת, עם השאלות, החששות וכל מה שאת סוחבת. נלמד יחד להבין את הגוף, לפגוש את החרדה קצת אחרת ולתרגל דרכים לעזור לעצמנו.</p>
     <p class="lp-when"><strong>27.12</strong><span aria-hidden="true">·</span><strong>20:30</strong><span aria-hidden="true">·</span><strong>90 דקות</strong><span aria-hidden="true">·</span>בזום</p>
     <div class="lp-form">{form}</div>
+    <div class="lp-wa-direct">
+      <p class="lp-hand">מתלבטת? אני זמינה עבורך</p>
+      <a class="lp-wa-btn" href="{whatsapp_link()}" target="_blank" rel="noopener">{WA_ICON}לשליחת הודעה בוואטסאפ</a>
+    </div>
     <p class="fine">אחזור אלייך עם פרטים על המחיר כשיתפרסמו. <br>ההרשמה אינה מותנית באישור דיוור, ואפשר להסיר את עצמך מהרשימה בכל עת.</p>
     <div class="lp-wa">
       <p class="lp-hand">מתווסתים פה עם אנה לי מילשטיין</p>
@@ -1239,6 +1243,10 @@ def page_free_lecture(l):
     <h2>שמרי לי מקום בהרצאה</h2>
     <p>החרדה לא חייבת להחליט בשבילך איך ייראה היום שלך. <br><strong>בואי להקדיש לעצמך 30 דקות של הבנה, תרגול וכלים ראשוניים.</strong></p>
     <div class="lp-form">{form}</div>
+    <div class="lp-wa-direct">
+      <p class="lp-hand">מתלבטת? אני זמינה עבורך</p>
+      <a class="lp-wa-btn" href="{whatsapp_link()}" target="_blank" rel="noopener">{WA_ICON}לשליחת הודעה בוואטסאפ</a>
+    </div>
     <p class="fine">אחרי ההרשמה יישלח אלייך מייל אישור עם קישור לזום. <br>ההרשמה אינה מותנית באישור דיוור, ואפשר להסיר את עצמך מהרשימה בכל עת.</p>
     <div class="lp-wa">
       <p class="lp-hand">לא מסתדר לך הפעם?</p>
