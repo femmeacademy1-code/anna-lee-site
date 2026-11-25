@@ -1077,7 +1077,7 @@ def page_calm_landing(p):
     dream = f"""<section class="lp-sec lp-dream" aria-label="משפט מתוך הסדנה">
   {photo("calm-water-hand.jpg", "calm-photo-dream", "50% 45%")}
   <div class="lp-wrap lp-narrow">
-    <p class="lp-hand lp-hand-xl">לא חיים בלי פחד, <br>אלא חיים שבהם הפחד כבר לא מנהל אותך.</p>
+    <p class="lp-hand lp-hand-xl">לא חיים בלי פחד, <br>אלא חיים שבהם הפחד <br>כבר לא מנהל אותך.</p>
     <p class="lp-soft">אפשר להרגיש יציבה גם כשהכול מסביב סוער.</p>
   </div>
 </section>"""
