@@ -1010,6 +1010,7 @@ def page_calm_landing(p):
 </section>"""
     mood = """<section class="lp-sec lp-mood calm-soft" aria-label="משפט מתוך הסדנה">
   <div class="lp-wrap lp-narrow">
+    <span class="calm-round"><img src="/static/img/calm-tulle.jpg" alt="דמות בבד שקוף מתנופף מול אור השקיעה" width="400" height="600" loading="lazy"></span>
     <p class="lp-hand lp-hand-xl">מה אם במקום להילחם בגוף שלך, <br>תלמדי לעבוד איתו?</p>
   </div>
 </section>"""
@@ -1138,14 +1139,14 @@ def page_calm_landing(p):
     float_btn = LP_FLOAT.replace("שמרי לי מקום בהרצאה", CTA)
     # the passages between sections: a gentle wave in place of the fades
     passages = [
-        (hero, "down", CALM_CREAM), (problem, "up", CALM_PEACH), (mood, "up", CALM_CREAM), (plan, "up", CALM_PEACH),
+        (hero, None, None), (problem, "up", CALM_PEACH), (mood, "up", CALM_CREAM), (plan, "up", CALM_PEACH),
         (protocol, "up", CALM_CREAM), (fit, "down", CALM_CREAM), (take, "up", CALM_CREAM), (dream, "down", CALM_CREAM),
         (story, "up", CALM_CREAM), (register, "up", CALM_PEACH),
     ]
     waved = []
     for n, (html_, kind, color) in enumerate(passages):
         end = html_.index(">") + 1                      # right after the opening <section ...> tag
-        waved.append(html_[:end] + calm_wave(kind, color, n) + html_[end:])
+        waved.append(html_[:end] + (calm_wave(kind, color, n) if kind else "") + html_[end:])
     waved.append(float_btn)
     return layout(
         f"/workshops/{p['slug']}",
