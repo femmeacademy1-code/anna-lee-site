@@ -489,3 +489,21 @@
   box-shadow: 0 0 0 6px rgba(255, 252, 248, .9), 0 0 0 7.5px rgba(122, 79, 58, .22), 0 28px 44px -26px rgba(110, 66, 48, .55); }
 .calm-round img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 28%; }
 .lp-calm .calm-soft { padding-block: calc(var(--calm-wave) + 3rem) 3.5rem; }
+
+
+/* ---------- "על קוצים": the same gentle waves between the sections; the menu and the footer keep their fades ---------- */
+.lp-kotzim { --calm-wave: clamp(1.4rem, 3vw, 2.5rem); }
+.lp-kotzim .lp-sec { overflow: visible; overflow-x: clip; }
+.lp-kotzim .lp-sec:not(.lp-hero) { padding-top: calc(var(--lp-pad) + var(--calm-wave)); }
+.lp-kotzim .lp-hero { background: var(--lp-cream); overflow: hidden; }
+.lp-kotzim .lp-problem { background: var(--lp-peach); }
+.lp-kotzim .lp-mood { background: #FBF6EF; padding-top: calc(clamp(6rem, 14vw, 10rem) + var(--calm-wave)); }
+.lp-kotzim .lp-mood::before { -webkit-mask-image: none; mask-image: none;
+  background: radial-gradient(60% 55% at 50% 62%, rgba(255, 236, 206, .85), rgba(255, 236, 206, 0) 70%),
+              radial-gradient(45% 60% at 20% 40%, rgba(234, 190, 158, .4), rgba(234, 190, 158, 0) 70%),
+              radial-gradient(45% 60% at 82% 45%, rgba(214, 190, 160, .4), rgba(214, 190, 160, 0) 70%); }
+.lp-kotzim .lp-plan { background: var(--lp-peach); }
+.lp-kotzim .lp-gift { background: var(--lp-peach); padding-top: calc(clamp(7rem, 15vw, 11rem) + var(--calm-wave)); }
+.lp-kotzim .lp-gift-photo { -webkit-mask-image: none; mask-image: none; }
+.lp-kotzim .lp-about { background: #FBF6EF; }
+.lp-kotzim .lp-register { background: var(--lp-peach); }

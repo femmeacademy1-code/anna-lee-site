@@ -971,6 +971,16 @@ def calm_wave(kind, color, i=0):
             f'<path d="{path}" fill="currentColor"/></svg>')
 
 
+def wave_sections(passages):
+    """Joins sections with a gentle wave at the top of each (kind None: no wave, the page's top keeps its fade under the menu).
+    The end of the page keeps its fade into the footer."""
+    out = []
+    for n, (html_, kind, color) in enumerate(passages):
+        end = html_.index(">") + 1                      # right after the opening <section ...> tag
+        out.append(html_[:end] + (calm_wave(kind, color, n) if kind else "") + html_[end:])
+    return "".join(out)
+
+
 def page_calm_landing(p):
     """The landing page of the workshop "רגועה בעין הסערה", in the soft design of the lecture
     (static/landing.css), with the site menu, but with its own character: five steps as a path,
@@ -1388,10 +1398,11 @@ def page_free_lecture(l):
         f"/lectures/{l['slug']}",
         f"{l['name']}: {l['title']}",
         "הרצאה חינמית בלייב, 30 דקות, אונליין: מה קורה בגוף כשהחרדה עולה, ואילו כלים עוזרים, ובסוף ערכת ויסות לשמירה בטלפון.",
-        hero + problem + mood + plan + gift + about + register + LP_FLOAT,
+        wave_sections([(hero, None, None), (problem, "up", CALM_PEACH), (mood, "up", CALM_CREAM), (plan, "up", CALM_PEACH),
+                       (gift, "down", CALM_PEACH), (about, "up", CALM_CREAM), (register, "up", CALM_PEACH)]) + LP_FLOAT,
         active="/lectures",
         extra_head=fonts + f'<link rel="stylesheet" href="{asset("/static/landing.css")}">',
-        body_class="lp",
+        body_class="lp lp-kotzim",
         og_image="/static/img/og-kotzim.jpg",
         landing=True,
     )
