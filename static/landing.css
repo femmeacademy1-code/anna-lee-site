@@ -507,3 +507,6 @@
 .lp-kotzim .lp-gift-photo { -webkit-mask-image: none; mask-image: none; }
 .lp-kotzim .lp-about { background: #FBF6EF; }
 .lp-kotzim .lp-register { background: var(--lp-peach); }
+
+/* the community page: the text section is centred in a calm cream band */
+.lp-calm .calm-community { padding-bottom: clamp(5rem, 10vw, 8rem); }

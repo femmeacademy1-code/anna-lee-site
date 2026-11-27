@@ -44,6 +44,7 @@ NAV = [
     ("/lectures", "הרצאות"),
     ("/articles", "מאמרים"),
     ("/free", "כלים חינמיים"),
+    ("/community", "הצטרפות לקהילה"),
     ("/contact", "צרו קשר"),
 ]
 
@@ -681,6 +682,10 @@ def page_home():
   </div>
 </div></section>"""
 
+    community = sec("מתווסתים פה עם אנה לי מילשטיין",
+                    "<p>קבוצת וואטסאפ שקטה למי שרוצה להכיר את מערכת העצבים שלה קצת יותר טוב. בלי רעש מיותר.</p>"
+                    '<div class="actions"><a class="btn" href="/community">להצטרפות לקבוצה השקטה</a></div>',
+                    tone="light", center=True)
     wa_link = f'<p><a class="more" href="{E(wa)}" rel="noopener">לשיחה בוואטסאפ</a></p>' if wa else ""
     contact = form_sec("ליצירת קשר",
                        f"<p>הפגישות מתקיימות בהרצליה או בזום. אפשר להשאיר פרטים, ואחזור אלייך לתיאום שיחת היכרות של כ-20 דקות, ללא עלות.</p>{contact_lines()}{wa_link}",
@@ -689,7 +694,7 @@ def page_home():
         "/",
         "טיפול רגשי ופסיכותרפיה הוליסטית בהרצליה ובזום",
         "טיפול רגשי לנשים ולגברים שמתמודדים עם חרדה, טראומה וקושי בוויסות רגשי. בהרצליה ובזום.",
-        hero + ways + feature + med + about + contact,
+        hero + ways + feature + med + about + community + contact,
         active="/",
     )
 
@@ -1141,7 +1146,7 @@ def page_calm_landing(p):
     <div class="lp-wa">
       <p class="lp-hand">מתווסתים פה עם אנה לי מילשטיין</p>
       <p>קבוצת וואטסאפ שקטה למי שרוצה להכיר את מערכת העצבים שלה קצת יותר טוב. אני משתפת שם ידע בגובה העיניים, תרגולים קצרים, כלים להתמודדות עם חרדה והצפה ועדכונים על הרצאות וסדנאות. בלי רעש מיותר.</p>
-      <a class="lp-wa-btn" href="{WHATSAPP_GROUP}" target="_blank" rel="noopener">{WA_ICON}להצטרפות לקבוצה השקטה</a>
+      <a class="lp-wa-btn" href="/community">{WA_ICON}להצטרפות לקבוצה השקטה</a>
     </div>
     <p class="fine lp-disclaimer">זו סדנה לימודית וחווייתית, לא תחליף לטיפול נפשי אישי או רפואי. תרגולים מותאמים לבחירה ולנוחות של המשתתפות.</p>
   </div>
@@ -1169,6 +1174,47 @@ def page_calm_landing(p):
         active="/workshops",
         extra_head=fonts + f'<link rel="stylesheet" href="{asset("/static/landing.css")}">',
         body_class="lp lp-calm",
+    )
+
+
+def page_community():
+    """The page every "join the quiet group" button leads to. The new design (as the lecture and the workshop):
+    menu, a photograph, waves between the sections. The form adds the person to Brevo list #17 and then opens the WhatsApp group.
+    The text about the group is Anna Lee's own (her brief, section 'הקהילה שלי')."""
+    def photo(name, cls, pos="", size=""):
+        st = f"--calm-photo:url(/static/img/{name})" + (f";--pos:{pos}" if pos else "") + (f";--size:{size}" if size else "")
+        return f'<div class="calm-photo {cls}" style="{st}" aria-hidden="true"></div>'
+
+    hero = f"""<section class="lp-sec lp-hero calm-hero">
+  {photo("calm-shore.jpg", "calm-photo-hero", "50% 50%")}
+  <div class="lp-wrap lp-narrow calm-hero-text">
+    <p class="lp-kicker">קבוצת וואטסאפ שקטה</p>
+    <h1 class="lp-title"><span class="lp-title-glow" aria-hidden="true"></span>הצטרפות לקהילה</h1>
+    <p class="lp-sub"><strong>מתווסתים פה עם אנה לי מילשטיין</strong> <br>קבוצת וואטסאפ שקטה למי שרוצה להכיר את מערכת העצבים שלה קצת יותר טוב.</p>
+    <p><a class="lp-btn" href="#join">להצטרפות לקבוצה השקטה</a></p>
+  </div>
+</section>"""
+    about = """<section class="lp-sec lp-take calm-take calm-community">
+  <div class="lp-wrap lp-narrow">
+    <p class="lp-hand lp-hand-lg">מתווסתים פה עם אנה לי מילשטיין</p>
+    <p>אני משתפת שם <span class="lp-key">ידע בגובה העיניים,</span> <span class="lp-key">תרגולים קצרים,</span> <span class="lp-key">כלים להתמודדות עם חרדה והצפה</span> ועדכונים על הרצאות וסדנאות.</p>
+    <p class="lp-hand lp-hand-xl">בלי רעש מיותר.</p>
+  </div>
+</section>"""
+    form = lead_form("free", item="קהילת וואטסאפ שקטה", register=True, button="להצטרפות לקבוצה השקטה",
+                     success="תודה! מעבירה אותך עכשיו לקבוצת הוואטסאפ.", next_page=WHATSAPP_GROUP)
+    join = f"""<section class="lp-sec calm-register lp-register" id="join">
+  <div class="lp-wrap lp-narrow">
+    <p class="lp-hand lp-hand-lg">להצטרפות לקבוצה השקטה</p>
+    <p>אחרי שליחת הפרטים תועברי אוטומטית לקבוצת הוואטסאפ.</p>
+    <div class="lp-form">{form}</div>
+  </div>
+</section>"""
+    return layout(
+        "/community", "הצטרפות לקהילה: קבוצת וואטסאפ שקטה",
+        "קבוצת וואטסאפ שקטה עם אנה לי מילשטיין: ידע בגובה העיניים, תרגולים קצרים, כלים להתמודדות עם חרדה והצפה ועדכונים על הרצאות וסדנאות.",
+        wave_sections([(hero, None, None), (about, "up", CALM_CREAM), (join, "up", CALM_PEACH)]),
+        active="/community", extra_head=f'<link rel="stylesheet" href="{asset("/static/landing.css")}">', body_class="lp lp-calm",
     )
 
 
@@ -1390,7 +1436,7 @@ def page_free_lecture(l):
     <div class="lp-wa">
       <p class="lp-hand">לא מסתדר לך הפעם?</p>
       <p>מוזמנת להצטרף לקבוצת וואטסאפ שקטה, <br>ולשמוע על ההרצאות והמפגשים הבאים.</p>
-      <a class="lp-wa-btn" href="{WHATSAPP_GROUP}" target="_blank" rel="noopener">{WA_ICON}להצטרפות לקבוצה השקטה</a>
+      <a class="lp-wa-btn" href="/community">{WA_ICON}להצטרפות לקבוצה השקטה</a>
     </div>
   </div>
 </section>"""
@@ -1887,6 +1933,7 @@ def build():
     write("contact.html", page_contact())
     write("free.html", page_free())
     write("tashlich.html", page_tashlich())
+    write("community.html", page_community())
     for slug, g in GIFTS.items():
         write(g["page"].strip("/") + ".html", page_gift(slug))
     write("privacy.html", page_legal("/privacy", "מדיניות פרטיות", privacy_body()))
@@ -1897,7 +1944,7 @@ def build():
         write(f"workshops/{p['slug']}.html", page_workshop(p))
 
     # sitemap and robots, only when the site is public
-    urls = ["/", "/about", "/therapy", "/breathwork", "/workshops", "/lectures", "/articles", "/contact", "/free", "/tashlich", "/privacy", "/accessibility", "/terms"]
+    urls = ["/", "/about", "/therapy", "/breathwork", "/workshops", "/lectures", "/articles", "/contact", "/free", "/community", "/tashlich", "/privacy", "/accessibility", "/terms"]
     urls += [f"/articles/{a['slug']}" for a in ARTICLES]
     urls += [f"/lectures/{l['slug']}" for l in LECTURES]
     urls += [f"/workshops/{p['slug']}" for p in PRODUCTS]

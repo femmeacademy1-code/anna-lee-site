@@ -11,7 +11,7 @@ LECTURE_TIME = "20:30"
 ZOOM_LINK = ""
 BREVO_SENDER_NAME = "אנה לי מילשטיין"
 # which Brevo list each form's topic goes to: [text in the topic, list number]. The lecture "על קוצים" uses the secret BREVO_LIST_REGISTRANTS (#4).
-ITEM_LISTS = '[["רגועה בעין הסערה",7],["טקס תשליך",2],["קורס עומק",9],["ריברסינג לנשים אחרי לידה",10],["ערכת עזרה ראשונה",11],["חוברות עבודה",11],["לעבוד תחת לחץ",14],["הרצאה לצוותי חינוך",15]]'
+ITEM_LISTS = '[["רגועה בעין הסערה",7],["טקס תשליך",2],["קורס עומק",9],["ריברסינג לנשים אחרי לידה",10],["ערכת עזרה ראשונה",11],["חוברות עבודה",11],["לעבוד תחת לחץ",14],["הרצאה לצוותי חינוך",15],["קהילת וואטסאפ",17]]'
 # forms with no topic: by the kind of service, and the contact page (#16) for everything else asked there
 SERVICE_LISTS = '{"therapy":12,"breathwork":13}'
 CONTACT_LIST = "16"
