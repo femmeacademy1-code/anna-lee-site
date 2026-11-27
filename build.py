@@ -207,6 +207,15 @@ def layout(path, title, description, main, active=None, noindex=None, extra_head
     insta = (f'<li><a href="{E(CFG["instagram"])}" target="_blank" rel="noopener">אינסטגרם</a></li>'
              if CFG.get("instagram") else "")
     mail = f'<li><a href="mailto:{E(CFG["email"])}">{E(CFG["email"])}</a></li>' if CFG.get("email") else ""
+    if not landing and "lp-site" not in body_class and "lp" not in body_class.split():
+        body_class = ("lp lp-calm lp-site " + body_class).strip()
+    skin = ""
+    if "lp-site" in body_class:
+        if "landing.css" not in extra_head:
+            skin += f'<link rel="stylesheet" href="{asset("/static/landing.css")}">'
+        skin += f'<link rel="stylesheet" href="{asset("/static/skin.css")}">'
+        skin += '<link rel="preload" href="/static/fonts/PloniRegular.ttf" as="font" type="font/ttf" crossorigin><link rel="preload" href="/static/fonts/PloniYadRegular.ttf" as="font" type="font/ttf" crossorigin>'
+        extra_head = extra_head + skin
     return f"""<!doctype html>
 <html lang="he" dir="rtl">
 <head>

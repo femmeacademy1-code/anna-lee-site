@@ -1,0 +1,172 @@
+/* The new design for the whole site (body.lp-site), the language of "על קוצים" and "רגועה בעין הסערה":
+   Ploni and Ploni Yad, two browns for text, ONE pink-peach (#F3E4DA) and cream (#FBF6EF) for backgrounds,
+   gentle waves between the sections, rounded asymmetric boxes, round photographs.
+   Loaded after site.css and landing.css, only on the inner pages. It re-colours the old components through their
+   variables, so a page built from the shared helpers (page_head, sec, box, card, ...) is in the new design by itself. */
+
+.lp-site {
+  --font: "Ploni", "Heebo", system-ui, sans-serif;
+  --peach: #F3E4DA; --cream: #FBF6EF;
+  --paper: var(--cream); --paper-hi: var(--peach); --white: #FFFCF9;
+  --blush: var(--peach); --blush-box: #FFFCF9;
+  --sage-bg: var(--cream); --sage-box: var(--peach); --sage: var(--peach); --sage-ink: #3A2620; --olive: #7A4F3A;
+  --mustard: #E8C9B0; --clay: #7A4F3A; --clay-deep: #7A4F3A; --clay-soft: var(--peach); --clay-box: var(--peach); --clay-mid: var(--peach);
+  --earth: var(--peach); --berry: var(--peach); --rose: #A04F64; --rose-deep: #94455A;
+  --heading: #3A2620; --text: #3A2620; --muted: #7A4F3A; --line: rgba(122, 79, 58, .2); --field: rgba(122, 79, 58, .3);
+  --radius: 28px;
+  --wave: clamp(1.4rem, 3vw, 2.5rem);
+  --wave-a: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 40' preserveAspectRatio='none'%3E%3Cpath d='M0 20C180 8 360 8 540 18S900 32 1080 22 1300 10 1440 18V40H0Z'/%3E%3C/svg%3E");
+  --wave-b: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 40' preserveAspectRatio='none'%3E%3Cpath d='M0 18C240 30 480 30 720 20S1200 6 1440 18V40H0Z'/%3E%3C/svg%3E");
+}
+.lp-site h1, .lp-site h2, .lp-site h3 { color: var(--heading); }
+.lp-site h3 { font-weight: 600; }
+.lp-site .key { color: var(--heading); font-weight: 600; }
+.lp-site .kicker { color: var(--muted); }
+.lp-site .lead, .lp-site .sub { color: var(--heading); }
+.lp-site .btn { color: #FFF8F3; }
+.lp-site .btn.ghost { color: var(--rose-deep); }
+.lp-site .btn.ghost:hover { color: #FFF8F3; }
+.lp-site .btn { box-shadow: 0 10px 28px -12px rgba(148, 69, 90, .55); }
+.lp-site .btn.ghost { box-shadow: none; background: transparent; }
+.lp-site .btn.ghost:hover { background: var(--rose-deep); }
+.lp-site .btn.light { background: var(--rose-deep); border-color: var(--rose-deep); color: #FFF8F3; }
+.lp-site .btn.light:hover { background: #7C3649; border-color: #7C3649; color: #FFF8F3; }
+
+/* ---------- sections: flat peach or cream, a wave rising over the one above ---------- */
+.lp-site .sec { position: relative; padding-top: calc(var(--sec) + var(--wave)); background: var(--bg); --box: #FFFCF9; overflow: visible; overflow-x: clip; }
+.lp-site .tone-paper, .lp-site .tone-sage { --bg: var(--cream); }
+.lp-site .tone-light, .lp-site .tone-blush, .lp-site .tone-clay, .lp-site .tone-deep-clay, .lp-site .event { --bg: var(--peach); }
+.lp-site .tone-deep-clay, .lp-site .event, .lp-site .med { background: var(--bg); }
+.lp-site .sec::before {
+  content: ""; position: absolute; left: 0; width: 100%; top: 1px; height: var(--wave); transform: translateY(-100%); z-index: 3; pointer-events: none;
+  background: var(--bg); -webkit-mask: var(--wave-a) center / 100% 100% no-repeat; mask: var(--wave-a) center / 100% 100% no-repeat;
+}
+.lp-site main > .sec:nth-child(even)::before { -webkit-mask-image: var(--wave-b); mask-image: var(--wave-b); }
+.lp-site main > .sec:first-child::before, .lp-site .hero::before { display: none; }
+.lp-site main > .sec:first-child { padding-top: var(--sec); }
+/* the end of the page melts into the footer */
+.lp-site main > .sec:last-child { background: linear-gradient(180deg, var(--bg) 0, var(--bg) calc(100% - 7rem), var(--peach) 100%); padding-bottom: calc(var(--sec) + 4.5rem); }
+
+/* ---------- page heads: cream, centred, the photograph in a round frame ---------- */
+.lp-site .ph, .lp-site .hero { background: var(--cream); --bg: var(--cream); overflow: visible; }
+.lp-site .ph::after, .lp-site .hero::after { display: none; }
+.lp-site .ph { padding: clamp(3rem, 6vw, 5rem) 0 clamp(3rem, 6vw, 5rem); }
+.lp-site .ph .kicker, .lp-site .hero .kicker { color: var(--muted); justify-content: center; }
+.lp-site .ph h1, .lp-site .hero h1 {
+  font-family: "Ploni Yad", "Ploni", cursive; font-weight: 700; color: var(--heading); line-height: 1.05;
+  font-size: clamp(2.8rem, 7vw, 5rem); letter-spacing: 0; margin-bottom: .35em;
+  text-shadow: 0 0 28px rgba(255, 246, 236, .9), 0 0 2px rgba(255, 250, 244, .6);
+}
+.lp-site .ph-grid, .lp-site .ph.panel .ph-grid, .lp-site .ph.side.wide .ph-grid { grid-template-columns: minmax(0, 1fr); justify-items: center; text-align: center; gap: clamp(1.75rem, 4vw, 2.75rem); background: none; padding: 0; border-radius: 0; box-shadow: none; }
+.lp-site .ph-text { max-width: 46rem; margin-inline: auto; text-align: center; }
+.lp-site .ph p:not(.kicker), .lp-site .ph-text p { margin-inline: auto; }
+.lp-site .ph .actions, .lp-site .ph .chips, .lp-site .ph .toc { justify-content: center; }
+.lp-site .ph-media, .lp-site .ph.panel .ph-media, .lp-site .ph.side.wide .ph-media { order: 2; margin: 0; max-width: 17rem; width: min(17rem, 70vw); justify-self: center; }
+.lp-site .ph-media.art, .lp-site .ph-media .ground { display: none; }
+.lp-site .ph-media svg.boho, .lp-site .hero .accent { display: none; }
+.lp-site .ph::before { content: none; }
+
+/* photographs: round in the page head, a soft asymmetric frame elsewhere (her photos stay, only the frame is new) */
+.lp-site .print { background: none; padding: 0; box-shadow: none; }
+.lp-site .print .frame { overflow: hidden; border-radius: 40px 16px 40px 16px; box-shadow: 0 28px 46px -28px rgba(110, 66, 48, .5); }
+.lp-site .print img, .lp-site .print.wide img { aspect-ratio: 4 / 5; }
+.lp-site .print.wide img { aspect-ratio: 4 / 3; }
+.lp-site .print figcaption { color: var(--muted); }
+.lp-site .ph-media .print .frame { border-radius: 50%; box-shadow: 0 0 0 6px rgba(255, 252, 248, .92), 0 0 0 7.5px rgba(122, 79, 58, .22), 0 30px 46px -26px rgba(110, 66, 48, .55); }
+.lp-site .ph-media .print img, .lp-site .ph-media .print.wide img { aspect-ratio: 1; }
+.lp-site .print-wrap .stamp { top: -.4rem; inset-inline-end: -1rem; }
+.lp-site .stamp { background: var(--rose-deep); color: #FFF8F3; box-shadow: 0 0 0 5px var(--bg, var(--cream)), 0 0 0 6px rgba(148, 69, 90, .5); }
+
+/* the home page's own head: her portrait in the breathing rings stays, in the new colours */
+.lp-site .hero { padding: clamp(3rem, 6vw, 5rem) 0 clamp(3.5rem, 7vw, 5.5rem); }
+.lp-site .hero-grid { text-align: start; }
+.lp-site .hero .lead { color: var(--heading); }
+.lp-site .breath .ring.outer { border-color: rgba(122, 79, 58, .55); }
+.lp-site .breath .ring.inner { border-color: rgba(122, 79, 58, .32); }
+.lp-site .breath .photo { box-shadow: 0 30px 50px -30px rgba(110, 66, 48, .55); }
+
+/* ---------- boxes, cards, steps, prices: rounded, asymmetric, soft ---------- */
+.lp-site .box, .lp-site .steps li, .lp-site .tiles div, .lp-site .offer, .lp-site .qa, .lp-site .form-box, .lp-site .card, .lp-site .sources {
+  background: #FFFCF9; box-shadow: 0 22px 38px -30px rgba(110, 66, 48, .45);
+}
+.lp-site .box, .lp-site .steps li, .lp-site .offer, .lp-site .qa, .lp-site .form-box, .lp-site .card { border-radius: 34px 14px 34px 14px; }
+.lp-site .box:nth-child(even), .lp-site .steps li:nth-child(even), .lp-site .offer:nth-child(even), .lp-site .card:nth-child(even) { border-radius: 14px 34px 14px 34px; }
+.lp-site .tiles div, .lp-site .sources { border-radius: 24px 10px 24px 10px; }
+.lp-site .box.sage, .lp-site .box.blush, .lp-site .box.clay, .lp-site .card.blush, .lp-site .card.sage, .lp-site .card.clay { background: #FFFCF9; }
+.lp-site .offer.rec { background: #FFFCF9; box-shadow: 0 22px 38px -26px rgba(160, 79, 100, .5), inset 0 0 0 2px rgba(160, 79, 100, .28); }
+.lp-site .offer .badge { background: var(--rose-deep); color: #FFF8F3; }
+.lp-site .offer .price { color: var(--rose-deep); }
+.lp-site .card:hover, .lp-site .card:focus-within { box-shadow: 0 26px 40px -28px rgba(148, 69, 90, .55); }
+.lp-site .card .tag, .lp-site .card .meta { background: var(--peach); color: var(--muted); }
+.lp-site .card .mark .dot { border-color: var(--clay); box-shadow: 0 0 0 5px #FFFCF9, 0 0 0 6px rgba(122, 79, 58, .3); }
+.lp-site .callout { background: #FFFCF9; border-inline-start: 0; border-radius: 34px 14px 34px 14px; box-shadow: 0 22px 38px -30px rgba(110, 66, 48, .45), inset 0 0 0 1.5px rgba(122, 79, 58, .18); }
+.lp-site .box .callout { background: var(--bg); box-shadow: none; }
+.lp-site .steps li::before { background: var(--rose-deep); color: #FFF8F3; }
+.lp-site .steps .dur, .lp-site .chips li { background: var(--peach); color: var(--heading); }
+.lp-site .chips li.hl { background: var(--rose-deep); color: #FFF8F3; }
+.lp-site .toc a, .lp-site .filters button, .lp-site .search input { background: #FFFCF9; border-color: var(--line); }
+.lp-site .filters button[aria-pressed="true"] { background: var(--rose-deep); border-color: var(--rose-deep); color: #FFF8F3; }
+.lp-site .rings li::before { border-color: var(--rose-deep); }
+.lp-site .qa summary::after { border-color: var(--clay); }
+.lp-site .qa details[open] summary::after { background: var(--rose-deep); border-color: var(--rose-deep); }
+.lp-site .note, .lp-site .form-msg.ok { background: var(--peach); }
+.lp-site .field input, .lp-site .field select, .lp-site .field textarea { background: #FFFCF9; border-radius: 16px; }
+.lp-site .pdf-view { background: #FFFCF9; }
+
+/* the deep surfaces are gone: the live lecture panel, "how it works" and the meditation band are cream-white and peach */
+.lp-site .on-deep { --heading: #3A2620; --text: #3A2620; --muted: #7A4F3A; --line: rgba(122, 79, 58, .2); --box: #FFFCF9; color: var(--text); }
+.lp-site .on-deep .kicker { color: var(--muted); }
+.lp-site .on-deep a:not(.btn), .lp-site .on-deep a:not(.btn):hover { color: var(--rose-deep); }
+.lp-site .on-deep .btn { background: var(--rose-deep); border-color: var(--rose-deep); color: #FFF8F3; }
+.lp-site .on-deep .btn:hover { background: #7C3649; border-color: #7C3649; color: #FFF8F3; }
+.lp-site .on-deep .stamp { background: var(--rose-deep); color: #FFF8F3; box-shadow: 0 0 0 5px #FFFCF9, 0 0 0 6px rgba(148, 69, 90, .5); }
+.lp-site .on-deep .key { color: var(--heading); }
+.lp-site .on-deep .rings li::before { border-color: var(--rose-deep); }
+.lp-site .tone-deep-clay .steps li { background: #FFFCF9; border: 0; }
+.lp-site .tone-deep-clay .steps .dur { background: var(--peach); color: var(--heading); }
+.lp-site .tone-deep-clay .steps li::before { background: var(--rose-deep); color: #FFF8F3; }
+.lp-site .tone-deep-clay .box { border: 0; }
+.lp-site .feature-panel, .lp-site .card.event { background: #FFFCF9; border-radius: 44px 18px 44px 18px; box-shadow: 0 30px 50px -34px rgba(110, 66, 48, .5); }
+.lp-site .feature .sub, .lp-site .feature-meta { color: var(--heading); }
+.lp-site .feature-panel .kotzim-feature .stamp { box-shadow: 0 0 0 5px #FFFCF9, 0 0 0 6px rgba(148, 69, 90, .5); }
+.lp-site .card.event .meta { background: var(--peach); color: var(--muted); }
+.lp-site .card.event .more { color: var(--rose-deep); }
+.lp-site .card.event .stamp { box-shadow: 0 0 0 4px #FFFCF9, 0 0 0 5px rgba(148, 69, 90, .5); }
+.lp-site .event .kotzim-line, .lp-site .event .k-words { color: var(--heading); }
+.lp-site .event .kotzim-anim .k-spikes, .lp-site .event .kotzim-anim .k-alarm, .lp-site .event .kotzim-anim .k-ring { stroke: var(--heading); }
+.lp-site .event .kotzim-anim .k-ground { fill: var(--heading); }
+.lp-site .med { --bg: var(--peach); color: var(--text); }
+.lp-site .med h2 { color: var(--heading); }
+.lp-site .med .kicker { color: var(--muted); }
+.lp-site .med .sub { color: var(--heading); }
+.lp-site .med p, .lp-site .med .guide { color: var(--text); }
+.lp-site .med-art .ring { border-color: rgba(122, 79, 58, .3); }
+.lp-site .med-art .cover { box-shadow: 0 28px 46px -26px rgba(110, 66, 48, .55); }
+.lp-site .med-art .play { background: var(--rose-deep); color: #FFF8F3; }
+.lp-site .way-photo .disc { box-shadow: 0 0 0 9px var(--bg), 0 0 0 10px rgba(122, 79, 58, .25); }
+.lp-site .way a:hover .way-photo .disc, .lp-site .way a:focus-visible .way-photo .disc { box-shadow: 0 0 0 13px var(--bg), 0 0 0 14px rgba(148, 69, 90, .5); }
+.lp-site .way-circle { background: var(--peach); box-shadow: 0 0 0 9px var(--bg), 0 0 0 10px rgba(122, 79, 58, .25); }
+
+/* articles and the legal pages: plain reading, in the new colours */
+.lp-site .article-wrap h1 { font-family: "Ploni Yad", "Ploni", cursive; font-weight: 700; }
+.lp-site .article-body h2, .lp-site .legal-body h2 { font-weight: 500; }
+.lp-site .byline { color: var(--muted); }
+
+/* the footer: the same as the lecture's and the workshop's */
+.lp-site .site-footer { background: linear-gradient(180deg, var(--peach) 0, #F9F0E8 45%, #FCF8F2 100%); color: var(--text); }
+
+@media (max-width: 860px) {
+  .lp-site .hero-grid { text-align: center; }
+  .lp-site .ph-media, .lp-site .ph.panel .ph-media, .lp-site .ph.side.wide .ph-media { width: min(14rem, 62vw); }
+}
+
+/* the shadow belongs to the round frame only; headings and reading columns are centred on the page */
+.lp-site .ph .print, .lp-site .ph.panel .print { box-shadow: none; background: none; }
+.lp-site .sec-head { margin-inline: auto; text-align: center; }
+.lp-site .sec-head .kicker { justify-content: center; }
+.lp-site .sec-head p { margin-inline: auto; }
+.lp-site .sec-body { margin-inline: auto; }
+
+/* the old drawings on the cards are gone (one palette, no clutter); the line of "על קוצים" stays */
+.lp-site .card .mark .card-art { display: none; }
+.lp-site .card .mark:not(:has(.kotzim-mark)) { display: none; }
