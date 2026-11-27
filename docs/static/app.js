@@ -99,6 +99,20 @@
     });
   });
 
+  // The article list: from the server when it runs (admin), otherwise from the static file the build writes
+  function loadArticles(query) {
+    return fetch("/api/articles" + (query || "")).then(function (r) {
+      if (!r.ok) throw new Error("no api");
+      return r.json();
+    }).catch(function () {
+      return fetch("/static/articles.json").then(function (r) { return r.json(); }).then(function (j) {
+        var items = j.articles || [];
+        if (query && query.indexOf("featured=1") !== -1) items = items.filter(function (a) { return a.featured; }).slice(0, 3);
+        return { articles: items };
+      });
+    });
+  }
+
   // Article index: search, category filter, load more
   var list = document.querySelector("[data-article-list]");
   if (list) {
@@ -151,7 +165,7 @@
       });
     }
 
-    fetch("/api/articles").then(function (r) { return r.json(); }).then(function (j) {
+    loadArticles("").then(function (j) {
       state.items = j.articles || [];
       var cats = [];
       state.items.forEach(function (a) { if (a.category && cats.indexOf(a.category) === -1) cats.push(a.category); });
@@ -170,7 +184,7 @@
   // Featured articles on the home page
   var featured = document.querySelector("[data-featured]");
   if (featured) {
-    fetch("/api/articles?featured=1&limit=3").then(function (r) { return r.json(); }).then(function (j) {
+    loadArticles("?featured=1&limit=3").then(function (j) {
       var items = j.articles || [];
       if (!items.length) { featured.closest("section").hidden = true; return; }
       items.forEach(function (a) {
@@ -186,7 +200,7 @@
 
   // Single article page
   var art = document.querySelector("[data-article-slug]");
-  if (art) {
+  if (art && art.querySelector("[data-body]")) {   // only the dynamic template; the static article pages already hold the text
     var slug = art.getAttribute("data-article-slug") || decodeURIComponent(location.pathname.split("/").pop());
     fetch("/api/articles/" + encodeURIComponent(slug)).then(function (r) {
       if (!r.ok) throw new Error("not found");

@@ -27,6 +27,8 @@ CFG = json.loads((ROOT / "config.json").read_text(encoding="utf-8"))
 DATA = json.loads((ROOT / "products.json").read_text(encoding="utf-8"))
 PRODUCTS = DATA["products"]
 FREE = DATA["free"]
+# The articles (articles.json): published as static pages, since the live site is static (server.py does not run there)
+ARTICLES = json.loads((ROOT / "articles.json").read_text(encoding="utf-8")) if (ROOT / "articles.json").exists() else []
 TODAY = date.today().isoformat()
 
 
@@ -1456,16 +1458,37 @@ def page_articles():
         lead="ידע מקצועי בשפה פשוטה ואנושית, על חרדה, ויסות רגשי, טראומה, גבולות ושחיקה.",
         media=media_art(boho.articles()),
     )
-    listing = """<section class="sec tone-light articles-index" data-article-list><div class="wrap">
+    cards_html = "".join(
+        f'<article class="card"><span class="tag">{E(a["category"])}</span><h3><a href="/articles/{E(a["slug"])}">{E(a["title"])}</a></h3><p>{E(a["excerpt"])}</p><a class="more" href="/articles/{E(a["slug"])}">לקריאה</a></article>'
+        for a in ARTICLES)
+    listing = f"""<section class="sec tone-light articles-index" data-article-list><div class="wrap">
   <label class="search">חיפוש מאמרים<input type="search" placeholder="למשל: חרדה, נשימה, גבולות"></label>
   <div class="filters" hidden></div>
-  <div class="grid cols-3"></div>
+  <div class="grid cols-3">{cards_html}</div>
   <div class="empty" hidden>המאמרים הראשונים יתפרסמו בקרוב.</div>
   <p><button class="btn ghost" type="button" data-more hidden>טעינת מאמרים נוספים</button></p>
 </div></section>"""
     return layout("/articles", "מאמרים על חרדה, ויסות רגשי וטראומה",
                   "ספריית מאמרים מקצועית על חרדה, ויסות רגשי, התקפי זעם, טראומה, גבולות ושחיקה.",
                   head + listing, active="/articles")
+
+
+def page_article(a):
+    """One article as a complete static page (the text exactly as Anna Lee wrote it, from articles.json)."""
+    body = "".join(f"<{x['type']}>{E(x['text'])}</{x['type']}>" for x in a["blocks"])
+    others = [o for o in ARTICLES if o["slug"] != a["slug"]]
+    related = ("<div><h2>מאמרים קשורים</h2><ul>" + "".join(f'<li><a href="/articles/{E(o["slug"])}">{E(o["title"])}</a></li>' for o in others) + "</ul></div>") if others else ""
+    main = f"""<section class="ph"><div class="wrap article-wrap">
+  <p class="kicker"><a href="/articles">כל המאמרים</a></p>
+  <article data-article-slug="{E(a['slug'])}">
+    <h1>{E(a['title'])}</h1>
+    <p class="byline">מאת {E(a['author'])}, עודכן {E(a['updated'])}</p>
+    <div class="article-body">{body}</div>
+    <p class="article-next"><a class="more" href="/contact">לשיחת היכרות ללא עלות</a></p>
+    {related}
+  </article>
+</div></section>"""
+    return layout(f"/articles/{a['slug']}", a["title"], a["excerpt"], main, active="/articles")
 
 
 def page_article_template():
@@ -1858,6 +1881,9 @@ def build():
         write(f"lectures/{l['slug']}.html", page_free_lecture(l) if l["free"] else page_lecture(l))
     write("articles.html", page_articles())
     write("article.html", page_article_template())
+    for a in ARTICLES:
+        write(f"articles/{a['slug']}.html", page_article(a))
+    (ROOT / "static" / "articles.json").write_text(json.dumps({"articles": [{k: a[k] for k in ("slug", "title", "category", "excerpt", "featured")} for a in ARTICLES]}, ensure_ascii=False), encoding="utf-8")   # generated: the list the articles page reads
     write("contact.html", page_contact())
     write("free.html", page_free())
     write("tashlich.html", page_tashlich())
@@ -1872,6 +1898,7 @@ def build():
 
     # sitemap and robots, only when the site is public
     urls = ["/", "/about", "/therapy", "/breathwork", "/workshops", "/lectures", "/articles", "/contact", "/free", "/tashlich", "/privacy", "/accessibility", "/terms"]
+    urls += [f"/articles/{a['slug']}" for a in ARTICLES]
     urls += [f"/lectures/{l['slug']}" for l in LECTURES]
     urls += [f"/workshops/{p['slug']}" for p in PRODUCTS]
     base = CFG["domain"].rstrip("/")

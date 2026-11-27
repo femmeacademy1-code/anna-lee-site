@@ -759,3 +759,5 @@ html.a11y-still *, html.a11y-still *::before, html.a11y-still *::after { animati
 mark.todo { background: #FFF1C2; color: #5A4300; border-radius: 4px; padding: 0 .25em; }
 .legal-body ul { padding-inline-start: 1.3em; }
 .legal-body li { margin-bottom: .35em; }
+
+.articles-index [hidden] { display: none !important; }
